@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AimArrowController : MonoBehaviour
 {
-    
+
     private bool rotate;
     //Rotation: 1 = høyre, -1 venstre
     public int direction;
@@ -18,31 +18,34 @@ public class AimArrowController : MonoBehaviour
     {
         body = GetComponent<Transform>();
         rotate = false;
-        
+
     }
 
-   
+
 
     public void FixedUpdate()
     {
-        
+
+        //Direction > 0 = nedover
         if (rotate)
         {
             var delta = GetAngle();
-           
+
             if (direction == 1)
             {
-                 if ((delta > maxAngle && rotationSpeed > 0) || (delta < -maxAngle && rotationSpeed < 0))
-                    rotationSpeed = rotationSpeed * -1;
+                var maxAnglePI = Mathf.PI - maxAngle;
+                Debug.Log(delta + " | " + (maxAnglePI) + " | RotationSpeed: " + rotationSpeed);
+                if ((delta < maxAnglePI && rotationSpeed > 0 && delta > 0) || (delta > -maxAnglePI && rotationSpeed < 0 && delta < 0))
+                    rotationSpeed *= -1;
+
             }
             else
             {
-                //Debug.Log(delta + " | " + maxAngle + " Direction: " + rotationSpeed);
-                if((delta < -maxAngle && rotationSpeed > 0) || (delta > maxAngle && rotationSpeed < 0))
-                    rotationSpeed = rotationSpeed * -1;
-
+                Debug.Log(delta + " | " + (maxAngle) + " | RotationSpeed: " + rotationSpeed);
+                if ((delta < -maxAngle && rotationSpeed > 0) || (delta > maxAngle && rotationSpeed < 0))
+                    rotationSpeed *= -1;
             }
-         
+
             body.RotateAround(pivotPoint.position, new Vector3(0f, 1f, 0f), rotationSpeed);
         }
     }
@@ -60,21 +63,13 @@ public class AimArrowController : MonoBehaviour
 
     private float GetAngle()
     {
-        float deltaX;
-        float deltaY = pivotPoint.position.z - body.position.z;
+        float deltaX = body.position.x - pivotPoint.position.x;
+        float deltaY = body.position.z - pivotPoint.position.z;
 
-        if (direction == 1)
-        {
-            deltaX = pivotPoint.position.x - body.position.x;
-        }
-        else
-        {
-            deltaX = -(pivotPoint.position.x - body.position.x);
-        }
-    
+
         float degree = Mathf.Atan2(deltaY, deltaX);
 
-        return -degree;
+        return degree;
     }
 
     public static float normalizeAngle(float angle)

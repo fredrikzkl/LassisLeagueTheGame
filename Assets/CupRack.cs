@@ -34,7 +34,7 @@ public class CupRack : MonoBehaviour
        
         diameter = cupPrefab.GetComponent<Renderer>().bounds.size.x;
         
-        CreateRack(Formations.HalfHouse);
+        CreateRack(Formations.FullHouse);
     }
 
     

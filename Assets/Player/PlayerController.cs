@@ -150,10 +150,29 @@ public class PlayerController : MonoBehaviour
         var ball = Instantiate(ballPrefab, playerHand.position, Quaternion.identity);
         ball.GetComponent<BallController>().owner = gameObject;
         roundHandler.ThrownBalls.Add(ball);
+
+
+
+        /*
         var adjustedPower = power * 0.045f;
         float x = arc.x * adjustedPower;
         float y = arc.y * adjustedPower;
+
         ball.GetComponent<Rigidbody>().velocity = new Vector3(x,y, angle*2f);
+        */
+
+        //NYGREIE:
+        Debug.Log(angle);
+        var adjustedPower = power * 0.075f;
+
+        float y =  adjustedPower;
+        
+        float x = Mathf.Cos(angle) * adjustedPower;
+        float z = Mathf.Sin(angle) * adjustedPower;
+
+        ball.GetComponent<Rigidbody>().velocity = new Vector3(x, y, z);
+
+
     }
 
     private float LimitDeltaValues(float deltaValue)
