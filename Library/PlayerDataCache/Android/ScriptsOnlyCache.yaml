@@ -18,6 +18,7 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateEditor
     - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
@@ -74,33 +75,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11248}
     - Class: 114
-      Script: {instanceID: 11310}
+      Script: {instanceID: 11264}
     - Class: 114
-      Script: {instanceID: 11448}
+      Script: {instanceID: 11312}
     - Class: 114
-      Script: {instanceID: 11600}
+      Script: {instanceID: 11450}
     - Class: 114
-      Script: {instanceID: 11838}
+      Script: {instanceID: 11602}
     - Class: 114
-      Script: {instanceID: 11858}
+      Script: {instanceID: 11840}
     - Class: 114
-      Script: {instanceID: 12144}
+      Script: {instanceID: 11860}
     - Class: 114
-      Script: {instanceID: 12176}
+      Script: {instanceID: 12148}
     - Class: 114
-      Script: {instanceID: 12584}
+      Script: {instanceID: 12180}
     - Class: 114
-      Script: {instanceID: 12602}
+      Script: {instanceID: 12586}
     - Class: 114
-      Script: {instanceID: 12712}
+      Script: {instanceID: 12604}
     - Class: 114
-      Script: {instanceID: 12814}
+      Script: {instanceID: 12714}
     - Class: 114
-      Script: {instanceID: 13064}
+      Script: {instanceID: 12816}
     - Class: 114
-      Script: {instanceID: 13094}
+      Script: {instanceID: 13066}
     - Class: 114
-      Script: {instanceID: 103926}
+      Script: {instanceID: 13096}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 134
@@ -130,6 +131,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: CanvasScaler
+  - hash:
+      serializedVersion: 2
+      Hash: 6e5cba5b73182c9b12b2fc05e65ca543
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CupRack
   - hash:
       serializedVersion: 2
       Hash: c42672c997f8be6b1aa86a927ebea785
@@ -480,7 +487,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 685238fb7998a67212b168232f05bb7c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerRoundHandler
@@ -592,12 +599,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 54de24eeeeb6d04aa730ffa72fd0a187
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: CupRack
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

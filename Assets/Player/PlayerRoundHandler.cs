@@ -10,11 +10,30 @@ public class PlayerRoundHandler : MonoBehaviour
 
     public GameObject cupRack;
 
+    //Game variabels
+    public int restacks { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
         HitCups = new List<GameObject>();
         ThrownBalls = new List<GameObject>();
+
+        restacks = 1;
+    }
+
+    public int GetRestacksRemaining()
+    {
+        return restacks;
+    }
+
+    public void Restack()
+    {
+        var rack = cupRack.GetComponent<CupRack>();
+        int cupsRemaining = rack.GetCupCount();
+        //TODO: Lage slik at restack tar inn en formasjon
+        rack.Rerack(Formations.GetStandardFormation(cupsRemaining));
+        
     }
 
     public void EndRound()

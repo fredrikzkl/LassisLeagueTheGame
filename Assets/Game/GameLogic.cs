@@ -23,6 +23,7 @@ public class GameLogic : MonoBehaviour
         }
     }
 
+    
 
     private void Awake()
     {
@@ -73,6 +74,15 @@ public class GameLogic : MonoBehaviour
     {
         replays.Add(new Replay(arc,angle,power,originPosition));
     }
+
+    public GameObject GetOpponent(GameObject player)
+    {
+        if (player == player1)
+            return player2;
+        return player1;
+    }
+
+    
 
     
 
