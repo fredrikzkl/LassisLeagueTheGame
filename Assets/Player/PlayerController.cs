@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -11,16 +12,16 @@ public class PlayerController : MonoBehaviour
     public Transform playerHand;
     public GameObject ballPrefab;
     public GameObject aimArrow;
-  
 
     //Scripts
     public PlayerRoundHandler roundHandler;
 
     //Gamestuff
+    public Color playerColor;
     public Slider powerSlider;
+    public Image menuButton;
     public Image ball1_indicator;
     public Image ball2_indicator;
-    private Color beerpongBallColor = new Color(254, 172, 2);
 
     private int throwsRemaining = 0;
     
@@ -43,19 +44,32 @@ public class PlayerController : MonoBehaviour
         currentPower = 0f;
         powerSlider.value = 0;
         aimArrow.GetComponent<MeshRenderer>().enabled = false;
+        menuButton.gameObject.SetActive(false);
         roundHandler = GetComponent<PlayerRoundHandler>();
     }
 
     private void UpdateBallUI()
     {
-        if(ball1_indicator.color == beerpongBallColor)
+        Color temp = new Color(playerColor.r, playerColor.g, playerColor.b);
+
+        if (ball1_indicator.color == temp)
         {
             ball1_indicator.color = Color.black;
             return;
         }
-        else if(ball2_indicator.color == beerpongBallColor)
+        else if(ball2_indicator.color == temp)
             ball2_indicator.color = Color.black;
     }
+
+    private void UpdateUIColors()
+    {
+        Color temp = new Color(playerColor.r, playerColor.g, playerColor.b);
+        ball1_indicator.color = temp;
+        ball2_indicator.color = temp;
+        menuButton.color = temp;
+    }
+
+    
 
 
     public void StartRound()
@@ -64,8 +78,13 @@ public class PlayerController : MonoBehaviour
         //Legger til baller
         throwsRemaining = 2;
 
-        ball1_indicator.color = beerpongBallColor;
-        ball2_indicator.color = beerpongBallColor;
+        //Slår på menyknappen dersom vi trenger den.
+        if (roundHandler.restacks > 0)
+        {
+            menuButton.gameObject.SetActive(true);
+        }
+
+        UpdateUIColors();
 
         //Starter pilen
         aimArrow.GetComponent<MeshRenderer>().enabled = true;
@@ -79,9 +98,11 @@ public class PlayerController : MonoBehaviour
     {
         aimArrow.GetComponent<MeshRenderer>().enabled = false;
         aimArrow.GetComponent<AimArrowController>().StopRotating();
-  
+
+        //Fjerner meny knappen. Slår det på igjen dersom vi trenger den
+        menuButton.gameObject.SetActive(false);
+
         roundHandler.EndRound();
-       
     }
 
 
@@ -102,6 +123,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            UpdateUIColors();
+        }
+
         if(FindObjectOfType<GameLogic>().playerWithTheRound == gameObject)
         {
             if (throwsRemaining > 0)
@@ -109,7 +136,7 @@ public class PlayerController : MonoBehaviour
                 if (isChargingUp)
                 {
                     //Slipper opp
-                    if (Input.GetButtonUp("Fire1"))
+                    if (Input.GetButtonUp("Fire1") && !GameManager.gameIsPaused )
                     {
                         Vector2 temp_arc = GetAimingResults();
                         float temp_angle = currentAngle;
@@ -119,6 +146,7 @@ public class PlayerController : MonoBehaviour
                         isChargingUp = false;
                         currentPower = 0;
                         throwsRemaining -= 1;
+                        mousePosition = Vector3.zero;
                         //UI
                         aimArrow.GetComponent<AimArrowController>().StartRotating();
                         powerSlider.value = 0;
@@ -129,17 +157,18 @@ public class PlayerController : MonoBehaviour
                 }
 
                 //Første klikk
-                if (Input.GetButtonDown("Fire1"))
+                if (Input.GetButtonDown("Fire1") && !GameManager.gameIsPaused && !EventSystem.current.IsPointerOverGameObject())
                 {
                     mousePosition = Input.mousePosition;
                     currentAngle = aimArrow.GetComponent<AimArrowController>().StopRotating();
                     isChargingUp = true;
+                    //Fjerner muligheten din for å gjøre valg
+                    menuButton.gameObject.SetActive(false);
                 }
             }
             else
             {
                 EndRound();
-
             }
         }
     }
@@ -152,7 +181,7 @@ public class PlayerController : MonoBehaviour
         roundHandler.ThrownBalls.Add(ball);
 
 
-
+        
         /*
         var adjustedPower = power * 0.045f;
         float x = arc.x * adjustedPower;
@@ -161,7 +190,7 @@ public class PlayerController : MonoBehaviour
         ball.GetComponent<Rigidbody>().velocity = new Vector3(x,y, angle*2f);
         */
 
-        //NYGREIE:
+        //:
         Debug.Log(angle);
         var adjustedPower = power * 0.075f;
 
@@ -182,6 +211,7 @@ public class PlayerController : MonoBehaviour
         return deltaValue;
     }
 
+    //Lecay
     private Vector2 GetAimingResults()
     {
         var finalMousePos = Input.mousePosition;
@@ -191,4 +221,6 @@ public class PlayerController : MonoBehaviour
         
         return aim;
     }
+
+   
 }

@@ -620,6 +620,7 @@
     <Compile Include="Assets\BallController.cs" />
     <Compile Include="Assets\CupController.cs" />
     <Compile Include="Assets\CupRack.cs" />
+    <Compile Include="Assets\Game\Formations.cs" />
     <Compile Include="Assets\Game\GameLogic.cs" />
     <Compile Include="Assets\Game\Replay.cs" />
     <Compile Include="Assets\Player\PlayerController.cs" />
