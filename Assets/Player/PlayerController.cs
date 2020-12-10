@@ -61,22 +61,29 @@ public class PlayerController : MonoBehaviour
             ball2_indicator.color = Color.black;
     }
 
-    private void UpdateUIColors()
+    private void UpdateUIColors(int balls)
     {
         Color temp = new Color(playerColor.r, playerColor.g, playerColor.b);
-        ball1_indicator.color = temp;
+        if(balls > 1)
+        {
+            ball1_indicator.color = temp;
+        }
         ball2_indicator.color = temp;
         menuButton.color = temp;
     }
 
     
-
+    public void BallsBack()
+    {
+        Debug.Log(gameObject.name + " gets the balls back");
+        throwsRemaining = FindObjectOfType<GameRules>().BallsBackCount;
+        UpdateUIColors(throwsRemaining);
+        aimArrow.GetComponent<AimArrowController>().Enable();
+    }
 
     public void StartRound()
     {
         Debug.Log(gameObject.name + "'s round!");
-        //Legger til baller
-        throwsRemaining = 2;
 
         //Slår på menyknappen dersom vi trenger den.
         if (roundHandler.restacks > 0)
@@ -84,24 +91,20 @@ public class PlayerController : MonoBehaviour
             menuButton.gameObject.SetActive(true);
         }
 
-        UpdateUIColors();
-
+        //Legger til baller
+        throwsRemaining = 2;
+        UpdateUIColors(throwsRemaining);
         //Starter pilen
-        aimArrow.GetComponent<MeshRenderer>().enabled = true;
-        aimArrow.GetComponent<AimArrowController>().StartRotating();
-
+        aimArrow.GetComponent<AimArrowController>().Enable();
     }
 
    
 
     public void EndRound()
     {
-        aimArrow.GetComponent<MeshRenderer>().enabled = false;
-        aimArrow.GetComponent<AimArrowController>().StopRotating();
-
+        aimArrow.GetComponent<AimArrowController>().Disable();
         //Fjerner meny knappen. Slår det på igjen dersom vi trenger den
         menuButton.gameObject.SetActive(false);
-
         roundHandler.EndRound();
     }
 
@@ -124,11 +127,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            UpdateUIColors();
-        }
-
         if(FindObjectOfType<GameLogic>().playerWithTheRound == gameObject)
         {
             if (throwsRemaining > 0)
@@ -136,7 +134,7 @@ public class PlayerController : MonoBehaviour
                 if (isChargingUp)
                 {
                     //Slipper opp
-                    if (Input.GetButtonUp("Fire1") && !GameManager.gameIsPaused )
+                    if ((Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.Space)) && !GameManager.gameIsPaused )
                     {
                         Vector2 temp_arc = GetAimingResults();
                         float temp_angle = currentAngle;
@@ -157,7 +155,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 //Første klikk
-                if (Input.GetButtonDown("Fire1") && !GameManager.gameIsPaused && !EventSystem.current.IsPointerOverGameObject())
+                if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !GameManager.gameIsPaused && !EventSystem.current.IsPointerOverGameObject())
                 {
                     mousePosition = Input.mousePosition;
                     currentAngle = aimArrow.GetComponent<AimArrowController>().StopRotating();
@@ -190,8 +188,7 @@ public class PlayerController : MonoBehaviour
         ball.GetComponent<Rigidbody>().velocity = new Vector3(x,y, angle*2f);
         */
 
-        //:
-        Debug.Log(angle);
+        //Debug.Log(angle);
         var adjustedPower = power * 0.075f;
 
         float y =  adjustedPower;

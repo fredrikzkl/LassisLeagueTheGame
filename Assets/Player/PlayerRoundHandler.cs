@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Formations;
 
 public class PlayerRoundHandler : MonoBehaviour
 {
-    
+
     public List<GameObject> ThrownBalls { get; set; }
     public List<GameObject> HitCups { get; set; }
 
@@ -19,30 +20,51 @@ public class PlayerRoundHandler : MonoBehaviour
         HitCups = new List<GameObject>();
         ThrownBalls = new List<GameObject>();
 
-        restacks = 1;
+        restacks = FindObjectOfType<GameRules>().Restacks;
     }
 
-    public int GetRestacksRemaining()
-    {
-        return restacks;
-    }
 
-    public void Restack()
+    public void Restack(string formation)
     {
         var rack = cupRack.GetComponent<CupRack>();
         int cupsRemaining = rack.GetCupCount();
         //TODO: Lage slik at restack tar inn en formasjon
-        rack.Rerack(Formations.GetStandardFormation(cupsRemaining));
-        
+        rack.Rerack(formation);
+
     }
 
     public void EndRound()
     {
         if (!HasBallsAlive())
         {
+            bool ballsBack = false;
+            //Balls back
+            if (HitCups.Count > 1)
+            {
+                if (HitCups[0] == HitCups[1])
+                {
+                    //TODO!: DEN FJERNER FRA EGEN GREIE!!!
+                    foreach(var cup in cupRack.GetComponent<CupRack>().PickRandomCups(HitCups[0]))
+                    {
+                        //HitCups.Add(cup);
+                    }
+                    Debug.Log("TRIPPLE! Or? Actual number: " + HitCups.Count);
+                }
+                ballsBack = true;
+            }
+
             RemoveHitCups();
             RemoveAllThrownBalls();
-            FindObjectOfType<GameLogic>().RoundEnded(gameObject);
+
+            if (ballsBack)
+            {
+                gameObject.GetComponent<PlayerController>().BallsBack();
+            }
+            else
+            {
+
+                FindObjectOfType<GameLogic>().RoundEnded(gameObject);
+            }
         }
     }
 
@@ -70,13 +92,19 @@ public class PlayerRoundHandler : MonoBehaviour
 
     public bool HasBallsAlive()
     {
-        if (ThrownBalls.Count == 0) return false; 
+        if (ThrownBalls.Count == 0) return false;
         foreach (var ball in ThrownBalls)
         {
             if (ball.GetComponent<BallController>().isInPlay)
                 return true;
         }
         return false;
+    }
+
+    //Henter ut alle formasjonene til spilleren sin rack
+    public List<Formation> GetValidFormations()
+    {
+        return Formations.GetValidFormations(cupRack.GetComponent<CupRack>().GetCupCount());
     }
 
 

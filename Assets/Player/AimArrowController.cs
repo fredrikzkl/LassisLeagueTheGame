@@ -122,5 +122,17 @@ public class AimArrowController : MonoBehaviour
         return Mathf.Atan2(Mathf.Sin(angle), Mathf.Cos(angle));
     }
 
+    public void Enable()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        StartRotating();
+    }
+
+    public void Disable()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        StopRotating();
+    }
+
 
 }

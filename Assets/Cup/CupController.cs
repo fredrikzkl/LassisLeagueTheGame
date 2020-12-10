@@ -73,5 +73,11 @@ public class CupController : MonoBehaviour
             SetMainMaterial(isHitMaterial);
         }
     }
-
+    /*
+    //Kan denne lages bedre?
+    public List<GameObject> GetNeighbours()
+    {
+        Physics.
+    }
+    */
 }

@@ -67,6 +67,7 @@
     <Compile Include="Assets\Cup\CupRack.cs" />
     <Compile Include="Assets\Game\Formations.cs" />
     <Compile Include="Assets\Game\GameLogic.cs" />
+    <Compile Include="Assets\Game\GameRules.cs" />
     <Compile Include="Assets\Game\Replay.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Player\AimArrowController.cs" />

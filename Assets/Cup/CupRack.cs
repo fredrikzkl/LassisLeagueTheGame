@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Formations;
 
 public class CupRack : MonoBehaviour
 {
@@ -31,24 +32,24 @@ public class CupRack : MonoBehaviour
             Debug.Log("Rack doesn not have a location");
             return;
         }
-       
+
         diameter = cupPrefab.GetComponent<Renderer>().bounds.size.x;
-        
-        CreateRack(Formations.HalfHouse);
+        CreateRack(FindObjectOfType<GameRules>().StartFormation);
     }
 
-    
-
-    private void CreateRack(string formation)
+    private void CreateRack(StartFormation formation)
     {
-        foreach(var pos in CreatePositionMatrix(formation))
+        string f = GetStartFormation(formation);
+        foreach (var pos in CreatePositionMatrix(f))
         {
             SpawnCup(pos);
         }
     }
 
+    
 
-    public void SpawnCup(Vector3 pos) {
+    public void SpawnCup(Vector3 pos)
+    {
         var c = Instantiate(cupPrefab, pos, cupPrefab.transform.rotation);
         c.GetComponent<CupController>().SetMaterials(standard, hit);
         c.GetComponent<CupController>().Rack = gameObject;
@@ -66,7 +67,7 @@ public class CupRack : MonoBehaviour
         foreach (var row in rows)
         {
             var rowResult = CreatePositionMatrixRow(tempPos, row);
-            foreach(var position in rowResult)
+            foreach (var position in rowResult)
             {
                 positionMatrix.Add(position);
             }
@@ -94,12 +95,12 @@ public class CupRack : MonoBehaviour
     public void Rerack(string formation)
     {
         var positionsInRerack = CreatePositionMatrix(formation);
-        if(positionsInRerack.Count != cupList.Count)
+        if (positionsInRerack.Count != cupList.Count)
         {
             Debug.Log("Error: Can't rerack! Formation doesnt match with number of cups");
             return;
         }
-        for(int i = 0; i < cupList.Count; i++)
+        for (int i = 0; i < cupList.Count; i++)
         {
             cupList[i].GetComponent<CupController>().newPosition = positionsInRerack[i];
         }
@@ -108,10 +109,10 @@ public class CupRack : MonoBehaviour
     public void RemoveFromCupList(GameObject cup)
     {
         cupList.Remove(cup);
-      
-        if(cupList.Count == 2)
+
+        if (cupList.Count == 2)
         {
-            Rerack(Formations.Gentlemans);
+            Rerack(Gentlemans.FormationString);
         }
     }
 
@@ -120,5 +121,25 @@ public class CupRack : MonoBehaviour
         return cupList.Count;
     }
 
+    //TODO: Se igjennom denne:
+    //Brukt hvis begge blir ballene blir truffet i samme kopp
+    public List<GameObject> PickRandomCups(GameObject exlcude)
+    {
+        int removeCount = FindObjectOfType<GameRules>().SameCupCount;
+        if (removeCount + 1 >= cupList.Count)
+            return cupList;
+        List<GameObject> tempCups = new List<GameObject>();
+        var rand = new System.Random();
+        while(tempCups.Count != removeCount)
+        {
+            var picked = cupList[rand.Next(0,cupList.Count-1)];
+            if (tempCups.Contains(picked) || picked == exlcude)
+                continue;
+            tempCups.Add(picked);
+        }
+        return tempCups;
+    }
+
     
+
 }
