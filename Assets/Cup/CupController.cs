@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CupController : MonoBehaviour
 {
+    
     public Material rimMaterial;
 
     private Material standardMaterial;
@@ -13,23 +14,47 @@ public class CupController : MonoBehaviour
 
     bool isHit;
 
+    //IslandCup: Settes true dersom spiller invoker island
+    bool blinking;
+    bool isIslandCup;
+    bool successfullyHitIsland;
+  
+
     //Reracking stuff
-    public Vector3 newPosition { get; set; }
-    
+    public Vector3 newPosition;
 
 
     private void Start()
     {
         isHit = false;
+        isIslandCup = false;
+        blinking = false;
+        successfullyHitIsland = false;
         newPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
     }
 
     private void Update()
     {
-      
-            float step = 2.5f * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
-        
+        float step = 2.5f * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
+
+        if (blinking)
+        {
+            float t = Mathf.Sin(Time.fixedTime * 6.5f);
+            if (t > 0)
+                SetMainMaterial(standardMaterial);
+            else
+                SetMainMaterial(isHitMaterial);
+        }
+    }
+
+
+
+    //Når 
+    public void SetIsland()
+    {
+        isIslandCup = true;
+        blinking = true;
     }
 
     public void SetMaterials(Material standard, Material hit)
@@ -53,6 +78,14 @@ public class CupController : MonoBehaviour
         //Ballen traff koppen!!
         if(other.tag == "Ball")
         {
+            blinking = false;
+            //Sjekker om det var island
+            if(isIslandCup && other.gameObject.name == "ball_" + FindObjectOfType<GameRules>().NumberOfBallsPrRound)
+            {
+                successfullyHitIsland = true;
+                Debug.Log("DUDE ISLAND!!");
+            }
+
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             other.gameObject.GetComponent<BallController>().BallOutOfBounds(1f);
             RegisterHit(other.gameObject);
@@ -73,11 +106,9 @@ public class CupController : MonoBehaviour
             SetMainMaterial(isHitMaterial);
         }
     }
-    /*
-    //Kan denne lages bedre?
-    public List<GameObject> GetNeighbours()
+
+    public bool isSuccessfullyHitIsland()
     {
-        Physics.
+        return successfullyHitIsland;
     }
-    */
 }

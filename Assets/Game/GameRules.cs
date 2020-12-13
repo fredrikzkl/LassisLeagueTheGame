@@ -18,7 +18,17 @@ public class GameRules : MonoBehaviour
     public int Restacks = 1;
 
     [SerializeField]
+    [Range(1, 3)]
+    public int Islands = 1;
+
+    [SerializeField]
+    [Range(1, 3)]
+    public int IslandsReward = 1;
+
+    [SerializeField]
     [Range(1, 4)]
-    public int SameCupCount = 2;
+    public int SameCupReward = 2;
+
+    public int NumberOfBallsPrRound = 2;
 
 }

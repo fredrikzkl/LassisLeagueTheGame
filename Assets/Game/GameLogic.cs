@@ -82,10 +82,10 @@ public class GameLogic : MonoBehaviour
         return player1;
     }
 
-    
-
-    
-
-
+    public CupRack GetOpponentCupRack(GameObject player)
+    {
+        var opponent = GetOpponent(player);
+        return opponent.GetComponent<PlayerRoundHandler>().cupRack.GetComponent<CupRack>();
+    }
     
 }

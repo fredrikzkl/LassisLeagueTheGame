@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - GameLogic
     - GameManager
     - GameRules
+    - GameSettings
     - GameUIMenu
     - PlayerController
     - PlayerRoundHandler
@@ -137,6 +138,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13170}
     - Class: 114
       Script: {instanceID: 13200}
+    - Class: 114
+      Script: {instanceID: 70320}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -170,7 +173,7 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
-      Hash: 6e5cba5b73182c9b12b2fc05e65ca543
+      Hash: ba9ca4fce1e4d6128e994fd9339aaecd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CupRack
@@ -224,7 +227,7 @@ ScriptsOnlyBuild:
     className: ActivationTrack
   - hash:
       serializedVersion: 2
-      Hash: 578c47af95fd6b774ca79b42acb529c6
+      Hash: f4e1ab0a89956e2460cbcba48a7a4662
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameUIMenu
@@ -500,7 +503,7 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: 93d88c953af790101860777987e17b55
+      Hash: 880b09e78979d82302e01a91880dcc2c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RestackMenu
@@ -864,6 +867,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 60cf9ecaadce9d1dfa7e3346518163e2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameSettings
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

@@ -13,6 +13,7 @@ public class PlayerRoundHandler : MonoBehaviour
 
     //Game variabels
     public int restacks { get; set; }
+    public int islands { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class PlayerRoundHandler : MonoBehaviour
         ThrownBalls = new List<GameObject>();
 
         restacks = FindObjectOfType<GameRules>().Restacks;
+        islands = FindObjectOfType<GameRules>().Islands;
     }
 
 
@@ -33,38 +35,57 @@ public class PlayerRoundHandler : MonoBehaviour
 
     }
 
+    public void InvokeIsland(GameObject cup)
+    {
+        var cc = cup.GetComponent<CupController>();
+        cc.SetIsland();
+
+    }
+
     public void EndRound()
     {
         if (!HasBallsAlive())
         {
             bool ballsBack = false;
-            //Balls back
-            if (HitCups.Count > 1)
-            {
-                if (HitCups[0] == HitCups[1])
-                {
-                    //TODO!: DEN FJERNER FRA EGEN GREIE!!!
-                    foreach(var cup in cupRack.GetComponent<CupRack>().PickRandomCups(HitCups[0]))
-                    {
-                        //HitCups.Add(cup);
-                    }
-                    Debug.Log("TRIPPLE! Or? Actual number: " + HitCups.Count);
-                }
-                ballsBack = true;
-            }
 
+            if(HitCups.Count > 0)
+            {
+                int bonusCups = 0;
+                CupRack opponentRack = HitCups[0].GetComponent<CupController>().Rack.GetComponent<CupRack>();
+                GameRules rules = FindObjectOfType<GameRules>();
+
+                bool gotIsland = HitCups[0].GetComponent<CupController>().isSuccessfullyHitIsland();
+
+                //Island
+                if (gotIsland)
+                {
+                    bonusCups += rules.IslandsReward;
+                }
+
+                //Balls back
+                if (HitCups.Count > 1)
+                {
+                    //Begge i samme kopp
+                    if (HitCups[0] == HitCups[1])
+                    {
+                        HitCups.RemoveAt(1);
+                        bonusCups += rules.SameCupReward;
+                    }
+                    ballsBack = true;
+                }
+
+                if(bonusCups > 0)
+                    opponentRack.PickRandomCups(HitCups, bonusCups).ForEach(c => HitCups.Add(c));
+            }
+   
             RemoveHitCups();
             RemoveAllThrownBalls();
 
             if (ballsBack)
-            {
                 gameObject.GetComponent<PlayerController>().BallsBack();
-            }
             else
-            {
 
                 FindObjectOfType<GameLogic>().RoundEnded(gameObject);
-            }
         }
     }
 
@@ -73,11 +94,22 @@ public class PlayerRoundHandler : MonoBehaviour
         if (HitCups.Count == 0) return;
         foreach (var cup in HitCups)
         {
-            cup.GetComponent<CupController>().Rack.GetComponent<CupRack>().RemoveFromCupList(cup);
+            var cc = cup.GetComponent<CupController>();
+            var rack = cc.Rack.GetComponent<CupRack>();
+            rack.UpdateNeighborTable(cup);
+        }
+
+        foreach (var cup in HitCups)
+        {
+            var cc = cup.GetComponent<CupController>();
+            var rack = cc.Rack.GetComponent<CupRack>();
+
+            cc.Rack.GetComponent<CupRack>().RemoveFromCupList(cup);
             Destroy(cup);
         }
         HitCups.Clear();
     }
+
 
     public void RemoveAllThrownBalls()
     {

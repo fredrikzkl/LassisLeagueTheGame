@@ -16,11 +16,13 @@ public class CupRack : MonoBehaviour
 
     List<GameObject> cupList;
 
+    NeighbourTable neighbourTable;
+
+    string currentFormation;
+
 
     //Hjelpevariabler
     float diameter;
-    //public float tightFactor = 0.865f;
-    public float tightFactor = 0.7f;
 
     private void Start()
     {
@@ -40,61 +42,46 @@ public class CupRack : MonoBehaviour
     private void CreateRack(StartFormation formation)
     {
         string f = GetStartFormation(formation);
-        foreach (var pos in CreatePositionMatrix(f))
+        var pm = CreatePositionMatrix(f, location.position, direction, diameter);
+        for (int i = 0; i < pm.Item1.Count; i++)
         {
-            SpawnCup(pos);
+            SpawnCup(pm.Item1[i], pm.Item2[i]);
         }
+
+        neighbourTable = DetermineCupNeighbors(cupList, f);
+
+
+        currentFormation = f;
     }
 
-    
 
-    public void SpawnCup(Vector3 pos)
+    public GameObject SpawnCup(Vector3 pos, string id)
     {
         var c = Instantiate(cupPrefab, pos, cupPrefab.transform.rotation);
         c.GetComponent<CupController>().SetMaterials(standard, hit);
         c.GetComponent<CupController>().Rack = gameObject;
         cupList.Add(c);
+        c.name = id;
+        return c;
     }
 
-    //Lager en liste over alle posisjonene koppene skal stå
-    public List<Vector3> CreatePositionMatrix(string formation)
+    public GameObject GetCupFromName(string name)
     {
-        List<Vector3> positionMatrix = new List<Vector3>();
-        Vector3 tempPos = new Vector3(location.position.x, location.position.y, location.position.z);
-        tempPos.z -= (2 * diameter);
-        //Decoding string:
-        string[] rows = formation.Split('#');
-        foreach (var row in rows)
+        foreach (var cup in cupList)
         {
-            var rowResult = CreatePositionMatrixRow(tempPos, row);
-            foreach (var position in rowResult)
-            {
-                positionMatrix.Add(position);
-            }
-            tempPos.x += (direction * diameter * tightFactor);
+            if (cup.name == name)
+                return cup;
         }
-        return positionMatrix;
-
-    }
-
-    public List<Vector3> CreatePositionMatrixRow(Vector3 pos, string row)
-    {
-        List<Vector3> rowList = new List<Vector3>();
-        foreach (var symbol in row)
-        {
-            if (symbol == '1')
-            {
-                rowList.Add(pos);
-            }
-            pos.z = pos.z + (0.5f * diameter);
-        }
-        return rowList;
+        Debug.Log("Cup " + name + " could not be found");
+        return null;
     }
 
 
     public void Rerack(string formation)
     {
-        var positionsInRerack = CreatePositionMatrix(formation);
+        var pm = CreatePositionMatrix(formation, location.position, direction, diameter);
+        var positionsInRerack = pm.Item1;
+
         if (positionsInRerack.Count != cupList.Count)
         {
             Debug.Log("Error: Can't rerack! Formation doesnt match with number of cups");
@@ -102,18 +89,20 @@ public class CupRack : MonoBehaviour
         }
         for (int i = 0; i < cupList.Count; i++)
         {
+            //Oppdaterer posisjon
             cupList[i].GetComponent<CupController>().newPosition = positionsInRerack[i];
+            //Oppdaterer navn
+            cupList[i].gameObject.name = pm.Item2[i];
         }
+        //Henter nye nabotabellen
+        var newNeighbourTable = DetermineCupNeighbors(cupList, formation);
+        neighbourTable = newNeighbourTable;
+        currentFormation = formation;
     }
 
     public void RemoveFromCupList(GameObject cup)
     {
         cupList.Remove(cup);
-
-        if (cupList.Count == 2)
-        {
-            Rerack(Gentlemans.FormationString);
-        }
     }
 
     public int GetCupCount()
@@ -121,25 +110,76 @@ public class CupRack : MonoBehaviour
         return cupList.Count;
     }
 
+    public List<GameObject> GetCupList()
+    {
+        return cupList;
+    }
+
     //TODO: Se igjennom denne:
     //Brukt hvis begge blir ballene blir truffet i samme kopp
-    public List<GameObject> PickRandomCups(GameObject exlcude)
+    public List<GameObject> PickRandomCups(List<GameObject> exlcude, int removeCount)
     {
-        int removeCount = FindObjectOfType<GameRules>().SameCupCount;
+        
         if (removeCount + 1 >= cupList.Count)
             return cupList;
         List<GameObject> tempCups = new List<GameObject>();
         var rand = new System.Random();
-        while(tempCups.Count != removeCount)
+        while (tempCups.Count != removeCount)
         {
-            var picked = cupList[rand.Next(0,cupList.Count-1)];
-            if (tempCups.Contains(picked) || picked == exlcude)
+            var picked = cupList[rand.Next(0, cupList.Count - 1)];
+            if (tempCups.Contains(picked) || exlcude.Contains(picked))
                 continue;
             tempCups.Add(picked);
         }
         return tempCups;
     }
 
-    
+    public void UpdateNeighborTable(GameObject cup)
+    {
+        var neighboursToHitCup = neighbourTable.GetNeighbours(cup);
+        if (neighboursToHitCup == null) return;
+        foreach (var n in neighboursToHitCup)
+        {
+            neighbourTable.RemoveNeighbour(n, cup);
+        }
+        neighbourTable.Remove(cup);
+    }
+
+    public List<GameObject> CheckForIsland()
+    {
+        List<GameObject> islandCups = new List<GameObject>();
+        if (cupList.Count < 3) return islandCups;
+
+        foreach (var cup in cupList)
+        {
+            var neighbours = neighbourTable.GetNeighbours(cup);
+            if (neighbours == null) return islandCups;
+
+            if (neighbours.Count == 0)
+            {
+                islandCups.Add(cup);
+            }
+        }
+        if (islandCups.Count == 0) return islandCups;
+        //Hvis det er en som står alene, må vi også sjekke at det er et fastland,
+        //altså at det er en annen kopp som har en nabo
+        bool mainLandExists = false;
+        foreach(var cup in cupList)
+        {
+            if (islandCups.Contains(cup)) continue;
+            if(neighbourTable.GetNeighbours(cup).Count > 0)
+            {
+                mainLandExists = true;
+                break;
+            }
+        }
+
+        if (mainLandExists == false)
+            islandCups.Clear();
+
+        return islandCups;
+    }
+
+
 
 }
