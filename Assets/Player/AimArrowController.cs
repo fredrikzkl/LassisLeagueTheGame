@@ -19,6 +19,62 @@ public class AimArrowController : MonoBehaviour
     private Quaternion originalRotation;
     private Vector3 originalPosition;
 
+    //Brukt for å sikte
+    bool aiming;
+    //float anglePointXDistance = 250f;
+    float anglePointX;
+    float verticalAimSentivity;
+    float XYAngle;
+
+   
+
+    
+    private void Update()
+    {
+        verticalAimSentivity = FindObjectOfType<GameSettings>().VerticalAimSensitivity;
+        anglePointX = verticalAimSentivity * (direction * -1);
+
+
+        if (Input.GetButtonUp("Fire1"))
+        {
+            aiming = false;
+            //body.SetPositionAndRotation(originalPosition, originalRotation);
+            return;
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            mousePosOrigin = Input.mousePosition;
+            aiming = true;
+            originalPosition = body.position;
+            originalRotation = body.rotation;
+        }
+
+        if (aiming)
+        {
+            CalculateXYAngle();
+            //body.rotation = Quaternion.AngleAxis(RelativeXYAngle(), body.position);
+        }
+
+    }
+
+    void CalculateXYAngle()
+    {
+        var tempMousePosition = Input.mousePosition;
+        var deltaX = verticalAimSentivity;
+        var deltaY = mousePosOrigin.y - tempMousePosition.y;
+
+        XYAngle = Mathf.Atan2(deltaY, deltaX);
+        Debug.Log("Angle: [" + XYAngle + "]");
+    }
+
+    public float GetRelativeXYAngle()
+    {
+        float relativeXYAngle = (Mathf.PI / 2f) - XYAngle; //-XYAngle + (Mathf.PI/2f);
+        //Debug.Log("Relative " + relativeXYAngle);
+        return relativeXYAngle;                                                            
+    }
+
     private void Awake()
     {
         body = GetComponent<Transform>();
@@ -26,51 +82,14 @@ public class AimArrowController : MonoBehaviour
     }
 
 
-    /*
-    private void Update()
+
+    public float GetXYAngle()
     {
-
-        if(Input.GetButtonUp("Fire1"))
-        {
-            mousePosOrigin = Vector3.zero;
-            body.SetPositionAndRotation(originalPosition, originalRotation);
-            return;
-        }
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            mousePosOrigin = Input.mousePosition;
-            originalRotation = body.rotation;
-            originalPosition = body.position;
-        }
-
-
-        if (mousePosOrigin != Vector3.zero)
-        {
-            var angle = MouseAimAngle();
-            body.RotateAround(pivotPoint.position, new Vector3(0f, 0f, 1f), angle);
-            /*
-            var goal = Quaternion.Euler(new Vector3(0, 1f, angle));
-            if (body.rotation != goal)
-            {
-                
-
-            }
-         
-        }
+        return XYAngle;
     }
-            */
-    //Y - direction aim
-    public float MouseAimAngle()
-    {
-        var finalMousePos = Input.mousePosition;
-        var deltaX = finalMousePos.x - body.position.x;
-        var deltaY = finalMousePos.y - body.position.y;
-        var angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg; 
-        return angle;
-    }
+            
 
-
+  
     public void FixedUpdate()
     {
         //Direction > 0 = nedover
@@ -95,6 +114,8 @@ public class AimArrowController : MonoBehaviour
         }
     }
 
+
+
     public void StartRotating()
     {
         rotate = true;
@@ -111,9 +132,7 @@ public class AimArrowController : MonoBehaviour
         float deltaX = body.position.x - pivotPoint.position.x;
         float deltaY = body.position.z - pivotPoint.position.z;
 
-
         float degree = Mathf.Atan2(deltaY, deltaX);
-
         return degree;
     }
 

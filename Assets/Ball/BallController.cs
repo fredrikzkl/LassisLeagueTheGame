@@ -15,13 +15,28 @@ public class BallController : MonoBehaviour
     //Dersom on isInPlay, så 
     public bool isInPlay;
 
+    //Blir satt til ja dersom denne ballen skal blir brukt til island
+    public bool isIslandBall { get; set; }
 
+    private void Awake()
+    {
+        isIslandBall = false;
+    }
     // Start is called before the first frame update
     void Start()
     {
         isInPlay = true;
     }
 
+    private void OnDestroy()
+    {
+        //Dersom denne ballen dør og skal blir brukt til islandkoppen, fjernes alle islandkopper
+        if (isIslandBall)
+        {
+            var opponentRack = FindObjectOfType<GameLogic>().GetOpponentCupRack(owner);
+            opponentRack.DisableIsland();
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -39,6 +54,12 @@ public class BallController : MonoBehaviour
     public void BallOutOfBounds(float removeAfterSeconds)
     {
         timeAlive = removeAfterSeconds;
+    }
+
+    public void SetAsIslandBall()
+    {
+        GetComponent<TrailRenderer>().enabled = true;
+        isIslandBall = true;
     }
 
    

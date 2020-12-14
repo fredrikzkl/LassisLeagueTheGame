@@ -2675,7 +2675,10 @@ MonoBehaviour:
   StartFormation: 0
   BallsBackCount: 2
   Restacks: 1
-  SameCupCount: 2
+  Islands: 1
+  IslandsReward: 1
+  SameCupReward: 2
+  NumberOfBallsPrRound: 2
 --- !u!114 &963194233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2810,7 +2813,7 @@ MonoBehaviour:
     type: 3}
   cupImagePrefab: {fileID: 8508052346403333350, guid: 5002d282e44c4ea47b403f6f5b47817c,
     type: 3}
-  formationsCards: []
+  stratCards: []
 --- !u!114 &1069850725
 MonoBehaviour:
   m_ObjectHideFlags: 0

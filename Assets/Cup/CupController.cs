@@ -16,7 +16,7 @@ public class CupController : MonoBehaviour
 
     //IslandCup: Settes true dersom spiller invoker island
     bool blinking;
-    bool isIslandCup;
+    public bool isIslandCup;
     bool successfullyHitIsland;
   
 
@@ -51,10 +51,14 @@ public class CupController : MonoBehaviour
 
 
     //Når 
-    public void SetIsland()
+    public void SetIsland(bool status)
     {
-        isIslandCup = true;
-        blinking = true;
+        isIslandCup = status;
+        blinking = status;
+        if(status == false)
+        {
+            SetMainMaterial(standardMaterial);
+        }
     }
 
     public void SetMaterials(Material standard, Material hit)
@@ -80,7 +84,7 @@ public class CupController : MonoBehaviour
         {
             blinking = false;
             //Sjekker om det var island
-            if(isIslandCup && other.gameObject.name == "ball_" + FindObjectOfType<GameRules>().NumberOfBallsPrRound)
+            if(isIslandCup && other.GetComponent<BallController>().isIslandBall)
             {
                 successfullyHitIsland = true;
                 Debug.Log("DUDE ISLAND!!");

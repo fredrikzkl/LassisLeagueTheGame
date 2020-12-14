@@ -20,21 +20,24 @@ public class PlayerController : MonoBehaviour
     public Color playerColor;
     public Slider powerSlider;
     public GameHUD hud;
-    
+
     private int throwsRemaining = 0;
     public List<GameObject> islandCups { get; set; }
 
-    //Arc
-    private Vector3 mousePosition;
-    public float maxMouseDistance = 15f;
 
     //Power
-    public float powerConstant = 0.01f;
     private bool isChargingUp;
     private float currentPower;
+    //Brukt for 2D
+    //private float chargeUpRate = 2.5f;
+    private float chargeUpRate = 2.3f;
 
     //Throwing helpvariables
     float currentAngle;
+
+    //Island
+    public bool nextThrowIsIsland { get; set; }
+
 
     private void Start()
     {
@@ -44,6 +47,7 @@ public class PlayerController : MonoBehaviour
         aimArrow.GetComponent<MeshRenderer>().enabled = false;
         hud.DeactivateStratsButton();
         roundHandler = GetComponent<PlayerRoundHandler>();
+        nextThrowIsIsland = false;
     }
 
     public void BallsBack()
@@ -96,8 +100,6 @@ public class PlayerController : MonoBehaviour
         aimArrow.GetComponent<AimArrowController>().Enable();
     }
 
-
-
     public void EndRound()
     {
         aimArrow.GetComponent<AimArrowController>().Disable();
@@ -106,22 +108,19 @@ public class PlayerController : MonoBehaviour
         roundHandler.EndRound();
     }
 
-
     private void FixedUpdate()
     {
         if (isChargingUp)
         {
             if (currentPower < 100f)
             {
-                currentPower += 2.5f;
+                currentPower += chargeUpRate;
                 powerSlider.value = currentPower;
             }
             return;
         }
     }
 
-
-    // Update is called once per frame
     void Update()
     {
 
@@ -134,28 +133,23 @@ public class PlayerController : MonoBehaviour
                     //Slipper opp
                     if ((Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.Space)) && !GameManager.gameIsPaused)
                     {
-                        Vector2 temp_arc = GetAimingResults();
-                        float temp_angle = currentAngle;
-                        float temp_power = currentPower;
-                        ThrowBall(temp_arc, temp_angle, temp_power);
+                        ThrowBall();
                         //Gamme updates
                         isChargingUp = false;
                         currentPower = 0;
                         throwsRemaining -= 1;
-                        mousePosition = Vector3.zero;
                         //UI
                         aimArrow.GetComponent<AimArrowController>().StartRotating();
                         powerSlider.value = 0;
                         hud.UpdateBallIndicator(throwsRemaining);
                         //Replay
-                        FindObjectOfType<GameLogic>().AddThrowToReplay(temp_arc, temp_angle, temp_power, playerHand);
+                        //FindObjectOfType<GameLogic>().AddThrowToReplay(temp_arc, temp_angle, temp_power, playerHand);
                     }
                 }
 
                 //Første klikk
                 if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !GameManager.gameIsPaused && !IsPointerOverUIObject())
                 {
-                    mousePosition = Input.mousePosition;
                     currentAngle = aimArrow.GetComponent<AimArrowController>().StopRotating();
                     isChargingUp = true;
                     //Fjerner muligheten din for å gjøre valg
@@ -178,53 +172,34 @@ public class PlayerController : MonoBehaviour
         return results.Count > 0;
     }
 
+    void ThrowBall()
+    {
+        //var xyAngle = aimArrow.GetComponent<AimArrowController>().RelativeXYAngle();
+        var xyAngle = aimArrow.GetComponent<AimArrowController>().GetRelativeXYAngle();
+        var xzAngle = currentAngle;
+        var power = currentPower;
+        ThrowBall(xyAngle, xzAngle, power);
+    }
 
-    public void ThrowBall(Vector2 arc, float angle, float power)
+    public void ThrowBall(float xyAngle, float xzAngle, float power)
     {
         var ball = Instantiate(ballPrefab, playerHand.position, Quaternion.identity);
         ball.name = "ball_" + throwsRemaining;
         ball.GetComponent<BallController>().owner = gameObject;
         roundHandler.ThrownBalls.Add(ball);
 
+        if (nextThrowIsIsland)
+        {
+            ball.GetComponent<BallController>().SetAsIslandBall();
+            nextThrowIsIsland = false;
+        }
 
+        Vector3 intialValues = GetComponent<PlayerThrowLogic>().SphericalCoordinates(xyAngle, xzAngle, power);
 
-        /*
-        var adjustedPower = power * 0.045f;
-        float x = arc.x * adjustedPower;
-        float y = arc.y * adjustedPower;
+        ball.GetComponent<Rigidbody>().velocity = intialValues;
 
-        ball.GetComponent<Rigidbody>().velocity = new Vector3(x,y, angle*2f);
-        */
+        Debug.Log("Final XY: [[" + xyAngle + "]]" + " -- X: " + intialValues.x + " Y:" + intialValues.y + " Z:" + intialValues.z);
 
-        //Debug.Log(angle);
-        var adjustedPower = power * 0.075f;
-
-        float y = adjustedPower;
-
-        float x = Mathf.Cos(angle) * adjustedPower;
-        float z = Mathf.Sin(angle) * adjustedPower;
-
-        ball.GetComponent<Rigidbody>().velocity = new Vector3(x, y, z);
-
-
-    }
-
-    private float LimitDeltaValues(float deltaValue)
-    {
-        if (deltaValue > maxMouseDistance) return maxMouseDistance;
-        else if (deltaValue < -maxMouseDistance) return -maxMouseDistance;
-        return deltaValue;
-    }
-
-    //Lecay
-    private Vector2 GetAimingResults()
-    {
-        var finalMousePos = Input.mousePosition;
-        Vector2 aim = new Vector2();
-        aim.x = -LimitDeltaValues(mousePosition.x - finalMousePos.x) * powerConstant;
-        aim.y = LimitDeltaValues(mousePosition.y - finalMousePos.y) * powerConstant;
-
-        return aim;
     }
 
 

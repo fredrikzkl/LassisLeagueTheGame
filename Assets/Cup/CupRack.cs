@@ -180,6 +180,17 @@ public class CupRack : MonoBehaviour
         return islandCups;
     }
 
+    public void DisableIsland()
+    {
+        foreach(var c in cupList)
+        {
+            var cc = c.GetComponent<CupController>();
+            if (cc.isIslandCup)
+            {
+                cc.SetIsland(false);
+            }
+        }
+    }
 
 
 }

@@ -7,4 +7,7 @@ public class GameSettings : MonoBehaviour
     [SerializeField]
     public bool ShowFps;
 
+    [SerializeField]
+    [Range(50f, 250f)]
+    public float VerticalAimSensitivity = 100f;
 }

@@ -38,7 +38,8 @@ public class PlayerRoundHandler : MonoBehaviour
     public void InvokeIsland(GameObject cup)
     {
         var cc = cup.GetComponent<CupController>();
-        cc.SetIsland();
+        cc.SetIsland(true);
+        FindObjectOfType<GameLogic>().GetOpponent(gameObject).GetComponent<PlayerController>().nextThrowIsIsland = true; ;
 
     }
 

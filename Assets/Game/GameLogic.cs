@@ -65,7 +65,7 @@ public class GameLogic : MonoBehaviour
     {
         foreach (var r in replays)
         {
-            player.GetComponent<PlayerController>().ThrowBall(r.arc, r.angle, r.power);
+            //player.GetComponent<PlayerController>().ThrowBall(r.arc, r.angle, r.power);
             replays.Remove(r);
         }
     }
