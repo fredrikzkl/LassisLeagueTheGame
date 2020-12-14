@@ -18,7 +18,7 @@ public class CupRack : MonoBehaviour
 
     NeighbourTable neighbourTable;
 
-    string currentFormation;
+    public string currentFormation;
 
 
     //Hjelpevariabler

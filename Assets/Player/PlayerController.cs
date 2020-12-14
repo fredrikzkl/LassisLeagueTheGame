@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     //Island
     public bool nextThrowIsIsland { get; set; }
+    public bool isBallsBackRound;
 
 
     private void Start()
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
         hud.DeactivateStratsButton();
         roundHandler = GetComponent<PlayerRoundHandler>();
         nextThrowIsIsland = false;
+        isBallsBackRound = false;
     }
 
     public void BallsBack()
@@ -56,6 +58,7 @@ public class PlayerController : MonoBehaviour
         throwsRemaining = FindObjectOfType<GameRules>().BallsBackCount;
         hud.UpdateBallIndicator(throwsRemaining);
         aimArrow.GetComponent<AimArrowController>().Enable();
+        isBallsBackRound = true;
     }
 
     public void StartRound()
@@ -96,6 +99,7 @@ public class PlayerController : MonoBehaviour
         //Legger til baller
         throwsRemaining = FindObjectOfType<GameRules>().NumberOfBallsPrRound;
         hud.UpdateColors(playerColor, throwsRemaining);
+        isBallsBackRound = false;
         //Starter pilen
         aimArrow.GetComponent<AimArrowController>().Enable();
     }
@@ -192,6 +196,11 @@ public class PlayerController : MonoBehaviour
         {
             ball.GetComponent<BallController>().SetAsIslandBall();
             nextThrowIsIsland = false;
+        }
+
+        if (isBallsBackRound)
+        {
+            ball.GetComponent<TrailRenderer>().enabled = true;
         }
 
         Vector3 intialValues = GetComponent<PlayerThrowLogic>().SphericalCoordinates(xyAngle, xzAngle, power);

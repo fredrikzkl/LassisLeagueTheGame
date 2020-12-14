@@ -128,6 +128,7 @@ public class PlayerRoundHandler : MonoBehaviour
         if (ThrownBalls.Count == 0) return false;
         foreach (var ball in ThrownBalls)
         {
+            if (ball == null) continue;
             if (ball.GetComponent<BallController>().isInPlay)
                 return true;
         }

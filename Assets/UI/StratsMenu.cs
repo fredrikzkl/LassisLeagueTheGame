@@ -32,8 +32,10 @@ public class StratsMenu : MonoBehaviour
     GameObject player;
 
     //Hjelpevariabler
+    private string currentFormation;
     private float cardWidth;
     private float padding;
+    private float cupSpriteDiameter;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +45,7 @@ public class StratsMenu : MonoBehaviour
         //Setter verdier brukt for stratscards
         cardWidth = formationCardPrefab.GetComponent<RectTransform>().sizeDelta.x;
         padding = 0.1f * cardWidth;
-
+        cupSpriteDiameter = cupImagePrefab.GetComponent<RectTransform>().sizeDelta.x;
     }
 
 
@@ -63,16 +65,12 @@ public class StratsMenu : MonoBehaviour
         //Henter ut islandkoppene
         if (playerController.islandCups.Count > 0)
         {
+            currentFormation = opppnentRoundHandler.cupRack.GetComponent<CupRack>().currentFormation;
             CreateIslandCards(playerController.islandCups);
         }
         
     }
-    /*
-    float SetStartAnchorPoint(float origin, )
-    {
 
-    }
-    */
 
     void CreateFormationCards(List<Formation> formations)
     {
@@ -92,8 +90,7 @@ public class StratsMenu : MonoBehaviour
             int direction = correctedVisualAnchor.Item2;
          
             //Lager formasjonen
-            float diameter = cupImagePrefab.GetComponent<RectTransform>().sizeDelta.x;
-            List<Vector3> positions = Create2DPositionMatrix(f.FormationString, formationVisualAnchor.transform.position, direction, diameter);
+            List<Vector3> positions = Create2DPositionMatrix(f.FormationString, formationVisualAnchor.transform.position, direction, cupSpriteDiameter).Item1;
             foreach (var p in positions)
             {
                 var cupImage = Instantiate(cupImagePrefab, p, Quaternion.identity);
@@ -128,17 +125,46 @@ public class StratsMenu : MonoBehaviour
     {
         var anchorPointX = AdujustAnchorpointX(islandCardAnchorPoint.position.x, islandCups.Count);
 
-        for (int i = 0; i < islandCups.Count; i++)
+        for (int c = 0; c < islandCups.Count; c++)
         {
             string cardName = "Island";
             if (islandCups.Count > 1)
-                cardName += "#" + (i + 1);
+                cardName += "#" + (c + 1);
             //Lager kortet
             var newIslandCard = AddNewStratsCard(new Vector3(anchorPointX, islandCardAnchorPoint.transform.position.y, 0), cardName, islandCardAnchorPoint.transform);
 
-            var cup = islandCups[i];
+            var cup = islandCups[c];
             newIslandCard.GetComponent<Button>().onClick.AddListener(() => OnIslandCardClick(cup));
+            //Visuals
+            var correctedVisualAnchor = GetCorrectCupVisualAnchor(newIslandCard);
+            Transform formationVisualAnchor = correctedVisualAnchor.Item1;
+            int direction = correctedVisualAnchor.Item2;
 
+            var pm = Create2DPositionMatrix(currentFormation, formationVisualAnchor.transform.position, direction, cupSpriteDiameter);
+
+            var opponentRack = opppnentRoundHandler.cupRack.GetComponent<CupRack>();
+            for (int i = 0; i<pm.Item2.Count; i++)
+            {
+                var tempCumpName = pm.Item2[i];
+                foreach(var cupInRack in opponentRack.GetCupList())
+                {
+                    if (tempCumpName.Equals(cupInRack.name))
+                    {
+                        var cupImage = Instantiate(cupImagePrefab, pm.Item1[i], Quaternion.identity);
+                        cupImage.transform.SetParent(newIslandCard.transform);
+                        if (cupInRack == islandCups[c])
+                        {
+                            cupImage.GetComponent<Image>().color = new Color(255, 215, 0, 0.9f);
+                        }
+                        else
+                        {
+                            Color color = opppnentRoundHandler.gameObject.GetComponent<PlayerController>().playerColor;
+                            cupImage.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 0.9f);
+                        }
+                    }                    
+                }
+            }
+       
             //Setter x verdien til neste kort
             anchorPointX += (cardWidth + padding);
         }
@@ -150,7 +176,7 @@ public class StratsMenu : MonoBehaviour
         stratCards.Add(newCard);
         //Navn på gameobjectet
         newCard.name = name;
-        newCard.transform.SetParent(formationCardAnchorPoint.transform);
+        newCard.transform.SetParent(parent);
         //Setter tekst + bilde 
         newCard.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = name;
         return newCard;

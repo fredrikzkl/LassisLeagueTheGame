@@ -167,41 +167,50 @@ public class Formations
         return (rowList, cupIdList);
     }
 
+    
+
 
     //Lager en liste over alle posisjonene koppene skal stå
-    public static List<Vector3> Create2DPositionMatrix(string formation, Vector3 anchorPosition, int direction, float diameter)
+    public static (List<Vector3>, List<string>) Create2DPositionMatrix(string formation, Vector3 anchorPosition, int direction, float diameter)
     {
         var tightFactor = 0.865f;
 
         List<Vector3> positionMatrix = new List<Vector3>();
+        List<string> cupNames = new List<string>();
+
         Vector3 tempPos = new Vector3(anchorPosition.x, anchorPosition.y, anchorPosition.z);
         tempPos.y -= (2 * diameter);
         //Decoding string:
         string[] rows = formation.Split('#');
-        foreach (var row in rows)
+        for (int i = 0; i < rows.Length; i++)
         {
-            var rowResult = Create2DPositionMatrixRow(tempPos, row, diameter);
-            foreach (var position in rowResult)
-            {
-                positionMatrix.Add(position);
-            }
+            var row = rows[i];
+
+            var rowResult = Create2DPositionMatrixRow(tempPos, row, i, diameter);
+
+            rowResult.Item1.ForEach(coordinate => positionMatrix.Add(coordinate));
+            rowResult.Item2.ForEach(name => cupNames.Add(name));
             tempPos.x += (direction * diameter * tightFactor);
         }
-        return positionMatrix;
+        return (positionMatrix, cupNames);
     }
 
-    public static List<Vector3> Create2DPositionMatrixRow(Vector3 pos, string row, float diameter)
+    public static (List<Vector3>, List<string>) Create2DPositionMatrixRow(Vector3 pos, string row, int rowIndex, float diameter)
     {
         List<Vector3> rowList = new List<Vector3>();
-        foreach (var symbol in row)
+        List<string> cupNames = new List<string>();
+
+        for (int j = 0; j < row.Length; j++)
         {
+            char symbol = row[j];
             if (symbol == '1')
             {
                 rowList.Add(pos);
+                cupNames.Add(rowIndex + "-" + j);
             }
             pos.y = pos.y + (0.5f * diameter);
         }
-        return rowList;
+        return (rowList, cupNames);
     }
 
 
@@ -281,8 +290,6 @@ public class Formations
             if (currentRow[colIndex] == '1')
                 list.Add(rowIndex + "-" + colIndex);
     }
-
-
 
     static bool IsOutOfBounds(string currentRow, int colIndex)
     {
