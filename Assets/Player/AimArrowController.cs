@@ -65,7 +65,7 @@ public class AimArrowController : MonoBehaviour
         var deltaY = mousePosOrigin.y - tempMousePosition.y;
 
         XYAngle = Mathf.Atan2(deltaY, deltaX);
-        Debug.Log("Angle: [" + XYAngle + "]");
+        //Debug.Log("Angle: [" + XYAngle + "]");
     }
 
     public float GetRelativeXYAngle()

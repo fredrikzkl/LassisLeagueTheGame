@@ -77,7 +77,8 @@
     <Compile Include="Assets\Player\PlayerRoundHandler.cs" />
     <Compile Include="Assets\Player\PlayerThrowLogic.cs" />
     <Compile Include="Assets\RemoveBallZone.cs" />
-    <Compile Include="Assets\Sound\SoundEffectHandler.cs" />
+    <Compile Include="Assets\Sound\SoundFX.cs" />
+    <Compile Include="Assets\Sound\SoundManager.cs" />
     <Compile Include="Assets\StratsCard.cs" />
     <Compile Include="Assets\TestScripts\BallDropper.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />

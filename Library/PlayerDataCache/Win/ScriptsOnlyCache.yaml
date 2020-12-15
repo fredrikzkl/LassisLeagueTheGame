@@ -5,16 +5,18 @@ ScriptsOnlyBuild:
     - BallController
     - CupController
     - CupRack
+    - GameHUD
     - GameLogic
     - GameManager
     - GameRules
     - GameSettings
-    - GameUIMenu
     - PlayerController
     - PlayerRoundHandler
     - PlayerThrowLogic
     - RemoveBallZone
-    - RestackMenu
+    - SoundManager
+    - StratsCard
+    - StratsMenu
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -27,10 +29,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -76,11 +76,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
+      Script: {instanceID: 0}
+    - Class: 96
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -111,35 +115,39 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11912}
     - Class: 114
-      Script: {instanceID: 12200}
+      Script: {instanceID: 12180}
     - Class: 114
-      Script: {instanceID: 12232}
+      Script: {instanceID: 12202}
     - Class: 114
-      Script: {instanceID: 12286}
+      Script: {instanceID: 12234}
     - Class: 114
-      Script: {instanceID: 12370}
+      Script: {instanceID: 12288}
     - Class: 114
-      Script: {instanceID: 12514}
+      Script: {instanceID: 12372}
     - Class: 114
-      Script: {instanceID: 12530}
+      Script: {instanceID: 12516}
     - Class: 114
-      Script: {instanceID: 12660}
+      Script: {instanceID: 12532}
     - Class: 114
-      Script: {instanceID: 12680}
+      Script: {instanceID: 12662}
     - Class: 114
-      Script: {instanceID: 12732}
+      Script: {instanceID: 12682}
     - Class: 114
-      Script: {instanceID: 12796}
+      Script: {instanceID: 12734}
     - Class: 114
-      Script: {instanceID: 12912}
+      Script: {instanceID: 12798}
     - Class: 114
-      Script: {instanceID: 12964}
+      Script: {instanceID: 12914}
     - Class: 114
-      Script: {instanceID: 13076}
+      Script: {instanceID: 12966}
     - Class: 114
-      Script: {instanceID: 13176}
+      Script: {instanceID: 13078}
     - Class: 114
-      Script: {instanceID: 13206}
+      Script: {instanceID: 13178}
+    - Class: 114
+      Script: {instanceID: 13208}
+    - Class: 114
+      Script: {instanceID: 19060}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -185,7 +193,7 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
-      Hash: ba9ca4fce1e4d6128e994fd9339aaecd
+      Hash: 67a29b0319d4131f27c6e650ed1d002b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CupRack
@@ -239,10 +247,10 @@ ScriptsOnlyBuild:
     className: ActivationTrack
   - hash:
       serializedVersion: 2
-      Hash: f4e1ab0a89956e2460cbcba48a7a4662
+      Hash: e6375018e4b3e2256c1b1f8ecaf98734
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: GameUIMenu
+    className: GameHUD
   - hash:
       serializedVersion: 2
       Hash: aeb62f729c52c814dec86c47dcac1471
@@ -293,7 +301,7 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 7623bbfbfcddd8887b17c1d908bd303d
+      Hash: b31a10d692474cc052b12c4546433461
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameRules
@@ -323,7 +331,7 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 6d6cebb36a3001fb319cbf313c0b5dd4
+      Hash: eb3afb304ac9f27d659a337d2a0dedb5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CupController
@@ -473,7 +481,13 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: 3933468cdc03aa6314085699a456d096
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StratsCard
+  - hash:
+      serializedVersion: 2
+      Hash: 9763bd83f9454fc4f88efe835fbeb651
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -503,10 +517,10 @@ ScriptsOnlyBuild:
     className: ChatController
   - hash:
       serializedVersion: 2
-      Hash: d7d8445dd40673a7e7149422d32ed57a
+      Hash: a8c99747987c3f1db452ee7fe424d14a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: RestackMenu
+    className: StratsMenu
   - hash:
       serializedVersion: 2
       Hash: f84d945e5e1ca985698660fc26e9657f
@@ -515,7 +529,7 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
-      Hash: 60cf9ecaadce9d1dfa7e3346518163e2
+      Hash: 77542358229a84ebbc409acb2a0c5227
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameSettings
@@ -879,6 +893,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: ea16b0c44047d84e1b776fdc0890a033
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SoundManager
   platform: 5
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

@@ -62,6 +62,14 @@ public class BallController : MonoBehaviour
         isIslandBall = true;
     }
 
-   
-   
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+        if(collision.gameObject.tag == "Table")
+        {
+            Debug.Log("HIT WITH TABLE");
+            FindObjectOfType<SoundManager>().PlaySoundEffect("BallHitTable");
+        }
+    }
+
 }

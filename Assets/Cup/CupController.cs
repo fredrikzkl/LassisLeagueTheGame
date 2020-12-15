@@ -90,6 +90,8 @@ public class CupController : MonoBehaviour
                 Debug.Log("DUDE ISLAND!!");
             }
 
+            FindObjectOfType<SoundManager>().PlaySoundEffect("CupHit");
+
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             other.gameObject.GetComponent<BallController>().BallOutOfBounds(1f);
             RegisterHit(other.gameObject);
