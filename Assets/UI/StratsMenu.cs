@@ -19,17 +19,20 @@ public class StratsMenu : MonoBehaviour
     public GameObject cupImagePrefab;
     private Image panel;
 
-
+    public GameObject IslandSection;
+    public GameObject RestackSecion;
 
     //OpponentsRack
     private PlayerRoundHandler opppnentRoundHandler;
 
     //FormationCards
     public List<GameObject> stratCards;
-    
+
 
     //Temps
     GameObject player;
+    int restacks;
+    int islands;
 
     //Hjelpevariabler
     private string currentFormation;
@@ -59,15 +62,35 @@ public class StratsMenu : MonoBehaviour
         var pc = playerController.playerColor;
         Color temp = new Color(pc.r, pc.g, pc.b, 0.1f);
         panel.color = temp;
-        //Hvor mange restacks har denne spilleren?
+        //Henter ut egen stats
+        var playerRoundHandler = player.GetComponent<PlayerRoundHandler>();
+        islands = playerRoundHandler.islands;
+        restacks = playerRoundHandler.restacks;
+        //Henter ut racken til motspilleren
         opppnentRoundHandler = game.GetOpponent(player).GetComponent<PlayerRoundHandler>();
-        CreateFormationCards(opppnentRoundHandler.GetValidFormations());
+        //Sjekker reracks
+        List<Formation> validFormations = opppnentRoundHandler.GetValidFormations();
+        if (validFormations.Count > 0 && restacks > 0)
+        {
+            CreateFormationCards(opppnentRoundHandler.GetValidFormations());
+            RestackSecion.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Restack  (" + restacks + ")";
+            RestackSecion.active = true;
+        }
+
         //Henter ut islandkoppene
-        if (playerController.islandCups.Count > 0)
+        if (playerController.islandCups.Count > 0 && islands > 0)
         {
             currentFormation = opppnentRoundHandler.cupRack.GetComponent<CupRack>().currentFormation;
             CreateIslandCards(playerController.islandCups);
+            IslandSection.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Island  (" + islands + ")";
+            IslandSection.active = true;
         }
+        else
+        {
+            
+        }
+        //Formations
+        
         
     }
 
@@ -226,8 +249,12 @@ public class StratsMenu : MonoBehaviour
         RemoveFormationCards();
         Time.timeScale = 1f;
         GameManager.gameIsPaused = false;
+        IslandSection.active = false;
+        RestackSecion.active = false;
         gameObject.SetActive(false);
         SetLowerUiActive(true);
+
+
     }
 
     private void RemoveFormationCards()

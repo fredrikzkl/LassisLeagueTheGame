@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
             bool hasStrats = false;
             //Har vi island?
             islandCups = opponentCupRack.CheckForIsland();
-            if (islandCups.Count > 0)
+            if (islandCups.Count > 0 && GetComponent<PlayerRoundHandler>().islands > 0)
             {
                 Debug.Log(gameObject.name + " has island with " + islandCups.Count + " cups!");
                 islandCups.ForEach(ic => Debug.Log(ic.name));
