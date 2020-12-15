@@ -242,6 +242,7 @@ public class Formations
                     if(i+1 < rows.Length)
                     {
                         var tempRow = rows[i + 1];
+                        CheckNeighbor(tempRow, j, i + 1, neigbors);
                         colIndex = j + 1;
                         CheckNeighbor(tempRow, colIndex, i + 1, neigbors);
                         colIndex = j - 1;
@@ -252,6 +253,7 @@ public class Formations
                     if (i - 1 >= 0)
                     {
                         var tempRow = rows[i - 1];
+                        CheckNeighbor(tempRow, j, i - 1, neigbors);
                         colIndex = j + 1;
                         CheckNeighbor(tempRow, colIndex, i - 1, neigbors);
                         colIndex = j - 1;
