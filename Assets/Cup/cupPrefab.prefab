@@ -25,7 +25,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 30
+  m_CookingOptions: -1
   m_Mesh: {fileID: 6654154832039259940, guid: 8a590948eb8b9ab47baaf7235eea26f6, type: 3}
 --- !u!114 &792370046
 MonoBehaviour:
@@ -40,6 +40,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rimMaterial: {fileID: 2100000, guid: a77fba8c8a5a52a47b1ca6816b8d7cfe, type: 2}
+  isIslandCup: 0
+  newPosition: {x: 0, y: 0, z: 0}
+--- !u!65 &1595158179611044673
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4483557802647962617}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.001, y: 0.01291079, z: 0.01535619}
+  m_Center: {x: -0.009, y: -9.3132246e-10, z: 0.00050029013}
+--- !u!65 &3353531650641597277
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4483557802647962617}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.001, y: 0.01291079, z: 0.01535619}
+  m_Center: {x: 0.009, y: -9.3132246e-10, z: 0.00050029013}
+--- !u!65 &6284825204808753230
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4483557802647962617}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.019, y: 0.001, z: 0.01535619}
+  m_Center: {x: -4.656613e-10, y: 0.007, z: 0.00050029013}
+--- !u!65 &5575856703872773208
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4483557802647962617}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.019, y: 0.001, z: 0.01535619}
+  m_Center: {x: -4.656613e-10, y: -0.007, z: 0.00050029013}
 --- !u!1001 &3673149219055500968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,6 +186,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: cupPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8a590948eb8b9ab47baaf7235eea26f6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a590948eb8b9ab47baaf7235eea26f6, type: 3}

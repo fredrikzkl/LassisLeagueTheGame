@@ -39,13 +39,16 @@ public class CupRack : MonoBehaviour
         CreateRack(FindObjectOfType<GameRules>().StartFormation);
     }
 
+
+
     private void CreateRack(StartFormation formation)
     {
         string f = GetStartFormation(formation);
         var pm = CreatePositionMatrix(f, location.position, direction, diameter);
         for (int i = 0; i < pm.Item1.Count; i++)
         {
-            SpawnCup(pm.Item1[i], pm.Item2[i]);
+            var c = SpawnCup(pm.Item1[i], pm.Item2[i]);
+            c.gameObject.transform.SetParent(gameObject.transform);
         }
 
         neighbourTable = DetermineCupNeighbors(cupList, f);
@@ -189,6 +192,16 @@ public class CupRack : MonoBehaviour
             {
                 cc.SetIsland(false);
             }
+        }
+    }
+
+    //Om denne koppen var siste dråpen
+    public void CheckIfLost(GameObject hitCup)
+    {
+        if(cupList.Count == 1 && cupList[0] == hitCup)
+        {
+            GameObject winner = FindObjectOfType<GameLogic>().GetOpponent(gameObject.transform.root.gameObject);
+            FindObjectOfType<GameLogic>().InitiateWinningSequence(winner);
         }
     }
 

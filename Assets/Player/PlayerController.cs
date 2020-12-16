@@ -42,12 +42,12 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        roundHandler = GetComponent<PlayerRoundHandler>();
         isChargingUp = false;
         currentPower = 0f;
         powerSlider.value = 0;
         aimArrow.GetComponent<MeshRenderer>().enabled = false;
         hud.DeactivateStratsButton();
-        roundHandler = GetComponent<PlayerRoundHandler>();
         nextThrowIsIsland = false;
         isBallsBackRound = false;
     }
@@ -209,6 +209,11 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("Final XY: [[" + xyAngle + "]]" + " -- X: " + intialValues.x + " Y:" + intialValues.y + " Z:" + intialValues.z);
 
+    }
+
+    public void Disable()
+    {
+        aimArrow.active = false;
     }
 
 

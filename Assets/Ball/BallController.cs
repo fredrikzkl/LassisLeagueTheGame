@@ -18,6 +18,9 @@ public class BallController : MonoBehaviour
     //Blir satt til ja dersom denne ballen skal blir brukt til island
     public bool isIslandBall { get; set; }
 
+    //Sound
+    float soundCooldown = 0f; //Brukes for å eliminere duplikate lyder når treffer objekter
+
     private void Awake()
     {
         isIslandBall = false;
@@ -64,11 +67,30 @@ public class BallController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        float ballVelocity = GetComponent<Rigidbody>().velocity.magnitude;
+        float volume = 0.5f*(ballVelocity*2f);
         
         if(collision.gameObject.tag == "Table")
         {
-            Debug.Log("HIT WITH TABLE");
-            FindObjectOfType<SoundManager>().PlaySoundEffect("BallHitTable");
+            FindObjectOfType<SoundManager>().PlaySoundEffect("BallHitTable", ballVelocity);
+        }
+        if(volume > 1f)
+        {
+            if (collision.gameObject.tag == "Cup")
+            {
+                var cupYPos = collision.gameObject.transform.position.y;
+
+                var rimLimit = cupYPos + ((cupYPos / 2) * 0.1);
+
+                if (gameObject.transform.position.y > rimLimit)
+                {
+                    FindObjectOfType<SoundManager>().PlaySoundEffect("BallHitCupRim", ballVelocity);
+                }
+                else
+                {
+                    FindObjectOfType<SoundManager>().PlaySoundEffect("BallHitCupSide", ballVelocity);
+                }
+            }
         }
     }
 

@@ -41,10 +41,9 @@ public class GameHUD : MonoBehaviour
 
     public void OpenRestackMenu()
     {
-
+        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
         stratsMenu.GetComponent<StratsMenu>().Initiate();
-        GameManager.gameIsPaused = true;
-        Time.timeScale = 0f;
+        
     }
 
     private void Update()

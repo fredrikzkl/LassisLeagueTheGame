@@ -54,6 +54,7 @@ public class StratsMenu : MonoBehaviour
 
     public void Initiate()
     {
+        GameManager.Pause();
         gameObject.SetActive(true);
         SetLowerUiActive(false);
         player = game.playerWithTheRound;
@@ -227,6 +228,7 @@ public class StratsMenu : MonoBehaviour
         GameObject opponent = game.GetOpponent(player);
         opponent.GetComponent<PlayerRoundHandler>().InvokeIsland(cup);
         player.GetComponent<PlayerRoundHandler>().islands--;
+        FindObjectOfType<Announcer>().Say("Island");
     }
 
     private void OnFormationCardClick(string formationString)
@@ -241,14 +243,16 @@ public class StratsMenu : MonoBehaviour
         GameObject opponent = game.GetOpponent(player);
         opponent.GetComponent<PlayerRoundHandler>().Restack(formationString);
         player.GetComponent<PlayerRoundHandler>().restacks--;
+        FindObjectOfType<Announcer>().Say("Restack");
     }
 
 
     public void ResumeGame()
     {
+        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+
         RemoveFormationCards();
-        Time.timeScale = 1f;
-        GameManager.gameIsPaused = false;
+        GameManager.Resume();
         IslandSection.active = false;
         RestackSecion.active = false;
         gameObject.SetActive(false);

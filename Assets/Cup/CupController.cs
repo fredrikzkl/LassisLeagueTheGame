@@ -82,6 +82,9 @@ public class CupController : MonoBehaviour
         //Ballen traff koppen!!
         if(other.tag == "Ball")
         {
+            //Check for win condition
+            Rack.GetComponent<CupRack>().CheckIfLost(gameObject);
+
             blinking = false;
             //Sjekker om det var island
             if(isIslandCup && other.GetComponent<BallController>().isIslandBall)

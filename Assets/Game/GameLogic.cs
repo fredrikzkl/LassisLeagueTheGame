@@ -87,5 +87,39 @@ public class GameLogic : MonoBehaviour
         var opponent = GetOpponent(player);
         return opponent.GetComponent<PlayerRoundHandler>().cupRack.GetComponent<CupRack>();
     }
+
+    public void CheckWinCondition(GameObject player)
+    {
+        if(GetOpponentCupRack(player).GetCupList().Count == 0)
+        {
+            Debug.Log("Player " + player + " won the match!");
+            InitiateWinningSequence(player);
+        }
+    }
+
+    public void CheckWinCondition(GameObject player, GameObject cup)
+    {
+        if (GetOpponentCupRack(player).GetCupList().Count == 0)
+        {
+            Debug.Log("Player " + player + " won the match!");
+            InitiateWinningSequence(player);
+        }
+    }
+
+    public void InitiateWinningSequence(GameObject player)
+    {
+        DisablePlayers();
+        FindObjectOfType<SoundManager>().PlaySoundEffect("PartyHorn");
+        FindObjectOfType<SoundManager>().PlaySoundEffect("CrowdCheer");
+        GameManager.Pause();
+        
+
+    }
+
+    void DisablePlayers()
+    {
+        player1.GetComponent<PlayerController>().Disable();
+        player2.GetComponent<PlayerController>().Disable();
+    }
     
 }

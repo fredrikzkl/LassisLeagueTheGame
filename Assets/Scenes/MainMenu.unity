@@ -34,11 +34,11 @@ RenderSettings:
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
-  m_ReflectionBounces: 1
+  m_ReflectionBounces: 5
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.4469136, g: 0.49679923, b: 0.5750133, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: de7d34de57e05c14f8aa0270036a504e,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -391,7 +392,7 @@ Transform:
   m_LocalScale: {x: 23.47, y: 11.798, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1725681063}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &361560201
 BoxCollider:
@@ -1366,6 +1367,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lassaronBord
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 378c21886cb601940b3cf44437a6c1b3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Table
+      objectReference: {fileID: 0}
     - target: {fileID: 8151023354082563727, guid: 378c21886cb601940b3cf44437a6c1b3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1511,7 +1517,7 @@ PrefabInstance:
     - target: {fileID: 226494010109199005, guid: 0151b37b03bb65641a57ea72a278b655,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.9701
+      value: 5.45
       objectReference: {fileID: 0}
     - target: {fileID: 226494010109199005, guid: 0151b37b03bb65641a57ea72a278b655,
         type: 3}
@@ -1552,6 +1558,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1473831185933727343, guid: 0151b37b03bb65641a57ea72a278b655,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 7503260739183765941, guid: 0151b37b03bb65641a57ea72a278b655,
         type: 3}
@@ -2133,7 +2144,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2736,10 +2747,10 @@ Transform:
   - {fileID: 1114853905}
   - {fileID: 1783381010}
   - {fileID: 348840108}
+  - {fileID: 361560200}
   - {fileID: 672508650}
   - {fileID: 506805376}
   - {fileID: 1618587206}
-  - {fileID: 361560200}
   - {fileID: 1136421244}
   m_Father: {fileID: 0}
   m_RootOrder: 4

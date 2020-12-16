@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.pitch = s.pitch;
             s.source.volume = s.volume;
+            
         }
     }
 
@@ -21,10 +22,25 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySoundEffect(string name)
     {
+        PlaySoundEffect(name, 1f);
+    }
+
+    public void PlaySoundEffect(string name, float volume)
+    {
         var sound = GetSound(name);
         if (sound == null) return;
-        Debug.Log("Skal spille lyden: " + name);
+        sound.volume = volume;
+        
+        Debug.Log("Skal spille lyden: " + name + " med volum: " + sound.volume);
         sound.source.Play();
+    }
+
+    public void PlayerSoundEffects(string[] names)
+    {
+        foreach(var n in names)
+        {
+            PlaySoundEffect(n);
+        }
     }
 
     public SoundFX GetSound(string name)

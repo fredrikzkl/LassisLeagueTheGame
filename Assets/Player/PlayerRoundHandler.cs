@@ -15,6 +15,9 @@ public class PlayerRoundHandler : MonoBehaviour
     public int restacks { get; set; }
     public int islands { get; set; }
 
+    //PlayerStts
+    public PlayerStats stats;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,8 @@ public class PlayerRoundHandler : MonoBehaviour
 
         restacks = FindObjectOfType<GameRules>().Restacks;
         islands = FindObjectOfType<GameRules>().Islands;
+
+        stats = new PlayerStats();
     }
 
 
@@ -48,7 +53,7 @@ public class PlayerRoundHandler : MonoBehaviour
         if (!HasBallsAlive())
         {
             bool ballsBack = false;
-
+            
             if(HitCups.Count > 0)
             {
                 int bonusCups = 0;
@@ -71,6 +76,11 @@ public class PlayerRoundHandler : MonoBehaviour
                     {
                         HitCups.RemoveAt(1);
                         bonusCups += rules.SameCupReward;
+                        FindObjectOfType<Announcer>().Say("DoubleHit");
+                    }
+                    else
+                    {
+                        FindObjectOfType<Announcer>().Say("BallsBack");
                     }
                     ballsBack = true;
                 }
@@ -81,6 +91,14 @@ public class PlayerRoundHandler : MonoBehaviour
    
             RemoveHitCups();
             RemoveAllThrownBalls();
+
+            //Check for win condition
+            FindObjectOfType<GameLogic>().CheckWinCondition(gameObject);
+
+            if (stats.missStreak > 4)
+            {
+                FindObjectOfType<Announcer>().Dissapointed();
+            }
 
             if (ballsBack)
                 gameObject.GetComponent<PlayerController>().BallsBack();

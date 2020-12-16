@@ -10,4 +10,16 @@ public class GameManager : MonoBehaviour
     {
         gameIsPaused = false;    
     }
+
+    public static void Pause()
+    {
+        gameIsPaused = true;
+        Time.timeScale = 0f;
+    }
+
+    public static void Resume()
+    {
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+    }
 }
