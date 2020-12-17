@@ -54,6 +54,12 @@ public class BallController : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (soundCooldown > 0f)
+            soundCooldown -= 0.1f;
+    }
+
     public void BallOutOfBounds(float removeAfterSeconds)
     {
         timeAlive = removeAfterSeconds;
@@ -67,12 +73,13 @@ public class BallController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        bool soundCdOk = soundCooldown <= 0f;
         float ballVelocity = GetComponent<Rigidbody>().velocity.magnitude;
         float volume = 0.5f*(ballVelocity*2f);
         
         if(collision.gameObject.tag == "Table")
         {
-            FindObjectOfType<SoundManager>().PlaySoundEffect("BallHitTable", ballVelocity);
+            PlayBallImpactSound("BallHitTable", ballVelocity);
         }
         if(volume > 1f)
         {
@@ -84,13 +91,24 @@ public class BallController : MonoBehaviour
 
                 if (gameObject.transform.position.y > rimLimit)
                 {
-                    FindObjectOfType<SoundManager>().PlaySoundEffect("BallHitCupRim", ballVelocity);
+                    PlayBallImpactSound("BallHitCupRim", ballVelocity);
                 }
                 else
                 {
-                    FindObjectOfType<SoundManager>().PlaySoundEffect("BallHitCupSide", ballVelocity);
+                    PlayBallImpactSound("BallHitCupSide", ballVelocity);
+                    
                 }
             }
+        }
+    }
+
+    public void PlayBallImpactSound(string soundeffect, float volume)
+    {
+        bool soundCdOk = soundCooldown <= 0f;
+        if (soundCdOk)
+        {
+            FindObjectOfType<SoundManager>().PlaySoundEffect(soundeffect, volume);
+            soundCooldown = 0.5f;
         }
     }
 

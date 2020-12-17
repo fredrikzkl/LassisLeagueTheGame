@@ -7,6 +7,10 @@ public class GameLogic : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
 
+    //Canvases
+    public GameObject HUD;
+    public GameObject EndScreen;
+
     public List<Replay> replays;
 
     public GameObject playerWithTheRound { get; set; }
@@ -93,6 +97,7 @@ public class GameLogic : MonoBehaviour
         if(GetOpponentCupRack(player).GetCupList().Count == 0)
         {
             Debug.Log("Player " + player + " won the match!");
+            GameOver();
             InitiateWinningSequence(player);
         }
     }
@@ -102,18 +107,25 @@ public class GameLogic : MonoBehaviour
         if (GetOpponentCupRack(player).GetCupList().Count == 0)
         {
             Debug.Log("Player " + player + " won the match!");
+            GameOver();
             InitiateWinningSequence(player);
         }
+    }
+
+    public void GameOver()
+    {
+        //Get the time
+        
+        EndScreen.SetActive(true);
+        FindObjectOfType<SoundManager>().PlaySoundEffect("PartyHorn");
+        FindObjectOfType<SoundManager>().PlaySoundEffect("CrowdCheer");
     }
 
     public void InitiateWinningSequence(GameObject player)
     {
         DisablePlayers();
-        FindObjectOfType<SoundManager>().PlaySoundEffect("PartyHorn");
-        FindObjectOfType<SoundManager>().PlaySoundEffect("CrowdCheer");
         GameManager.Pause();
-        
-
+        HUD.SetActive(false);
     }
 
     void DisablePlayers()
