@@ -191,7 +191,6 @@ public class PlayerController : MonoBehaviour
         ball.name = "ball_" + throwsRemaining;
         ball.GetComponent<BallController>().owner = gameObject;
         roundHandler.ThrownBalls.Add(ball);
-
         if (nextThrowIsIsland)
         {
             ball.GetComponent<BallController>().SetAsIslandBall();

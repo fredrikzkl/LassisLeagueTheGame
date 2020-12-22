@@ -934,7 +934,7 @@ Transform:
   m_LocalScale: {x: 23.47, y: 11.798, z: 0.5}
   m_Children: []
   m_Father: {fileID: 276445962}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &265612990
 BoxCollider:
@@ -1029,10 +1029,10 @@ Transform:
   - {fileID: 1373112567}
   - {fileID: 861048723}
   - {fileID: 1300296509}
+  - {fileID: 265612989}
   - {fileID: 70871921}
   - {fileID: 1078842526}
   - {fileID: 1514153526}
-  - {fileID: 265612989}
   - {fileID: 1895373330}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -2935,6 +2935,7 @@ MonoBehaviour:
   player2: {fileID: 1213259428}
   HUD: {fileID: 1219948738}
   EndScreen: {fileID: 1283690074}
+  startTime: 0
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2961,8 +2962,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartFormation: 0
   BallsBackCount: 2
-  Restacks: 2
-  Islands: 2
+  Restacks: 1
+  Islands: 1
   IslandsReward: 1
   SameCupReward: 2
   NumberOfBallsPrRound: 2
@@ -3793,6 +3794,7 @@ GameObject:
   - component: {fileID: 1283690077}
   - component: {fileID: 1283690076}
   - component: {fileID: 1283690075}
+  - component: {fileID: 1283690079}
   m_Layer: 5
   m_Name: EndGameCanvas
   m_TagString: Untagged
@@ -3881,6 +3883,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1283690079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283690074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 743e07ebcbbc10646aff1ff33efc7e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1389466510}
+  timeText: {fileID: 1628341758}
+  menu: {fileID: 1878074639}
 --- !u!1 &1290321395
 GameObject:
   m_ObjectHideFlags: 0
@@ -5007,7 +5024,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1728092022}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1283690079}
+        m_MethodName: RematchOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1728092022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5604,6 +5632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1878074640}
+  - component: {fileID: 1878074641}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -5629,9 +5658,28 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -815}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1878074641
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878074639}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6eed11ccc4d5b5e47bb2ba83f81817ba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1895373329
 PrefabInstance:
   m_ObjectHideFlags: 0

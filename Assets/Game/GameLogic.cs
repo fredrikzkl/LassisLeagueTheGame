@@ -15,6 +15,8 @@ public class GameLogic : MonoBehaviour
 
     public GameObject playerWithTheRound { get; set; }
 
+    public float startTime;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.N))
@@ -37,6 +39,7 @@ public class GameLogic : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("Game started!");
+        startTime = Time.time;
         StartPlayerRound(player1);
     }
 
@@ -96,36 +99,50 @@ public class GameLogic : MonoBehaviour
     {
         if(GetOpponentCupRack(player).GetCupList().Count == 0)
         {
+            if(EndScreen.activeSelf == false)
+            {
+                GameOver(player);
+            }
             Debug.Log("Player " + player + " won the match!");
-            GameOver();
             InitiateWinningSequence(player);
         }
     }
 
-    public void CheckWinCondition(GameObject player, GameObject cup)
+    public void GameOver(GameObject winner)
     {
-        if (GetOpponentCupRack(player).GetCupList().Count == 0)
-        {
-            Debug.Log("Player " + player + " won the match!");
-            GameOver();
-            InitiateWinningSequence(player);
-        }
-    }
 
-    public void GameOver()
-    {
         //Get the time
-        
         EndScreen.SetActive(true);
+
+        var elapsedTime = Time.time - startTime;
+        Debug.Log("Elapsed Time: " + elapsedTime);
+        
+        var p1Cups = GetOpponentCupRack(player2).GetCupCount();
+        var p2Cups = GetOpponentCupRack(player1).GetCupCount();
+
+        if (winner == player1)
+            p2Cups = 0;
+        else
+            p1Cups = 0;
+
+        string score = p1Cups + " - " + p2Cups; 
+
+        FindObjectOfType<EndGameCanvas>().SetText(score, elapsedTime);
+
         FindObjectOfType<SoundManager>().PlaySoundEffect("PartyHorn");
         FindObjectOfType<SoundManager>().PlaySoundEffect("CrowdCheer");
+
+        FindObjectOfType<Announcer>().GG(elapsedTime, p1Cups, p2Cups);
+
     }
 
     public void InitiateWinningSequence(GameObject player)
     {
         DisablePlayers();
-        GameManager.Pause();
+        //GameManager.Pause();
         HUD.SetActive(false);
+        FindObjectOfType<EndGameCanvas>().ToggleMenu();
+
     }
 
     void DisablePlayers()
@@ -133,5 +150,11 @@ public class GameLogic : MonoBehaviour
         player1.GetComponent<PlayerController>().Disable();
         player2.GetComponent<PlayerController>().Disable();
     }
-    
+
+    public void Rematch()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+
 }

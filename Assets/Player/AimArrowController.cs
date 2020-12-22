@@ -19,12 +19,18 @@ public class AimArrowController : MonoBehaviour
     private Quaternion originalRotation;
     private Vector3 originalPosition;
 
+    private Quaternion pivot_originalRotation;
+    private Vector3 pivot_originalPosition;
+
+
     //Brukt for å sikte
     bool aiming;
     //float anglePointXDistance = 250f;
     float anglePointX;
     float verticalAimSentivity;
     float XYAngle;
+    float XZAngle;
+
 
    
 
@@ -38,24 +44,56 @@ public class AimArrowController : MonoBehaviour
         if (Input.GetButtonUp("Fire1"))
         {
             aiming = false;
-            //body.SetPositionAndRotation(originalPosition, originalRotation);
+            pivotPoint.SetPositionAndRotation(pivot_originalPosition, pivot_originalRotation);
+            
             return;
         }
 
         if (Input.GetButtonDown("Fire1"))
         {
             mousePosOrigin = Input.mousePosition;
+            XZAngle = GetAngle();
+            //pivotPoint.rotation = Quaternion.Euler(0,XZAngle * Mathf.Rad2Deg, 0);
             aiming = true;
-            originalPosition = body.position;
-            originalRotation = body.rotation;
+            pivot_originalPosition = pivotPoint.position;
+            pivot_originalRotation = pivotPoint.rotation;
         }
 
         if (aiming)
         {
             CalculateXYAngle();
-            //body.rotation = Quaternion.AngleAxis(RelativeXYAngle(), body.position);
+            var relativeAngle = GetRelativeXYAngle();
+            float degrees = Mathf.Rad2Deg * -XYAngle;
+
+            pivotPoint.rotation = Quaternion.Euler(0, direction == -1 ? 180f : 0 , degrees);
+
+            //if (degrees < 0f && degrees > -90f)
         }
 
+    }
+
+    public void FixedUpdate()
+    {
+        //Direction > 0 = nedover
+        if (rotate && !aiming)
+        {
+            var delta = GetAngle();
+            if (direction == 1)
+            {
+                var maxAnglePI = Mathf.PI - maxAngle;
+                //Debug.Log(delta + " | " + (maxAnglePI) + " | RotationSpeed: " + rotationSpeed);
+                if ((delta < maxAnglePI && rotationSpeed > 0 && delta > 0) || (delta > -maxAnglePI && rotationSpeed < 0 && delta < 0))
+                    rotationSpeed *= -1;
+
+            }
+            else
+            {
+                //Debug.Log(delta + " | " + (maxAngle) + " | RotationSpeed: " + rotationSpeed);
+                if ((delta < -maxAngle && rotationSpeed > 0) || (delta > maxAngle && rotationSpeed < 0))
+                    rotationSpeed *= -1;
+            }
+            body.RotateAround(pivotPoint.position, new Vector3(0f, 1f, 0f), rotationSpeed);
+        }
     }
 
     void CalculateXYAngle()
@@ -81,6 +119,7 @@ public class AimArrowController : MonoBehaviour
         rotate = false;
     }
 
+  
 
 
     public float GetXYAngle()
@@ -88,34 +127,6 @@ public class AimArrowController : MonoBehaviour
         return XYAngle;
     }
             
-
-  
-    public void FixedUpdate()
-    {
-        //Direction > 0 = nedover
-        if (rotate)
-        {
-            var delta = GetAngle();
-            if (direction == 1)
-            {
-                var maxAnglePI = Mathf.PI - maxAngle;
-                //Debug.Log(delta + " | " + (maxAnglePI) + " | RotationSpeed: " + rotationSpeed);
-                if ((delta < maxAnglePI && rotationSpeed > 0 && delta > 0) || (delta > -maxAnglePI && rotationSpeed < 0 && delta < 0))
-                    rotationSpeed *= -1;
-
-            }
-            else
-            {
-                //Debug.Log(delta + " | " + (maxAngle) + " | RotationSpeed: " + rotationSpeed);
-                if ((delta < -maxAngle && rotationSpeed > 0) || (delta > maxAngle && rotationSpeed < 0))
-                    rotationSpeed *= -1;
-            }
-            body.RotateAround(pivotPoint.position, new Vector3(0f, 1f, 0f), rotationSpeed);
-        }
-    }
-
-
-
     public void StartRotating()
     {
         rotate = true;

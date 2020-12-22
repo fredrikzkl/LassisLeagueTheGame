@@ -619,6 +619,7 @@
     <Compile Include="Assets\Ball\BallController.cs" />
     <Compile Include="Assets\Cup\CupController.cs" />
     <Compile Include="Assets\Cup\CupRack.cs" />
+    <Compile Include="Assets\Cup\DontGoThroughThings.cs" />
     <Compile Include="Assets\Cup\NeighbourTable.cs" />
     <Compile Include="Assets\Game\Formations.cs" />
     <Compile Include="Assets\Game\GameLogic.cs" />
@@ -626,12 +627,16 @@
     <Compile Include="Assets\Game\Replay.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\GameSettings.cs" />
+    <Compile Include="Assets\MainMenu\MainMenuCanvas.cs" />
     <Compile Include="Assets\Player\AimArrowController.cs" />
     <Compile Include="Assets\Player\PlayerController.cs" />
     <Compile Include="Assets\Player\PlayerRoundHandler.cs" />
+    <Compile Include="Assets\Player\PlayerStats.cs" />
     <Compile Include="Assets\Player\PlayerThrowLogic.cs" />
     <Compile Include="Assets\RemoveBallZone.cs" />
-    <Compile Include="Assets\StratsCard.cs" />
+    <Compile Include="Assets\Sound\Announcer.cs" />
+    <Compile Include="Assets\Sound\SoundFX.cs" />
+    <Compile Include="Assets\Sound\SoundManager.cs" />
     <Compile Include="Assets\TestScripts\BallDropper.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
@@ -667,6 +672,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\UI\EndGameCanvas.cs" />
     <Compile Include="Assets\UI\GameHUD.cs" />
     <Compile Include="Assets\UI\StratsMenu.cs" />
   </ItemGroup>

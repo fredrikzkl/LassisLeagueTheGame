@@ -201,7 +201,7 @@ public class CupRack : MonoBehaviour
         if(cupList.Count == 1 && cupList[0] == hitCup)
         {
             GameObject winner = FindObjectOfType<GameLogic>().GetOpponent(gameObject.transform.root.gameObject);
-            FindObjectOfType<GameLogic>().GameOver();
+            FindObjectOfType<GameLogic>().GameOver(winner);
         }
     }
 
