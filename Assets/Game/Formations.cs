@@ -117,11 +117,6 @@ public class Formations
     }
 
 
-    public static void DeterimineMissingCups(List<GameObject> cups, string formation)
-    {
-        
-    }
-
     //Lager en liste over alle posisjonene koppene skal stå
     public static (List<Vector3>, List<string>) CreatePositionMatrix(string formation, Vector3 anchorPosition, int direction, float diameter)
     {
@@ -145,9 +140,28 @@ public class Formations
             {
                 cupNames.Add(cupId);
             }
-            tempPos.x += (direction * diameter * tightFactor);
+
+            var tightnigFactor = tightFactor;
+            if(i + 1 < rows.Length && nextRowIsNotTight(row, rows[i+1]))
+            {
+                tightnigFactor = 1;
+            }
+       
+            tempPos.x += (direction * diameter * tightnigFactor);
         }
         return (positionMatrix, cupNames);
+    }
+
+    static bool nextRowIsNotTight(string currentRow, string nextRow)
+    {
+        for(int i = 0; i < currentRow.Length; i++)
+        {
+            if(currentRow[i] == '1' && nextRow[i] == '1')
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static (List<Vector3>, List<string>) CreatePositionMatrixRow(Vector3 pos, string row, int rowIndex, float diameter)

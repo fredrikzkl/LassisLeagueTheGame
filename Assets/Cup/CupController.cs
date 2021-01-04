@@ -82,15 +82,30 @@ public class CupController : MonoBehaviour
         //Ballen traff koppen!!
         if(other.tag == "Ball")
         {
+            //Nøytraliserer ballen
+            other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            other.gameObject.GetComponent<BallController>().BallOutOfBounds(1f);
+
             //Check for win condition
             Rack.GetComponent<CupRack>().CheckIfLost(gameObject);
 
             blinking = false;
             //Sjekker om det var island
-            if(isIslandCup && other.GetComponent<BallController>().isIslandBall)
+            if(other.GetComponent<BallController>().isIslandBall)
             {
-                successfullyHitIsland = true;
-                Debug.Log("DUDE ISLAND!!");
+                if (isIslandCup)
+                {
+                    Debug.Log("DUDE ISLAND!!");
+                    FindObjectOfType<SoundManager>().PlaySoundEffect("CrowdCheer");
+                    successfullyHitIsland = true;
+
+                }
+                else
+                {
+                    Debug.Log("Traff en kopp som ikke er island koppen");
+                    FindObjectOfType<SoundManager>().PlaySoundEffect("CrowdGroan");
+                    return;
+                }
             }
 
             FindObjectOfType<SoundManager>().PlaySoundEffect("CupHit");

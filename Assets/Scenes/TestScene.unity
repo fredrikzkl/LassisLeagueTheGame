@@ -901,7 +901,7 @@ Transform:
   m_LocalScale: {x: 14, y: 14, z: 23}
   m_Children: []
   m_Father: {fileID: 651852954}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &265612988
 GameObject:
@@ -1809,7 +1809,7 @@ Transform:
   m_LocalScale: {x: 14, y: 14, z: 23}
   m_Children: []
   m_Father: {fileID: 1213259434}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -2963,7 +2963,7 @@ MonoBehaviour:
   StartFormation: 0
   BallsBackCount: 2
   Restacks: 1
-  Islands: 1
+  Islands: 3
   IslandsReward: 1
   SameCupReward: 2
   NumberOfBallsPrRound: 2
@@ -4437,6 +4437,11 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: PartyHorn
     clip: {fileID: 8300000, guid: dbda90d72c8e4614aad369e64ebb388e, type: 3}
+    volume: 0.59
+    pitch: 1
+    source: {fileID: 0}
+  - name: CrowdGroan
+    clip: {fileID: 8300000, guid: e62eccf7f8bdc0b4381e329e764f836d, type: 3}
     volume: 0.59
     pitch: 1
     source: {fileID: 0}
