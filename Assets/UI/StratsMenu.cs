@@ -115,6 +115,7 @@ public class StratsMenu : MonoBehaviour
          
             //Lager formasjonen
             List<Vector3> positions = Create2DPositionMatrix(f.FormationString, formationVisualAnchor.transform.position, direction, cupSpriteDiameter).Item1;
+        
             foreach (var p in positions)
             {
                 var cupImage = Instantiate(cupImagePrefab, p, Quaternion.identity);

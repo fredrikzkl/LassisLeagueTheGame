@@ -201,6 +201,7 @@ public class Formations
             var row = rows[i];
 
             var rowResult = Create2DPositionMatrixRow(tempPos, row, i, diameter);
+            rowResult.Item1.Reverse();
 
             rowResult.Item1.ForEach(coordinate => positionMatrix.Add(coordinate));
             rowResult.Item2.ForEach(name => cupNames.Add(name));
