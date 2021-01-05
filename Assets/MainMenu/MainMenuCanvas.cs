@@ -27,12 +27,17 @@ public class MainMenuCanvas : MonoBehaviour
         FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
         currentWindow = "rules";
         cameraAnimator.SetBool("toRules", true);
-        ToggleActive(mainMenuButtons);
-        ToggleActive(backButton);
-        ToggleActive(rulesCanvas);
-        ToggleActive(logo);
+        mainMenuButtons.SetActive(false);
+        logo.SetActive(false);
 
+    }
+
+    public void ShowRulesCanvas()
+    {
+        rulesCanvas.SetActive(true);
+        backButton.SetActive(true);
         rulesCanvas.GetComponent<RulesCanvas>().Open();
+
     }
 
     public void BackToMainScreen()

@@ -5,7 +5,7 @@ using static Formations;
 
 public class GameRules : MonoBehaviour
 {
-    
+    public bool LoadRulesFromFile = true;
 
 
     [SerializeField]
@@ -32,5 +32,22 @@ public class GameRules : MonoBehaviour
     public int SameCupReward = 2;
 
     public int NumberOfBallsPrRound = 2;
+
+    private void Awake()
+    {
+        if (LoadRulesFromFile)
+        {
+            var rules = SaveSystem.LoadRules();
+            ApplyRules(rules);
+        }
+    }
+
+    void ApplyRules(RulesData data)
+    {
+        Restacks = int.Parse(data.restacks);
+        StartFormation = (StartFormation)System.Enum.Parse(typeof(StartFormation), data.startFormation);
+        Islands = int.Parse(data.islands);
+        BallsBackCount = int.Parse(data.ballsBack);
+    }
 
 }

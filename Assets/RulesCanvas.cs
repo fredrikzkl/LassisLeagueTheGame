@@ -8,12 +8,13 @@ public class RulesCanvas : MonoBehaviour
 
     public TMP_Dropdown startFormation;
     public TMP_Dropdown restacks;
+    public TMP_Dropdown islands;
+    public TMP_Dropdown ballsBack;
 
 
     public void Open()
     {
         RulesData d = SaveSystem.LoadRules();
-
         ApplyRulesToCanvas(d);
     }
     
@@ -28,6 +29,8 @@ public class RulesCanvas : MonoBehaviour
     {
         startFormation.value = startFormation.options.FindIndex(option => option.text == data.startFormation);
         restacks.value = restacks.options.FindIndex(option => option.text == data.restacks);
+        islands.value = islands.options.FindIndex(option => option.text == data.islands);
+        ballsBack.value = islands.options.FindIndex(option => option.text == data.ballsBack);
     }
 
     void GetAndSaveHouseRules()
@@ -36,6 +39,8 @@ public class RulesCanvas : MonoBehaviour
 
         rd.startFormation = startFormation.options[startFormation.value].text;;
         rd.restacks = restacks.options[restacks.value].text;
+        rd.islands = islands.options[islands.value].text;
+        rd.ballsBack = ballsBack.options[ballsBack.value].text;
 
         SaveSystem.SaveRules(rd);
     }

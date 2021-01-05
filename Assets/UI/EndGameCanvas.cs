@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndGameCanvas : MonoBehaviour
 {
@@ -37,6 +38,12 @@ public class EndGameCanvas : MonoBehaviour
     {
         FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
         FindObjectOfType<GameLogic>().Rematch();
+    }
+
+    public void ExitToMenu()
+    {
+        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
 

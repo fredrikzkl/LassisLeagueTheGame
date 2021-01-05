@@ -8,6 +8,10 @@ public class RulesData
 {
     public string startFormation;
     public string restacks;
+
+    public string islands;
+    public string ballsBack;
+
    
 
     public RulesData GetStandardRules()
@@ -15,7 +19,9 @@ public class RulesData
         return new RulesData
         {
             restacks = "1",
-            startFormation = "Trangle"
+            startFormation = "Trangle",
+            islands = "1",
+            ballsBack = "2"
         };
     }
 

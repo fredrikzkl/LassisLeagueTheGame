@@ -116,6 +116,8 @@ public class Formations
         }
     }
 
+    
+
 
     //Lager en liste over alle posisjonene koppene skal stå
     public static (List<Vector3>, List<string>) CreatePositionMatrix(string formation, Vector3 anchorPosition, int direction, float diameter)

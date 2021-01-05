@@ -76,6 +76,7 @@
     <Compile Include="Assets\Game\Replay.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\GameSettings.cs" />
+    <Compile Include="Assets\MainMenu\CameraMainMenu.cs" />
     <Compile Include="Assets\MainMenu\MainMenuCanvas.cs" />
     <Compile Include="Assets\Player\AimArrowController.cs" />
     <Compile Include="Assets\Player\PlayerController.cs" />
