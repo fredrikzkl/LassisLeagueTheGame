@@ -2962,7 +2962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadRulesFromFile: 1
   StartFormation: 0
-  BallsBackCount: 2
+  BallsBackCount: 1
   Restacks: 1
   Islands: 3
   IslandsReward: 1

@@ -64,17 +64,16 @@ public class GameHUD : MonoBehaviour
         }
     }
 
-
     public void UpdateBallIndicator(int ballCount)
     {
         Color temp = currentColor;
-
-        if (ball1_indicator.color == temp)
-        {
+        if (ballCount >= 2)
+            ball1_indicator.color = temp;
+        else
             ball1_indicator.color = Color.black;
-            return;
-        }
-        else if (ball2_indicator.color == temp)
+        if (ballCount >= 1)
+            ball2_indicator.color = temp;
+        else
             ball2_indicator.color = Color.black;
     }
 

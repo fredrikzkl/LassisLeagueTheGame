@@ -30,7 +30,7 @@ public class RulesCanvas : MonoBehaviour
         startFormation.value = startFormation.options.FindIndex(option => option.text == data.startFormation);
         restacks.value = restacks.options.FindIndex(option => option.text == data.restacks);
         islands.value = islands.options.FindIndex(option => option.text == data.islands);
-        ballsBack.value = islands.options.FindIndex(option => option.text == data.ballsBack);
+        ballsBack.value = ballsBack.options.FindIndex(option => option.text == data.ballsBack);
     }
 
     void GetAndSaveHouseRules()
