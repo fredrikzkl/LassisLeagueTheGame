@@ -18,6 +18,8 @@ public class BallController : MonoBehaviour
     //Blir satt til ja dersom denne ballen skal blir brukt til island
     public bool isIslandBall { get; set; }
 
+    public float BallHitSoundFactor = 2f;
+
     //Sound
     float soundCooldown = 0f; //Brukes for å eliminere duplikate lyder når treffer objekter
 
@@ -74,30 +76,34 @@ public class BallController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         bool soundCdOk = soundCooldown <= 0f;
+
         float ballVelocity = GetComponent<Rigidbody>().velocity.magnitude;
-        float volume = 0.5f*(ballVelocity*2f);
-        
+
+        float maxVolume = 8f;
+        float minVolume = 0.8f;
+
+        float volume = (ballVelocity - minVolume) / (maxVolume-minVolume);
+
+        //float volume = (0.5f*(ballVelocity*2f)) / BallHitSoundFactor;
+      
         if(collision.gameObject.tag == "Table")
         {
-            PlayBallImpactSound("BallHitTable", ballVelocity);
+            PlayBallImpactSound("BallHitTable", volume);
         }
-        if(volume > 1f)
+        if (collision.gameObject.tag == "Cup")
         {
-            if (collision.gameObject.tag == "Cup")
+            var cupYPos = collision.gameObject.transform.position.y;
+
+            var rimLimit = cupYPos + ((cupYPos / 2) * 0.1);
+
+            if (gameObject.transform.position.y > rimLimit)
             {
-                var cupYPos = collision.gameObject.transform.position.y;
+                PlayBallImpactSound("BallHitCupRim", volume);
+            }
+            else
+            {
+                PlayBallImpactSound("BallHitCupSide", volume);
 
-                var rimLimit = cupYPos + ((cupYPos / 2) * 0.1);
-
-                if (gameObject.transform.position.y > rimLimit)
-                {
-                    PlayBallImpactSound("BallHitCupRim", ballVelocity);
-                }
-                else
-                {
-                    PlayBallImpactSound("BallHitCupSide", ballVelocity);
-                    
-                }
             }
         }
     }

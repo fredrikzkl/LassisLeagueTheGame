@@ -7,7 +7,7 @@ public class Formations
 {
     public enum StartFormation
     {
-        Triangle, SmallTriangle, Giga
+        Standard, Small, GigaHouse
     }
 
     public class Formation
@@ -28,14 +28,14 @@ public class Formations
     //15 kopper: Mega boy
     public static Formation GigaHouse = new Formation("Giga House", 15, "101010101#010101010#001010100#000101000#000010000");
     //10 - Standard start
-    public static Formation Triangle = new Formation("Triangle", 10, "01010101#001010100#000101000#000010000");
+    public static Formation Standard = new Formation("Standard", 10, "01010101#001010100#000101000#000010000");
     //8 Marching
     public static Formation Marching = new Formation("North Korean Army", 8, "000101000#000101000#000101000#000101000");
     //7 kopper: 4-3 bak, full trekant
     public static Formation HoneyComb = new Formation("Honning", 7, "000101000#001010100#000101000");
     public static Formation TraingleWithClit = new Formation("Triangle med nipple", 7, "001010100#000101000#000010000#000010000");
     //6 kopper: 3 bak, full trekant
-    public static Formation SmallTriangle = new Formation("Liten triangel", 6, "001010100#000101000#000010000");
+    public static Formation Small = new Formation("Liten triangel", 6, "001010100#000101000#000010000");
     public static Formation Zipper = new Formation("Zipper", 6, "000100000#000010000#000100000#000010000#000100000#000010000");
     public static Formation Lego = new Formation("Lego", 6, "000101000#000101000#000101000");
     //5 kopper: 3 bak, full trekant
@@ -61,7 +61,7 @@ public class Formations
         switch (cups)
         {
             case 10:
-                formations.Add(Triangle);
+                formations.Add(Standard);
                 break;
 
             case 8:
@@ -73,7 +73,7 @@ public class Formations
                 formations.Add(Lego);
                 break;
             case 6:
-                formations.Add(SmallTriangle);
+                formations.Add(Small);
                 formations.Add(Zipper);
                 break;
             case 5:
@@ -105,14 +105,14 @@ public class Formations
     {
         switch (sf)
         {
-            case StartFormation.Triangle:
-                return Triangle.FormationString;
-            case StartFormation.SmallTriangle:
-                return SmallTriangle.FormationString;
-            case StartFormation.Giga:
+            case StartFormation.Standard:
+                return Standard.FormationString;
+            case StartFormation.Small:
+                return Small.FormationString;
+            case StartFormation.GigaHouse:
                 return GigaHouse.FormationString;
             default:
-                return Triangle.FormationString;
+                return Standard.FormationString;
         }
     }
 
@@ -143,9 +143,7 @@ public class Formations
 
             var tightnigFactor = tightFactor;
             if(i + 1 < rows.Length && nextRowIsNotTight(row, rows[i+1]))
-            {
                 tightnigFactor = 1;
-            }
        
             tempPos.x += (direction * diameter * tightnigFactor);
         }

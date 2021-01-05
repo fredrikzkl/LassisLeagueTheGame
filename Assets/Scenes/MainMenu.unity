@@ -2507,6 +2507,11 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  - name: BallHitTable
+    clip: {fileID: 8300000, guid: 31a0bc72d3f3cc347b0d2bc767b4669b, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
 --- !u!1 &734556062
 GameObject:
   m_ObjectHideFlags: 0
@@ -3459,7 +3464,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1215801850}
-        m_MethodName: ToSettingsClick
+        m_MethodName: ToRulesClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7301,6 +7306,7 @@ GameObject:
   - component: {fileID: 2017855166}
   - component: {fileID: 2017855165}
   - component: {fileID: 2017855164}
+  - component: {fileID: 2017855168}
   m_Layer: 5
   m_Name: RulesCanvas
   m_TagString: Untagged
@@ -7389,6 +7395,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2017855168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017855163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7093689019f70ef479a467df04bb7d5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startFormation: {fileID: 1916328614}
+  restacks: {fileID: 348984632}
 --- !u!1 &2024708580
 GameObject:
   m_ObjectHideFlags: 0

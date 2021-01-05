@@ -83,6 +83,7 @@
     <Compile Include="Assets\Player\PlayerStats.cs" />
     <Compile Include="Assets\Player\PlayerThrowLogic.cs" />
     <Compile Include="Assets\RemoveBallZone.cs" />
+    <Compile Include="Assets\RulesCanvas.cs" />
     <Compile Include="Assets\Sound\Announcer.cs" />
     <Compile Include="Assets\Sound\SoundFX.cs" />
     <Compile Include="Assets\Sound\SoundManager.cs" />

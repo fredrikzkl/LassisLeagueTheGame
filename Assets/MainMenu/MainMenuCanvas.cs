@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,11 +12,9 @@ public class MainMenuCanvas : MonoBehaviour
     public GameObject mainMenuButtons;
     public GameObject backButton;
     public GameObject rulesCanvas;
-   
-    private void Start()
-    {
 
-    }
+    string currentWindow;
+   
 
     public void StartGameOnClick()
     {
@@ -23,14 +22,17 @@ public class MainMenuCanvas : MonoBehaviour
         SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
     }
 
-    public void ToSettingsClick()
+    public void ToRulesClick()
     {
         FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
-        cameraAnimator.SetBool("toSettings", true);
+        currentWindow = "rules";
+        cameraAnimator.SetBool("toRules", true);
         ToggleActive(mainMenuButtons);
         ToggleActive(backButton);
         ToggleActive(rulesCanvas);
         ToggleActive(logo);
+
+        rulesCanvas.GetComponent<RulesCanvas>().Open();
     }
 
     public void BackToMainScreen()
@@ -40,7 +42,12 @@ public class MainMenuCanvas : MonoBehaviour
         ToggleActive(mainMenuButtons);
         rulesCanvas.SetActive(false);
 
-        cameraAnimator.SetBool("toSettings", false);
+        if(currentWindow == "rules")
+        {
+            rulesCanvas.GetComponent<RulesCanvas>().Close();
+        }
+
+        cameraAnimator.SetBool("toRules", false);
 
     }
 
@@ -51,4 +58,6 @@ public class MainMenuCanvas : MonoBehaviour
         else
             obj.SetActive(true);
     }
+
+   
 }

@@ -5,6 +5,8 @@ using static Formations;
 
 public class GameRules : MonoBehaviour
 {
+    
+
 
     [SerializeField]
     public StartFormation StartFormation;

@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeAlive: 4
   isInPlay: 0
+  BallHitSoundFactor: 2.5
 --- !u!96 &8856160796924680596
 TrailRenderer:
   serializedVersion: 2
