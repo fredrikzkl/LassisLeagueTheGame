@@ -88,6 +88,7 @@
     <Compile Include="Assets\Sound\Announcer.cs" />
     <Compile Include="Assets\Sound\SoundFX.cs" />
     <Compile Include="Assets\Sound\SoundManager.cs" />
+    <Compile Include="Assets\SystemSettings.cs" />
     <Compile Include="Assets\TestScripts\BallDropper.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />

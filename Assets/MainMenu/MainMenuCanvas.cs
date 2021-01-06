@@ -12,8 +12,10 @@ public class MainMenuCanvas : MonoBehaviour
     public GameObject mainMenuButtons;
     public GameObject backButton;
     public GameObject rulesCanvas;
+    public GameObject settingsCanvas;
 
     string currentWindow;
+    
    
 
     public void StartGameOnClick()
@@ -30,6 +32,20 @@ public class MainMenuCanvas : MonoBehaviour
         mainMenuButtons.SetActive(false);
         logo.SetActive(false);
 
+    }
+
+    public void ShowSettingsMenu() {
+        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+
+        gameObject.SetActive(false);
+        settingsCanvas.SetActive(true);
+    }
+
+    public void CloseSettingsMenu()
+    {
+        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        gameObject.SetActive(true);
+        settingsCanvas.SetActive(false);
     }
 
     public void ShowRulesCanvas()
