@@ -14,6 +14,8 @@ public class PlayerStats
     public int longestHitStreak;
     public int longestMissStreak;
 
+    public int bonusCups;
+
     public PlayerStats()
     {
         hit = 0;
@@ -22,6 +24,7 @@ public class PlayerStats
         hitStreak = 0;
         longestHitStreak = 0;
         longestMissStreak = 0;
+        bonusCups = 0;
     }
 
     public double GetHitRate()
@@ -37,6 +40,7 @@ public class PlayerStats
     public void AddHit(int hits)
     {
         hit += hits;
+        hitStreak += hits;
         if(missStreak > longestMissStreak)
         {
             longestMissStreak = missStreak;
@@ -47,6 +51,7 @@ public class PlayerStats
     public void AddMiss(int misses)
     {
         miss += misses;
+        missStreak += misses;
         if (hitStreak > longestHitStreak)
         {
             longestHitStreak = hitStreak;
@@ -54,6 +59,28 @@ public class PlayerStats
         hitStreak = 0;
     }
 
+    public void AddBonusCups(int bonusCups)
+    {
+        bonusCups += bonusCups;
+    }
+
+    public int GetLongestHitStreak()
+    {
+        if (hitStreak > longestHitStreak) return hitStreak;
+        return longestHitStreak;
+    }
+
+    public int GetLongestMissStreak()
+    {
+        if (missStreak > longestMissStreak) return missStreak;
+        return longestMissStreak;
+    }
+
+    override
+    public string ToString()
+    {
+        return "Hits: " + hit + "\nMiss: " + miss + " \nLongest hit streak: " + GetLongestHitStreak() + "\nLongest miss streak" + GetLongestMissStreak();
+    }
 
     
 }

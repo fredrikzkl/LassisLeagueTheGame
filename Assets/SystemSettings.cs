@@ -2,19 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class SystemSettings : MonoBehaviour
 {
 
     //Refs
     public TMP_Dropdown resolutionDropdown;
+    public TMP_Dropdown graphicQualityDropdown;
+    public Slider masterSlider;
+    public Slider sfxSlider;
+    public Slider announcerSlider;
+    
+    public AudioMixer audioMixer;
     //
     Resolution[] availableResolutions;
-    
+    //SaveFile
+    SystemSettingsData saveData;
+
+
 
     void Start()
     {
+        //Henter ut alle muligheten for skjermen
         availableResolutions = Screen.resolutions;
+        //Laster inn data fra systemfilen
+        saveData = SaveSystem.LoadSystemSettings();
+        ApplySettingsToUI(saveData);
+        
         resolutionDropdown.ClearOptions();
 
         List<string> options = new List<string>();
@@ -26,7 +42,8 @@ public class SystemSettings : MonoBehaviour
             if (isCurrentResolution(tempRes))
                 currentResolutionIndex = i;
 
-            options.Add(tempRes.ToString());
+            options.Add(ResToString(tempRes));
+          
         }
 
         resolutionDropdown.AddOptions(options);
@@ -34,13 +51,41 @@ public class SystemSettings : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
     }
 
+    private string ResToString(Resolution r)
+    {
+        return r.width + " x " + r.height;
+    }
+
     bool isCurrentResolution(Resolution temp)
     {
         var currentResoltuon = Screen.currentResolution;
-        bool sameWidth = temp.width == currentResoltuon.width;
-        bool sameHeighht = temp.height == currentResoltuon.height;
+        return isSameResolution(temp, currentResoltuon);
+    }
+
+    bool isSameResolution(Resolution r1, Resolution r2)
+    {
+        bool sameWidth = r1.width == r2.width;
+        bool sameHeighht = r1.height == r2.height;
         if (sameHeighht && sameHeighht) return true;
         return false;
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        audioMixer.SetFloat("MasterVolume", volume);
+        saveData.masterVolume = volume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        audioMixer.SetFloat("SFXVolume", volume);
+        saveData.sfxVolume = volume;
+    }
+
+    public void SetAnnouncerVolume(float volume)
+    {
+        audioMixer.SetFloat("AnnouncerVolume", volume);
+        saveData.announcerVolume = volume;
     }
 
 
@@ -49,18 +94,40 @@ public class SystemSettings : MonoBehaviour
         FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
         Resolution res = availableResolutions[resolutionIndex]; 
         Screen.SetResolution(res.width, res.height, Screen.fullScreen);
+        saveData.SetResolution(res);
     }
     
     public void SetQuality(int qualityIndex)
     {
         FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
         QualitySettings.SetQualityLevel(qualityIndex);
+        saveData.graphicsSetting = qualityIndex;
     }
 
     public void SetFullScreen(bool isFullSCreen)
     {
         FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
         Screen.fullScreen = isFullSCreen;
+        saveData.fullscreen = isFullSCreen;
+    }
+
+    public void SaveSystemSettings()
+    {
+        SaveSystem.SaveSystemSettings(saveData);
+    }
+
+    public void ApplySettingsToUI(SystemSettingsData settings)
+    {
+        graphicQualityDropdown.value = settings.graphicsSetting;
+
+        SetMasterVolume(settings.masterVolume);
+        masterSlider.value = settings.masterVolume;
+
+        SetSFXVolume(settings.sfxVolume);
+        sfxSlider.value = settings.sfxVolume;
+
+        SetAnnouncerVolume(settings.announcerVolume);
+        announcerSlider.value = settings.announcerVolume;
     }
 
 }

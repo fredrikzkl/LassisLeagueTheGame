@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
+ 
     public GameObject owner { get; set; }
     //Hjelpevariabler
 
@@ -14,6 +15,9 @@ public class BallController : MonoBehaviour
 
     //Dersom on isInPlay, så 
     public bool isInPlay;
+
+    //Blir satt true dersom denne ballen traff en kopp
+    public bool didHitCup;
 
     //Blir satt til ja dersom denne ballen skal blir brukt til island
     public bool isIslandBall { get; set; }
@@ -31,6 +35,7 @@ public class BallController : MonoBehaviour
     void Start()
     {
         isInPlay = true;
+        didHitCup = false;
     }
 
     private void OnDestroy()
@@ -52,6 +57,10 @@ public class BallController : MonoBehaviour
         }
         else
         {
+            if (!didHitCup && isInPlay)
+            {
+                owner.GetComponent<PlayerRoundHandler>().stats.AddMiss(1);
+            }
             isInPlay = false;
         }
     }
@@ -71,6 +80,11 @@ public class BallController : MonoBehaviour
     {
         GetComponent<TrailRenderer>().enabled = true;
         isIslandBall = true;
+    }
+
+    public void SetAsHitBall()
+    {
+        didHitCup = true;
     }
 
     private void OnCollisionEnter(Collision collision)

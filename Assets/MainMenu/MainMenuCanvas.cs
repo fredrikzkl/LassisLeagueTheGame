@@ -43,6 +43,7 @@ public class MainMenuCanvas : MonoBehaviour
 
     public void CloseSettingsMenu()
     {
+        settingsCanvas.GetComponent<SystemSettings>().SaveSystemSettings();
         FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
         gameObject.SetActive(true);
         settingsCanvas.SetActive(false);

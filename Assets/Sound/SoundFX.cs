@@ -14,7 +14,15 @@ public class SoundFX
 
     [Range(0f,5f)]
     public float pitch;
+
+    public SoundGroup group;
     
     [HideInInspector]
     public AudioSource source;
+}
+
+[System.Serializable]
+public enum SoundGroup
+{
+    SFX, Announcer, Music
 }

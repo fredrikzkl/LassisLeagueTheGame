@@ -3141,6 +3141,8 @@ GameObject:
   - component: {fileID: 1101360316}
   - component: {fileID: 1101360314}
   - component: {fileID: 1101360315}
+  - component: {fileID: 1101360318}
+  - component: {fileID: 1101360317}
   m_Layer: 5
   m_Name: StratsMenuButton
   m_TagString: Untagged
@@ -3260,6 +3262,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1101360312}
   m_CullTransparentMesh: 0
+--- !u!114 &1101360317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101360312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &1101360318
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101360312}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1105553121
 GameObject:
   m_ObjectHideFlags: 0
@@ -4416,46 +4456,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf098e3cbfa40634ba5db01f1298aa1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: d4f81a2f81689a64c8d15aa716d933f4, type: 2}
   sounds:
   - name: CupHit
     clip: {fileID: 8300000, guid: 1841febf114ab1b4ebcedcef24a1286e, type: 3}
     volume: 0.71
     pitch: 1
+    group: 0
     source: {fileID: 0}
   - name: BallHitTable
     clip: {fileID: 8300000, guid: 31a0bc72d3f3cc347b0d2bc767b4669b, type: 3}
     volume: 0.71
     pitch: 1
+    group: 0
     source: {fileID: 0}
   - name: BallHitCupRim
     clip: {fileID: 8300000, guid: ceb7a1eb1c5675142a8d3bacaba42f2e, type: 3}
     volume: 0.56
     pitch: 1
+    group: 0
     source: {fileID: 0}
   - name: BallHitCupSide
     clip: {fileID: 8300000, guid: b1a557cfa6c0d6746b434a3cc2b06a77, type: 3}
     volume: 0.59
     pitch: 1
+    group: 0
     source: {fileID: 0}
   - name: Click
     clip: {fileID: 8300000, guid: 769a5cd3f258f1f47b1fd500ca230189, type: 3}
     volume: 0.59
     pitch: 1
+    group: 0
     source: {fileID: 0}
   - name: CrowdCheer
     clip: {fileID: 8300000, guid: a55e3a2009d488d45b9b746c5e4cbf20, type: 3}
     volume: 0.59
     pitch: 1
+    group: 0
     source: {fileID: 0}
   - name: PartyHorn
     clip: {fileID: 8300000, guid: dbda90d72c8e4614aad369e64ebb388e, type: 3}
     volume: 0.59
     pitch: 1
+    group: 0
     source: {fileID: 0}
   - name: CrowdGroan
     clip: {fileID: 8300000, guid: e62eccf7f8bdc0b4381e329e764f836d, type: 3}
     volume: 0.59
     pitch: 1
+    group: 0
     source: {fileID: 0}
 --- !u!1 &1502650111
 GameObject:
@@ -5311,51 +5360,61 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: cf16047b2c500c94589b877d1c5c6f7f, type: 3}
     volume: 1
     pitch: 1
+    group: 1
     source: {fileID: 0}
   - name: DoubleHit
     clip: {fileID: 8300000, guid: e7f7ec158d5f53948b80a5cc0ba0fcab, type: 3}
     volume: 1
     pitch: 1
+    group: 1
     source: {fileID: 0}
   - name: Island
     clip: {fileID: 8300000, guid: bfe61a3008cfe054c8736660f5569248, type: 3}
     volume: 1
     pitch: 1
+    group: 1
     source: {fileID: 0}
   - name: Restack
     clip: {fileID: 8300000, guid: be2fb29cb693a3a468005c605facfc9c, type: 3}
     volume: 1
     pitch: 1
+    group: 1
     source: {fileID: 0}
   - name: MyMomWouldDoBetter
     clip: {fileID: 8300000, guid: 7744abffd5b496a428bcdb2fe2119c72, type: 3}
     volume: 1
     pitch: 1
+    group: 1
     source: {fileID: 0}
   - name: gg_standard_1
     clip: {fileID: 8300000, guid: 8ae3cdf44b3d2fe4ab5f8aa5239d312c, type: 3}
     volume: 1
     pitch: 1
+    group: 1
     source: {fileID: 0}
   - name: gg_standard_2
     clip: {fileID: 8300000, guid: 6f35db3df5d656b43ba28eb398cbfaa2, type: 3}
     volume: 1
     pitch: 1
+    group: 1
     source: {fileID: 0}
   - name: gg_medium_1
     clip: {fileID: 8300000, guid: 2401adcf8c70b4649b14ea530a14fccd, type: 3}
     volume: 1
     pitch: 1
+    group: 1
     source: {fileID: 0}
   - name: gg_medium_2
     clip: {fileID: 8300000, guid: 842b27aac4d6acb489107e5701bc8f6e, type: 3}
     volume: 1
     pitch: 1
+    group: 0
     source: {fileID: 0}
   - name: gg_long
     clip: {fileID: 8300000, guid: 17e5632de7f388648a1156615af128c8, type: 3}
     volume: 1
     pitch: 1
+    group: 1
     source: {fileID: 0}
 --- !u!1 &1788652532
 GameObject:

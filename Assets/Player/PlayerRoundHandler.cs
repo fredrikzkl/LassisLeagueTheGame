@@ -16,7 +16,7 @@ public class PlayerRoundHandler : MonoBehaviour
     public int islands { get; set; }
 
     //PlayerStts
-    public PlayerStats stats;
+    public PlayerStats stats { set; get; }
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +91,8 @@ public class PlayerRoundHandler : MonoBehaviour
    
             RemoveHitCups();
             RemoveAllThrownBalls();
+
+            Debug.Log(stats.ToString());
 
             //Check for win condition
             FindObjectOfType<GameLogic>().CheckWinCondition(gameObject);

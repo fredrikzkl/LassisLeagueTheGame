@@ -8,6 +8,7 @@ public static class SaveSystem
 {
 
     public static string RulesPath = Application.persistentDataPath + "/husregler.lasaron";
+    public static string SystemSettingsPath = Application.persistentDataPath + "/systemSettings.lasaron";
 
     public static void SaveRules(RulesData rulesData)
     {
@@ -41,5 +42,44 @@ public static class SaveSystem
             return new RulesData().GetStandardRules();
         }
     }
-   
+
+    public static void SaveSystemSettings(SystemSettingsData systemSettings)
+    {
+        string path = SystemSettingsPath;
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, systemSettings);
+        stream.Close();
+    }
+
+    public static SystemSettingsData LoadSystemSettings()
+    {
+        string path = SystemSettingsPath;
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            SystemSettingsData data = formatter.Deserialize(stream) as SystemSettingsData;
+            stream.Close();
+
+
+            Debug.Log(data.ToString());
+
+            return data;
+        }
+        else
+        {
+            Debug.Log("SystemSettingsFile not found - Returns a standard");
+            SystemSettingsData newSettings = new SystemSettingsData();
+            newSettings.ApplyStandardSettings();
+            return newSettings;
+        }
+    }
+
+
+
+
 }

@@ -33,7 +33,7 @@ public class Formations
     public static Formation Marching = new Formation("North Korean Army", 8, "000101000#000101000#000101000#000101000");
     //7 kopper: 4-3 bak, full trekant
     public static Formation HoneyComb = new Formation("Honning", 7, "000101000#001010100#000101000");
-    public static Formation TraingleWithClit = new Formation("Triangle med nipple", 7, "001010100#000101000#000010000#000010000");
+    public static Formation TraingleWithClit = new Formation("Triangle med kvise", 7, "001010100#000101000#000010000#000010000");
     //6 kopper: 3 bak, full trekant
     public static Formation Small = new Formation("Liten triangel", 6, "001010100#000101000#000010000");
     public static Formation Zipper = new Formation("Zipper", 6, "000100000#000010000#000100000#000010000#000100000#000010000");
@@ -44,8 +44,8 @@ public class Formations
     public static Formation Sword = new Formation("Sword", 5, "000010000#000101000#000010000#000010000");
     public static Formation LongDick = new Formation("Long Dick", 4, "000101000#000010000#000010000#000010000");
     //4 kopper: Diamant
-    public static Formation Vagina = new Formation("Vagina", 4, "000010000#000101000#000010000");
-    public static Formation DickNBalls = new Formation("Dick'n'balls", 4, "000101000#000010000#000010000");
+    public static Formation Vagina = new Formation("Diamant", 4, "000010000#000101000#000010000");
+    public static Formation DickNBalls = new Formation("Fallos'n'meatballs", 4, "000101000#000010000#000010000");
     public static Formation Square = new Formation("Firkant", 4, "000101000#000101000");
     //3 kopper: Trekant
     public static Formation Trio = new Formation("Trio", 3, "000101000#000010000");

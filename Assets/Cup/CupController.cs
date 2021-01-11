@@ -121,6 +121,8 @@ public class CupController : MonoBehaviour
     {
         GameObject owner = ball.GetComponent<BallController>().owner;
         owner.GetComponent<PlayerRoundHandler>().HitCups.Add(gameObject);
+        ball.GetComponent<BallController>().SetAsHitBall();
+        owner.GetComponent<PlayerRoundHandler>().stats.AddHit(1);
     }
 
     private void UpdateToHitMaterial()
