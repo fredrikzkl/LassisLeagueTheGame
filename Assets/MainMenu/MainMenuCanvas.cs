@@ -15,8 +15,15 @@ public class MainMenuCanvas : MonoBehaviour
     public GameObject settingsCanvas;
 
     string currentWindow;
-    
-   
+
+    CanvasGroup mainMenuButtonsGroup;
+    bool showButtons;
+
+    private void Start()
+    {
+        mainMenuButtonsGroup = mainMenuButtons.GetComponent<CanvasGroup>();
+        mainMenuButtonsGroup.alpha = 1f;
+    }
 
     public void StartGameOnClick()
     {
@@ -29,7 +36,8 @@ public class MainMenuCanvas : MonoBehaviour
         FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
         currentWindow = "rules";
         cameraAnimator.SetBool("toRules", true);
-        mainMenuButtons.SetActive(false);
+
+        HideMenuButtons();
         logo.SetActive(false);
 
     }
@@ -37,7 +45,7 @@ public class MainMenuCanvas : MonoBehaviour
     public void ShowSettingsMenu() {
         FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
 
-        gameObject.SetActive(false);
+        HideMenuButtons();
         settingsCanvas.SetActive(true);
     }
 
@@ -45,8 +53,9 @@ public class MainMenuCanvas : MonoBehaviour
     {
         settingsCanvas.GetComponent<SystemSettings>().SaveSystemSettings();
         FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
-        gameObject.SetActive(true);
+       
         settingsCanvas.SetActive(false);
+        ShowMenuButtons();
     }
 
     public void ShowRulesCanvas()
@@ -60,9 +69,10 @@ public class MainMenuCanvas : MonoBehaviour
     public void BackToMainScreen()
     {
         FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
-        ToggleActive(backButton);
-        ToggleActive(mainMenuButtons);
+        backButton.SetActive(false);
+        ShowMenuButtons();
         rulesCanvas.SetActive(false);
+        logo.SetActive(true);
 
         if(currentWindow == "rules")
         {
@@ -73,6 +83,21 @@ public class MainMenuCanvas : MonoBehaviour
 
     }
 
+    void ShowMenuButtons()
+    {
+        CanvasGroup g = mainMenuButtons.GetComponent<CanvasGroup>();
+        showButtons = true;
+        g.blocksRaycasts = true; //this prevents the UI element to receive input events
+    }
+
+    void HideMenuButtons()
+    {
+        CanvasGroup g = mainMenuButtons.GetComponent<CanvasGroup>();
+        g.alpha = 0f; //this makes everything transparent
+        g.blocksRaycasts = false; //this prevents the UI element to receive input events
+        showButtons = false;
+    }
+
     void ToggleActive(GameObject obj)
     {
         if (obj.activeSelf)
@@ -81,5 +106,12 @@ public class MainMenuCanvas : MonoBehaviour
             obj.SetActive(true);
     }
 
-   
+    private void FixedUpdate()
+    {
+        if (showButtons && mainMenuButtonsGroup.alpha  <= 1f)
+        {
+            mainMenuButtonsGroup.alpha += 0.025f;
+        }
+    }
+
 }
