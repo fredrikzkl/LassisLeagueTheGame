@@ -4,28 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Announcer : MonoBehaviour
+public class Announcer : SoundManager
 {
-    public SoundFX[] voicelines;
-
-    public void Awake()
-    {
-        foreach (var s in voicelines)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.pitch = s.pitch;
-            s.source.volume = s.volume;
-            
-        }
-    }
-
-    public void Dissapointed()
-    {
-        string[] dissapointedLines = { "MyMomWouldDoBetter" };
-
-    }
-
+    
+    
     public void Say(string voiceline)
     {
         var sound = GetSound(voiceline);
@@ -34,16 +16,11 @@ public class Announcer : MonoBehaviour
         sound.source.Play();
     }
 
-    public SoundFX GetSound(string name)
+    public void Dissapointed()
     {
-        foreach (var s in voicelines)
-        {
-            if (s.name == name)
-                return s;
-        }
-        Debug.LogError("Sound  [" + name + "] was not found!");
-        return null;
+
     }
+
 
     internal void GG(float elapsedTime, int p1Cups, int p2Cups)
     {

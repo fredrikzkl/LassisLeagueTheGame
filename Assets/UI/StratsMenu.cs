@@ -250,7 +250,7 @@ public class StratsMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
 
         RemoveFormationCards();
         GameManager.Resume();

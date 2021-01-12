@@ -27,13 +27,13 @@ public class MainMenuCanvas : MonoBehaviour
 
     public void StartGameOnClick()
     {
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
         SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
     }
 
     public void ToRulesClick()
     {
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
         currentWindow = "rules";
         cameraAnimator.SetBool("toRules", true);
 
@@ -43,7 +43,7 @@ public class MainMenuCanvas : MonoBehaviour
     }
 
     public void ShowSettingsMenu() {
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
 
         HideMenuButtons();
         settingsCanvas.SetActive(true);
@@ -52,7 +52,7 @@ public class MainMenuCanvas : MonoBehaviour
     public void CloseSettingsMenu()
     {
         settingsCanvas.GetComponent<SystemSettings>().SaveSystemSettings();
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
        
         settingsCanvas.SetActive(false);
         ShowMenuButtons();
@@ -68,7 +68,7 @@ public class MainMenuCanvas : MonoBehaviour
 
     public void BackToMainScreen()
     {
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
         backButton.SetActive(false);
         ShowMenuButtons();
         rulesCanvas.SetActive(false);

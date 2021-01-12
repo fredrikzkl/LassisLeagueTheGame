@@ -47,7 +47,6 @@ GameObject:
   - component: {fileID: 8996473784836071444}
   - component: {fileID: 6179240987539167697}
   - component: {fileID: 6344913922710890125}
-  - component: {fileID: 2846220286809839004}
   m_Layer: 5
   m_Name: FormationCard
   m_TagString: Untagged
@@ -157,18 +156,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2846220286809839004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3529802355325928313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d06dfc73ba658a4dac32886a95dca2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5771137918954301534
 GameObject:
   m_ObjectHideFlags: 0

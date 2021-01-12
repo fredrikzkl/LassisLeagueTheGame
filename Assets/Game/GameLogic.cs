@@ -129,8 +129,8 @@ public class GameLogic : MonoBehaviour
 
         FindObjectOfType<EndGameCanvas>().SetText(score, elapsedTime);
 
-        FindObjectOfType<SoundManager>().PlaySoundEffect("PartyHorn");
-        FindObjectOfType<SoundManager>().PlaySoundEffect("CrowdCheer");
+        FindObjectOfType<SoundManager>().PlaySound("PartyHorn");
+        FindObjectOfType<SoundManager>().PlaySound("CrowdCheer");
 
         FindObjectOfType<Announcer>().GG(elapsedTime, p1Cups, p2Cups);
 

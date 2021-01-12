@@ -91,7 +91,7 @@ public class SystemSettings : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
         Resolution res = availableResolutions[resolutionIndex]; 
         Screen.SetResolution(res.width, res.height, Screen.fullScreen);
         saveData.SetResolution(res);
@@ -99,14 +99,14 @@ public class SystemSettings : MonoBehaviour
     
     public void SetQuality(int qualityIndex)
     {
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
         QualitySettings.SetQualityLevel(qualityIndex);
         saveData.graphicsSetting = qualityIndex;
     }
 
     public void SetFullScreen(bool isFullSCreen)
     {
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
         Screen.fullScreen = isFullSCreen;
         saveData.fullscreen = isFullSCreen;
     }

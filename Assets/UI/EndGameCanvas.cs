@@ -36,13 +36,13 @@ public class EndGameCanvas : MonoBehaviour
 
     public void RematchOnClick()
     {
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
         FindObjectOfType<GameLogic>().Rematch();
     }
 
     public void ExitToMenu()
     {
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 

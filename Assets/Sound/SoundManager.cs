@@ -26,12 +26,12 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    public void PlaySoundEffect(string name)
+    public void PlaySound(string name)
     {
-        PlaySoundEffect(name, 1f);
+        PlaySound(name, 1f);
     }
 
-    public void PlaySoundEffect(string name, float volume)
+    public void PlaySound(string name, float volume)
     {
         var sound = GetSound(name);
         if (sound == null) return;
@@ -46,7 +46,7 @@ public class SoundManager : MonoBehaviour
     {
         foreach(var n in names)
         {
-            PlaySoundEffect(n);
+            PlaySound(n);
         }
     }
 

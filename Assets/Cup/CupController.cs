@@ -96,19 +96,19 @@ public class CupController : MonoBehaviour
                 if (isIslandCup)
                 {
                     Debug.Log("DUDE ISLAND!!");
-                    FindObjectOfType<SoundManager>().PlaySoundEffect("CrowdCheer");
+                    FindObjectOfType<SoundManager>().PlaySound("CrowdCheer");
                     successfullyHitIsland = true;
 
                 }
                 else
                 {
                     Debug.Log("Traff en kopp som ikke er island koppen");
-                    FindObjectOfType<SoundManager>().PlaySoundEffect("CrowdGroan");
+                    FindObjectOfType<SoundManager>().PlaySound("CrowdGroan");
                     return;
                 }
             }
 
-            FindObjectOfType<SoundManager>().PlaySoundEffect("CupHit");
+            FindObjectOfType<SoundManager>().PlaySound("CupHit");
 
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             other.gameObject.GetComponent<BallController>().BallOutOfBounds(1f);

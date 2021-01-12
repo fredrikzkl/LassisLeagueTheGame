@@ -41,7 +41,7 @@ public class GameHUD : MonoBehaviour
 
     public void OpenRestackMenu()
     {
-        FindObjectOfType<SoundManager>().PlaySoundEffect("Click");
+        FindObjectOfType<SoundManager>().PlaySound("Click");
         stratsMenu.GetComponent<StratsMenu>().Initiate();
         
     }

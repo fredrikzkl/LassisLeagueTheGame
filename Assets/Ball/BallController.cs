@@ -127,7 +127,7 @@ public class BallController : MonoBehaviour
         bool soundCdOk = soundCooldown <= 0f;
         if (soundCdOk)
         {
-            FindObjectOfType<SoundManager>().PlaySoundEffect(soundeffect, volume);
+            FindObjectOfType<SoundManager>().PlaySound(soundeffect, volume);
             soundCooldown = 0.5f;
         }
     }
