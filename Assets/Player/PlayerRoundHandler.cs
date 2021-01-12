@@ -99,7 +99,8 @@ public class PlayerRoundHandler : MonoBehaviour
 
             if (stats.missStreak > 4)
             {
-                FindObjectOfType<Announcer>().Dissapointed();
+                int possibleCups = FindObjectOfType<GameLogic>().GetOpponentCupRack(gameObject).GetCupCount();
+                FindObjectOfType<Announcer>().Dissapointed(stats.missStreak, possibleCups);
             }
 
             if (ballsBack)

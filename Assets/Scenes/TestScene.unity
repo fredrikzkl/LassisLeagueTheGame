@@ -6742,6 +6742,60 @@ MonoBehaviour:
     pitch: 1
     group: 1
     source: {fileID: 0}
+  - name: gg_long
+    clip: {fileID: 8300000, guid: 17e5632de7f388648a1156615af128c8, type: 3}
+    volume: 0.7
+    pitch: 1
+    group: 1
+    source: {fileID: 0}
+  - name: gg_medium_1
+    clip: {fileID: 8300000, guid: 2401adcf8c70b4649b14ea530a14fccd, type: 3}
+    volume: 0.7
+    pitch: 1
+    group: 1
+    source: {fileID: 0}
+  - name: gg_medium_2
+    clip: {fileID: 8300000, guid: 842b27aac4d6acb489107e5701bc8f6e, type: 3}
+    volume: 0.7
+    pitch: 1
+    group: 1
+    source: {fileID: 0}
+  - name: gg_standard_1
+    clip: {fileID: 8300000, guid: 8ae3cdf44b3d2fe4ab5f8aa5239d312c, type: 3}
+    volume: 0.7
+    pitch: 1
+    group: 1
+    source: {fileID: 0}
+  - name: gg_standard_2
+    clip: {fileID: 8300000, guid: 6f35db3df5d656b43ba28eb398cbfaa2, type: 3}
+    volume: 0.7
+    pitch: 1
+    group: 1
+    source: {fileID: 0}
+  - name: EvenTrying_1
+    clip: {fileID: 8300000, guid: f1f5f88f18209fc488c7a3d6c0f76377, type: 3}
+    volume: 0.7
+    pitch: 1
+    group: 1
+    source: {fileID: 0}
+  - name: Embarrassing
+    clip: {fileID: 8300000, guid: f1f5f88f18209fc488c7a3d6c0f76377, type: 3}
+    volume: 0.7
+    pitch: 1
+    group: 1
+    source: {fileID: 0}
+  - name: EvenTrying_2
+    clip: {fileID: 8300000, guid: f9625044b7eb1c947b9c6d923f557c9c, type: 3}
+    volume: 0.7
+    pitch: 1
+    group: 1
+    source: {fileID: 0}
+  - name: MomWouldDoBetter
+    clip: {fileID: 8300000, guid: 7744abffd5b496a428bcdb2fe2119c72, type: 3}
+    volume: 0.7
+    pitch: 1
+    group: 1
+    source: {fileID: 0}
 --- !u!1 &1795555634
 GameObject:
   m_ObjectHideFlags: 0
