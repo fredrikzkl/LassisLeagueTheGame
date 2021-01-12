@@ -16,12 +16,14 @@ public class Music : SoundManager
     TMP_Text songTitle;
 
     List<string> playedTracks;
+    string currentTrack;
     System.Random random;
 
     float musicBarTimeRemaining;
 
     private void Start()
     {
+        currentTrack = "";
         playedTracks = new List<string>();
         random = new System.Random();
 
@@ -62,7 +64,7 @@ public class Music : SoundManager
                 continue;
             break;
         }
-
+        currentTrack = pickedTrack;
         UpdateTextMusicCanvas(pickedTrack);
         PlaySound(pickedTrack);
         FadeInMusicCanvas();
@@ -88,7 +90,6 @@ public class Music : SoundManager
         return (playedTracks.Count == sounds.Length);
     }
 
-    
 
     private void FixedUpdate()
     {
@@ -100,6 +101,11 @@ public class Music : SoundManager
 
         musicBarTimeRemaining -= Time.deltaTime;
 
+        //Checks if song has stopped playin
+        if (!IsPlaying(currentTrack))
+        {
+            PlayRandomTrack();
+        }
     }
 
     private void FadeInMusicCanvas()

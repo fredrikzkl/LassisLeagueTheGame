@@ -14,7 +14,9 @@ ScriptsOnlyBuild:
     - GameManager
     - GameRules
     - GameSettings
+    - MainMenuButtons
     - MainMenuCanvas
+    - Music
     - PlayerController
     - PlayerRoundHandler
     - PlayerThrowLogic
@@ -133,33 +135,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11924}
     - Class: 114
-      Script: {instanceID: 12094}
+      Script: {instanceID: 12096}
     - Class: 114
-      Script: {instanceID: 12248}
+      Script: {instanceID: 12250}
     - Class: 114
-      Script: {instanceID: 12268}
+      Script: {instanceID: 12270}
     - Class: 114
-      Script: {instanceID: 12532}
+      Script: {instanceID: 12534}
     - Class: 114
-      Script: {instanceID: 12548}
+      Script: {instanceID: 12550}
     - Class: 114
-      Script: {instanceID: 12554}
+      Script: {instanceID: 12556}
     - Class: 114
-      Script: {instanceID: 12752}
+      Script: {instanceID: 12754}
     - Class: 114
-      Script: {instanceID: 12810}
+      Script: {instanceID: 12812}
     - Class: 114
-      Script: {instanceID: 12820}
+      Script: {instanceID: 12822}
     - Class: 114
-      Script: {instanceID: 12988}
+      Script: {instanceID: 12990}
     - Class: 114
-      Script: {instanceID: 13100}
+      Script: {instanceID: 13102}
     - Class: 114
-      Script: {instanceID: 13202}
+      Script: {instanceID: 13180}
     - Class: 114
-      Script: {instanceID: 13216}
+      Script: {instanceID: 13206}
     - Class: 114
-      Script: {instanceID: 13232}
+      Script: {instanceID: 13220}
+    - Class: 114
+      Script: {instanceID: 13236}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -181,6 +185,8 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
       Script: {instanceID: 0}
     - Class: 241
       Script: {instanceID: 0}
@@ -258,37 +264,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11916}
     - Class: 114
-      Script: {instanceID: 12214}
+      Script: {instanceID: 12216}
     - Class: 114
-      Script: {instanceID: 12248}
+      Script: {instanceID: 12250}
     - Class: 114
-      Script: {instanceID: 12304}
+      Script: {instanceID: 12306}
     - Class: 114
-      Script: {instanceID: 12388}
+      Script: {instanceID: 12390}
     - Class: 114
-      Script: {instanceID: 12532}
+      Script: {instanceID: 12534}
     - Class: 114
-      Script: {instanceID: 12680}
+      Script: {instanceID: 12682}
     - Class: 114
-      Script: {instanceID: 12700}
+      Script: {instanceID: 12702}
     - Class: 114
-      Script: {instanceID: 12752}
+      Script: {instanceID: 12754}
     - Class: 114
-      Script: {instanceID: 12758}
+      Script: {instanceID: 12760}
     - Class: 114
-      Script: {instanceID: 12810}
+      Script: {instanceID: 12812}
     - Class: 114
-      Script: {instanceID: 12820}
+      Script: {instanceID: 12822}
     - Class: 114
-      Script: {instanceID: 12936}
+      Script: {instanceID: 12938}
     - Class: 114
-      Script: {instanceID: 13138}
+      Script: {instanceID: 13140}
     - Class: 114
-      Script: {instanceID: 13202}
+      Script: {instanceID: 13206}
     - Class: 114
-      Script: {instanceID: 13232}
+      Script: {instanceID: 13236}
     - Class: 114
-      Script: {instanceID: 29630}
+      Script: {instanceID: 26322}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -310,6 +316,14 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    - Class: 241
+      Script: {instanceID: 0}
+    - Class: 243
+      Script: {instanceID: 0}
+    - Class: 245
       Script: {instanceID: 0}
     - Class: 258
       Script: {instanceID: 0}
@@ -1006,7 +1020,7 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
-      Hash: ff455440ba99727836bb477b38270830
+      Hash: 35d2b5c187a938e2f82f502921348b71
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Announcer
@@ -1028,6 +1042,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SubMesh
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenuButtons
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1082,6 +1102,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 0ce2c4378a75aab00503e42b7a028c4e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Music
   platform: 13
   scenePathNames:
   - Assets/Scenes/MainMenu.unity

@@ -14,6 +14,7 @@ public class SystemSettings : MonoBehaviour
     public Slider masterSlider;
     public Slider sfxSlider;
     public Slider announcerSlider;
+    public Slider musicSlider;
     
     public AudioMixer audioMixer;
     //
@@ -88,6 +89,13 @@ public class SystemSettings : MonoBehaviour
         saveData.announcerVolume = volume;
     }
 
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("MusicVolume", volume);
+        saveData.musicVolume = volume;
+    }
+
+
 
     public void SetResolution(int resolutionIndex)
     {
@@ -128,6 +136,9 @@ public class SystemSettings : MonoBehaviour
 
         SetAnnouncerVolume(settings.announcerVolume);
         announcerSlider.value = settings.announcerVolume;
+
+        SetMusicVolume(settings.musicVolume);
+        musicSlider.value = settings.musicVolume;
     }
 
 }

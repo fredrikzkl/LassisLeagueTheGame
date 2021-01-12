@@ -16,6 +16,7 @@ public class SystemSettingsData
     public float masterVolume { get; set; }
     public float sfxVolume { get; set; }
     public float announcerVolume { get; set; }
+    public float musicVolume { get; set; }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void OnBeforeSceneLoadRuntimeMethod()
@@ -35,7 +36,8 @@ public class SystemSettingsData
 
         masterVolume = 0f;
         sfxVolume = 0f;
-        announcerVolume = 0f;
+        announcerVolume = -10f;
+        musicVolume = -10f;
     }
 
     public void SetResolution(Resolution r)

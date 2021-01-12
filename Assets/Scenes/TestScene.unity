@@ -1035,19 +1035,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 111608903, guid: 1f33f098eb42ae641bc4f20819853e6c, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0
+      value: 2.2e-44
       objectReference: {fileID: 0}
     - target: {fileID: 111608903, guid: 1f33f098eb42ae641bc4f20819853e6c, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 4.5904e-41
+      value: 6.91e-43
       objectReference: {fileID: 0}
     - target: {fileID: 111608903, guid: 1f33f098eb42ae641bc4f20819853e6c, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 38
+      value: 15.353363
       objectReference: {fileID: 0}
     - target: {fileID: 111608903, guid: 1f33f098eb42ae641bc4f20819853e6c, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 12
+      value: 6.92e-43
       objectReference: {fileID: 0}
     - target: {fileID: 7487433142922027187, guid: 1f33f098eb42ae641bc4f20819853e6c,
         type: 3}
@@ -1399,8 +1399,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -159}
-  m_SizeDelta: {x: 1532.67, y: 275.8}
+  m_AnchoredPosition: {x: 10, y: -157.9}
+  m_SizeDelta: {x: 1459.5072, y: 282.44672}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &303162775
 MonoBehaviour:
@@ -1449,12 +1449,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 206.8
+  m_fontSize: 160
   m_fontSizeBase: 206.8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 52.9
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 72
+  m_fontSizeMax: 160
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1917,19 +1917,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 111608903, guid: 1f33f098eb42ae641bc4f20819853e6c, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1e-45
+      value: 1.04e-43
       objectReference: {fileID: 0}
     - target: {fileID: 111608903, guid: 1f33f098eb42ae641bc4f20819853e6c, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 6.94e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 111608903, guid: 1f33f098eb42ae641bc4f20819853e6c, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 14.51651
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 111608903, guid: 1f33f098eb42ae641bc4f20819853e6c, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 6.92e-43
+      value: 5.9e-44
       objectReference: {fileID: 0}
     - target: {fileID: 7487433142922027187, guid: 1f33f098eb42ae641bc4f20819853e6c,
         type: 3}
@@ -2107,7 +2107,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611536886}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2423,7 +2423,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.92e-43, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: -2.8139172}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -4298,8 +4298,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 192.80002}
-  m_SizeDelta: {x: 1532.67, y: 275.8}
+  m_AnchoredPosition: {x: -6.6, y: 202.7}
+  m_SizeDelta: {x: 1426.32, y: 278.01556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1092332057
 MonoBehaviour:
@@ -4348,12 +4348,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 206.8
+  m_fontSize: 160
   m_fontSizeBase: 206.8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 52.9
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 72
+  m_fontSizeMax: 160
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6661,6 +6661,12 @@ MonoBehaviour:
   - name: "Unge Seksti#Dagen Derp\xE5"
     clip: {fileID: 8300000, guid: 9f24c9ea473d23248afe7ceb213f1b50, type: 3}
     volume: 1
+    pitch: 1
+    group: 2
+    source: {fileID: 0}
+  - name: Klovner i Kamp#Fra Vugge Til Grav
+    clip: {fileID: 8300000, guid: 707db4b27cc5a5d4b9ff38ec8e50a0aa, type: 3}
+    volume: 0.307
     pitch: 1
     group: 2
     source: {fileID: 0}

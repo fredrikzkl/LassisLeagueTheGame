@@ -61,6 +61,11 @@ public class SoundManager : MonoBehaviour
         return null;
     }
 
+    public bool IsPlaying(string name)
+    {
+        return GetSound(name).source.isPlaying;
+    }
+
     /*
      *  MIXER
      */

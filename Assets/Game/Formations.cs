@@ -42,7 +42,7 @@ public class Formations
     public static Formation Trapezoid = new Formation("Trapezoid", 5, "001010100#000101000");
     public static Formation House = new Formation("Hus", 5, "000101000#000101000#000010000");
     public static Formation Sword = new Formation("Sword", 5, "000010000#000101000#000010000#000010000");
-    public static Formation LongDick = new Formation("Long Dick", 4, "000101000#000010000#000010000#000010000");
+    public static Formation LongDick = new Formation("Extra meatballs", 4, "000101000#000010000#000010000#000010000");
     //4 kopper: Diamant
     public static Formation Vagina = new Formation("Diamant", 4, "000010000#000101000#000010000");
     public static Formation DickNBalls = new Formation("Fallos'n'meatballs", 4, "000101000#000010000#000010000");
