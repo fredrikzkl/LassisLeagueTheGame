@@ -30,8 +30,11 @@ public class PlayerController : MonoBehaviour
     private float currentPower;
     //Brukt for 2D
     //private float chargeUpRate = 2.5f;
-    private float chargeUpRate = 2.3f;
 
+    public bool forgivingPowerbar;
+    private int chargeUpRateDirection = 1;
+    private float chargeUpRate = 2.15f;
+ 
     //Throwing helpvariables
     float currentAngle;
 
@@ -116,11 +119,27 @@ public class PlayerController : MonoBehaviour
     {
         if (isChargingUp)
         {
-            if (currentPower < 100f)
+            if (forgivingPowerbar)
             {
-                currentPower += chargeUpRate;
-                powerSlider.value = currentPower;
+                if (currentPower < 0 && chargeUpRateDirection == -1)
+                {
+                    chargeUpRateDirection = 1;
+                }
+                if (currentPower > 100 && chargeUpRateDirection == 1)
+                {
+                    chargeUpRateDirection = -1;
+                }
+
+                currentPower += chargeUpRate * chargeUpRateDirection;
             }
+            else
+            {
+                if (currentPower < 100)
+                    currentPower += chargeUpRate;
+            }
+            
+            powerSlider.value = currentPower;
+
             return;
         }
     }
