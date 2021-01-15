@@ -77,8 +77,9 @@ public class PlayerController : MonoBehaviour
         Debug.Log(gameObject.name + " gets the balls back");
         throwsRemaining = FindObjectOfType<GameRules>().BallsBackCount;
         hud.UpdateBallIndicator(throwsRemaining);
-        aimArrow.GetComponent<AimArrowController>().Enable();
         isBallsBackRound = true;
+        if(!IsAI())
+            aimArrow.GetComponent<AimArrowController>().Enable();
     }
 
     public void StartRound()
@@ -97,21 +98,29 @@ public class PlayerController : MonoBehaviour
         {
             //Har vi strats?
             bool hasStrats = false;
+            bool islandInvoked = false;
             //Har vi island?
             islandCups = opponentCupRack.CheckForIsland();
             if (islandCups.Count > 0 && GetComponent<PlayerRoundHandler>().islands > 0)
             {
-                Debug.Log(gameObject.name + " has island with " + islandCups.Count + " cups!");
-                islandCups.ForEach(ic => Debug.Log(ic.name));
+                //Debug.Log(gameObject.name + " has island with " + islandCups.Count + " cups!");
+                //islandCups.ForEach(ic => Debug.Log(ic.name));
+                if (IsAI() && AI.DecidesIsland(islandCups))
+                    islandInvoked = true;
+
                 hasStrats = true;
             }
             //Kan vi restacke?
-            if (roundHandler.restacks > 0 && Formations.GetValidFormations(opponentCupRack.GetCupCount()).Count > 0)
+            if (roundHandler.restacks > 0 && Formations.GetValidFormations(opponentCupRack.GetCupCount()).Count > 0 && !islandInvoked)
             {
                 hasStrats = true;
+                if (IsAI())
+                {
+                    AI.DecideRestack();
+                }
             }
             //Om vi har noen syke strats, så viser vi knappen
-            if (hasStrats) 
+            if (hasStrats && !IsAI()) 
             {
                 hud.ActivateStratsButton();
             }
@@ -121,8 +130,9 @@ public class PlayerController : MonoBehaviour
         hud.UpdateColors(playerColor, throwsRemaining);
         isBallsBackRound = false;
         //Starter pilen
-        if(!IsAI())
+        if (!IsAI())
             aimArrow.GetComponent<AimArrowController>().Enable();
+            
     }
 
     public void EndRound()
@@ -179,6 +189,7 @@ public class PlayerController : MonoBehaviour
                         throwsRemaining -= 1;
                         hud.UpdateBallIndicator(throwsRemaining);
                     }
+                    return;
                 }
 
                 if (isChargingUp)

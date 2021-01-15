@@ -225,11 +225,7 @@ public class StratsMenu : MonoBehaviour
             return;
         }
         ResumeGame();
-
-        GameObject opponent = game.GetOpponent(player);
-        opponent.GetComponent<PlayerRoundHandler>().InvokeIsland(cup);
-        player.GetComponent<PlayerRoundHandler>().islands--;
-        FindObjectOfType<Announcer>().Say("Island");
+        player.GetComponent<PlayerRoundHandler>().InvokeIsland(cup);
     }
 
     private void OnFormationCardClick(string formationString)

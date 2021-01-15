@@ -118,6 +118,11 @@ public class CupRack : MonoBehaviour
         return cupList;
     }
 
+    public NeighbourTable GetNeighbourTable()
+    {
+        return neighbourTable;
+    }
+
     //TODO: Se igjennom denne:
     //Brukt hvis begge blir ballene blir truffet i samme kopp
     public List<GameObject> PickRandomCups(List<GameObject> exlcude, int removeCount)

@@ -24,6 +24,17 @@ public class NeighbourTable
         return null;
     }
 
+    public int GetNeighbourCount(GameObject cup)
+    {
+        foreach(var e  in table)
+        {
+            if (e.Item1 == cup)
+                return e.Item2.Count;
+        }
+        return 0;
+    }
+
+
     public void Add(GameObject cup, List<GameObject> neighbours)
     {
         table.Add((cup,neighbours));

@@ -42,10 +42,14 @@ public class PlayerRoundHandler : MonoBehaviour
 
     public void InvokeIsland(GameObject cup)
     {
+        //Cup er motstanderen sin kopp som skal bli island
         var cc = cup.GetComponent<CupController>();
         cc.SetIsland(true);
-        FindObjectOfType<GameLogic>().GetOpponent(gameObject).GetComponent<PlayerController>().nextThrowIsIsland = true; ;
 
+        gameObject.GetComponent<PlayerController>().nextThrowIsIsland = true; ;
+
+        islands--;
+        FindObjectOfType<Announcer>().Say("Island");
     }
 
     public void EndRound()
