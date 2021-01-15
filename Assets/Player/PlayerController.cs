@@ -5,13 +5,22 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public enum PlayerType
+{
+    Player, AI
+}
+
+
 public class PlayerController : MonoBehaviour
 {
+    public PlayerType playerType;
+    public AICore AI { get; set; }
 
     //Player utilites
     public Transform playerHand;
     public GameObject ballPrefab;
     public GameObject aimArrow;
+
 
     //Scripts
     public PlayerRoundHandler roundHandler;
@@ -53,6 +62,14 @@ public class PlayerController : MonoBehaviour
         hud.DeactivateStratsButton();
         nextThrowIsIsland = false;
         isBallsBackRound = false;
+        //AI 
+        if(IsAI())
+        {
+            AI = GetComponent<AICore>();
+            if (AI == null)
+                Debug.LogWarning("Player " + gameObject + " is missing an AI Core component");
+        }
+            
     }
 
     public void BallsBack()
@@ -94,7 +111,7 @@ public class PlayerController : MonoBehaviour
                 hasStrats = true;
             }
             //Om vi har noen syke strats, så viser vi knappen
-            if (hasStrats)
+            if (hasStrats) 
             {
                 hud.ActivateStratsButton();
             }
@@ -104,7 +121,8 @@ public class PlayerController : MonoBehaviour
         hud.UpdateColors(playerColor, throwsRemaining);
         isBallsBackRound = false;
         //Starter pilen
-        aimArrow.GetComponent<AimArrowController>().Enable();
+        if(!IsAI())
+            aimArrow.GetComponent<AimArrowController>().Enable();
     }
 
     public void EndRound()
@@ -151,6 +169,18 @@ public class PlayerController : MonoBehaviour
         {
             if (throwsRemaining > 0)
             {
+                if(IsAI())
+                {
+                    if (AI.IsReadyToThrow())
+                    {
+                        var targetCup = AI.PickACup();
+                        var shot = AI.CalculateShot(playerHand, targetCup.transform, GetPlayerDirection());
+                        ThrowBall(shot);
+                        throwsRemaining -= 1;
+                        hud.UpdateBallIndicator(throwsRemaining);
+                    }
+                }
+
                 if (isChargingUp)
                 {
                     //Slipper opp
@@ -204,6 +234,11 @@ public class PlayerController : MonoBehaviour
         ThrowBall(xyAngle, xzAngle, power);
     }
 
+    void ThrowBall(ThrowData shot)
+    {
+        ThrowBall(shot.XYAngle, shot.XZAngle, shot.Power);
+    }
+
     public void ThrowBall(float xyAngle, float xzAngle, float power)
     {
         var ball = Instantiate(ballPrefab, playerHand.position, Quaternion.identity);
@@ -229,10 +264,18 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public int GetPlayerDirection()
+    {
+        return aimArrow.GetComponent<AimArrowController>().direction;
+    }
+
     public void Disable()
     {
         aimArrow.active = false;
     }
 
-
+    public bool IsAI()
+    {
+        return playerType == PlayerType.AI;
+    }
 }

@@ -51,4 +51,6 @@ public class PlayerThrowLogic : MonoBehaviour
 
         return new Vector3(x, y, z);
     }
+
+   
 }
