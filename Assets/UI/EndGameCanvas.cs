@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EndGameCanvas : MonoBehaviour
 {
@@ -21,14 +22,27 @@ public class EndGameCanvas : MonoBehaviour
         timeText.text = formatTimeNicely(time);
     }
 
-    public void SetPlayerStats(PlayerStats p1Stats, PlayerStats p2Stats)
+    public void SetPlayerStats(GameObject player1, GameObject player2)
     {
-        SetPlayerStats(player1stats, p1Stats);
-        SetPlayerStats(player2stats, p2Stats);
+        //Player1
+        SetPlayerStats(player1stats, player1);
+        //Player 2
+        SetPlayerStats(player2stats, player2);
     }
 
-    public void SetPlayerStats(CanvasGroup statsGroup, PlayerStats stats)
+    public void SetPlayerStats(CanvasGroup statsGroup, GameObject player)
     {
+        var stats = player.GetComponent<PlayerRoundHandler>().stats;
+        var playerController = player.GetComponent<PlayerController>();
+
+        //Setter navn og farge
+        var header = statsGroup.transform.Find("Header");
+        header.GetComponent<TMP_Text>().text = player.name;
+
+        var pc = playerController.playerColor;
+        statsGroup.gameObject.GetComponent<Image>().color = new Color(pc.r, pc.g, pc.b, 0.5f);
+
+        //Setter stats
         var hitRatingStats = statsGroup.transform.Find("HitRating_Value");
         hitRatingStats.GetComponent<TMP_Text>().text = Math.Round(stats.GetHitRate() * 100, 2) + "%";
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum GameStage
 {
-    EyeToEye, Game
+    EyeToEye, Game, GameOver
 }
 
 public class GameLogic : MonoBehaviour
@@ -57,6 +57,9 @@ public class GameLogic : MonoBehaviour
     {
         //Setter runden til ingenting i starten
         playerWithTheRound = null;
+
+        if (gameStage == GameStage.GameOver)
+            return;
 
         if(gameStage == GameStage.EyeToEye && player == player2)
         {
@@ -158,7 +161,7 @@ public class GameLogic : MonoBehaviour
 
     public void GameOver(GameObject winner)
     {
-
+        gameStage = GameStage.GameOver;
         //Get the time
         EndScreen.SetActive(true);
 
@@ -177,7 +180,7 @@ public class GameLogic : MonoBehaviour
 
         FindObjectOfType<EndGameCanvas>().SetText(score, elapsedTime);
 
-        FindObjectOfType<EndGameCanvas>().SetPlayerStats(player1.GetComponent<PlayerRoundHandler>().stats, player2.GetComponent<PlayerRoundHandler>().stats);
+        FindObjectOfType<EndGameCanvas>().SetPlayerStats(player1, player2);
 
         FindObjectOfType<SoundManager>().PlaySound("PartyHorn");
         FindObjectOfType<SoundManager>().PlaySound("CrowdCheer");
@@ -191,8 +194,7 @@ public class GameLogic : MonoBehaviour
         DisablePlayers();
         //GameManager.Pause();
         HUD.SetActive(false);
-        FindObjectOfType<EndGameCanvas>().ToggleMenu();
-
+        FindObjectOfType<EndGameCanvas>().enabled = true;
     }
 
     void DisablePlayers()

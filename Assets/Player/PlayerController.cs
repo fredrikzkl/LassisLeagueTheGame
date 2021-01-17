@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerType playerType;
     public AICore AI { get; set; }
+    public string Name {get;set;}
 
     //Player utilites
     public Transform playerHand;
@@ -68,6 +69,11 @@ public class PlayerController : MonoBehaviour
             AI = GetComponent<AICore>();
             if (AI == null)
                 Debug.LogWarning("Player " + gameObject + " is missing an AI Core component");
+            name = AI.difficulty.ToString() + " AI";
+        }
+        else
+        {
+            Name = gameObject.name;
         }
             
     }
