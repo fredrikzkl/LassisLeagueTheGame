@@ -68,7 +68,6 @@
     <Compile Include="Assets\Ball\BallController.cs" />
     <Compile Include="Assets\Cup\CupController.cs" />
     <Compile Include="Assets\Cup\CupRack.cs" />
-    <Compile Include="Assets\Cup\DontGoThroughThings.cs" />
     <Compile Include="Assets\Cup\NeighbourTable.cs" />
     <Compile Include="Assets\Data\RulesData.cs" />
     <Compile Include="Assets\Data\SaveSystem.cs" />

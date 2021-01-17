@@ -174,8 +174,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
-        if (FindObjectOfType<GameLogic>().playerWithTheRound == gameObject)
+        var gameLogic = FindObjectOfType<GameLogic>();
+        if (gameLogic.playerWithTheRound == gameObject && gameLogic.gameStage != GameStage.GameOver)
         {
             if (throwsRemaining > 0)
             {
