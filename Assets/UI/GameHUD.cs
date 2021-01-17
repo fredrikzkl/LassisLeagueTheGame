@@ -22,6 +22,7 @@ public class GameHUD : MonoBehaviour
     //Referanser
     public Image ball1_indicator;
     public Image ball2_indicator;
+    public Color ballsIndicatorIdle;
     //Temp
     Color currentColor;
     //FPS STUFF
@@ -55,7 +56,6 @@ public class GameHUD : MonoBehaviour
         if(stage == GameStage.EyeToEye && FindObjectOfType<GameLogic>().playerWithTheRound != null)
         {
             var val = Mathf.Abs(Mathf.Sin(Time.time*2f) *1.25f);
-            Debug.Log(val);
             EyeToEyeGroup.alpha = val;
         }
         else
@@ -88,11 +88,11 @@ public class GameHUD : MonoBehaviour
         if (ballCount >= 2)
             ball1_indicator.color = temp;
         else
-            ball1_indicator.color = Color.black;
+            ball1_indicator.color = ballsIndicatorIdle;
         if (ballCount >= 1)
             ball2_indicator.color = temp;
         else
-            ball2_indicator.color = Color.black;
+            ball2_indicator.color = ballsIndicatorIdle;
     }
 
     public void UpdateColors(Color c, int ballCount)

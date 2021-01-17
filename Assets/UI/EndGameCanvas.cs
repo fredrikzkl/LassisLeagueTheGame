@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class EndGameCanvas : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timeText;
 
+    public CanvasGroup player1stats;
+    public CanvasGroup player2stats;
+
     public GameObject menu;
 
     public void SetText(string score, float time)
@@ -16,6 +20,24 @@ public class EndGameCanvas : MonoBehaviour
         scoreText.text = score;
         timeText.text = formatTimeNicely(time);
     }
+
+    public void SetPlayerStats(PlayerStats p1Stats, PlayerStats p2Stats)
+    {
+        SetPlayerStats(player1stats, p1Stats);
+        SetPlayerStats(player2stats, p2Stats);
+    }
+
+    public void SetPlayerStats(CanvasGroup statsGroup, PlayerStats stats)
+    {
+        var hitRatingStats = statsGroup.transform.Find("HitRating_Value");
+        hitRatingStats.GetComponent<TMP_Text>().text = Math.Round(stats.GetHitRate() * 100, 2) + "%";
+
+        var bestStreak = statsGroup.transform.Find("Streak_Value");
+        bestStreak.GetComponent<TMP_Text>().text = "" + stats.GetLongestHitStreak();
+    }
+
+
+
 
     string formatTimeNicely(float time)
     {

@@ -2128,7 +2128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 361.9, y: 0}
+  m_AnchoredPosition: {x: 350, y: 0}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &539380529
@@ -3220,7 +3220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 0.9490196}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5817,7 +5817,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -290.8}
-  m_SizeDelta: {x: 403.7, y: 106.79999}
+  m_SizeDelta: {x: 250, y: 106.79999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201343909
 MonoBehaviour:
@@ -6193,6 +6193,7 @@ MonoBehaviour:
   colorFadeFactor: 0.613
   ball1_indicator: {fileID: 2086581811}
   ball2_indicator: {fileID: 754952421}
+  ballsIndicatorIdle: {r: 0.2, g: 0.2, b: 0.2, a: 0.9490196}
   fpsText: {fileID: 2146237938}
   EyeToEyeGroup: {fileID: 1519222714}
 --- !u!114 &1219948744
@@ -6715,6 +6716,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1389466510}
   timeText: {fileID: 1628341758}
+  player1stats: {fileID: 1175541064}
+  player2stats: {fileID: 539380529}
   menu: {fileID: 1878074639}
 --- !u!1 &1290321395
 GameObject:
@@ -8109,7 +8112,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -142.79999}
-  m_SizeDelta: {x: 403.7, y: 106.79999}
+  m_SizeDelta: {x: 250, y: 106.79999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728092021
 MonoBehaviour:
@@ -9588,7 +9591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 0.9490196}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -9959,7 +9962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 0.9490196}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

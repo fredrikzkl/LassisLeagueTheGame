@@ -177,6 +177,8 @@ public class GameLogic : MonoBehaviour
 
         FindObjectOfType<EndGameCanvas>().SetText(score, elapsedTime);
 
+        FindObjectOfType<EndGameCanvas>().SetPlayerStats(player1.GetComponent<PlayerRoundHandler>().stats, player2.GetComponent<PlayerRoundHandler>().stats);
+
         FindObjectOfType<SoundManager>().PlaySound("PartyHorn");
         FindObjectOfType<SoundManager>().PlaySound("CrowdCheer");
 
