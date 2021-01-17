@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AI\AICore.cs" />
+    <Compile Include="Assets\AI\AIPersonality.cs" />
     <Compile Include="Assets\Aim.cs" />
     <Compile Include="Assets\Ball\BallController.cs" />
     <Compile Include="Assets\Cup\CupController.cs" />

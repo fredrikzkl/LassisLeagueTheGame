@@ -18,7 +18,7 @@ public class PlayerThrowLogic : MonoBehaviour
     //https://mathinsight.org/spherical_coordinates
     public Vector3 SphericalCoordinates(float xyAngle, float xzAngle, float P)
     {
-        P = P * powerReducerConstant3D;
+        //P = P * powerReducerConstant3D;
 
         float x = Mathf.Sin(xyAngle) * Mathf.Cos(xzAngle) * P;
 

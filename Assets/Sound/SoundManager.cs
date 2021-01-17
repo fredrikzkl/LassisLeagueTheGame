@@ -5,8 +5,11 @@ using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
+
     public AudioMixer audioMixer;
     public SoundFX[] sounds;
+
+    public bool DebugSounds;
 
     public void Awake()
     {
@@ -36,8 +39,9 @@ public class SoundManager : MonoBehaviour
         var sound = GetSound(name);
         if (sound == null) return;
         sound.volume = volume;
-        
-        Debug.Log("Skal spille lyden: " + name + " med volum: " + sound.volume);
+
+        if(DebugSounds)
+            Debug.Log("Spiller lyden: " + name + " med volum: " + sound.volume);
         
         sound.source.Play();
     }
@@ -57,7 +61,7 @@ public class SoundManager : MonoBehaviour
             if (s.name == name)
                 return s;
         }
-        Debug.LogError("Sound  [" + name + "] was not found!");
+        Debug.LogWarning("Sound  [" + name + "] was not found!");
         return null;
     }
 

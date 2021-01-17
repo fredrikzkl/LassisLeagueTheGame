@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     public bool forgivingPowerbar;
     private int chargeUpRateDirection = 1;
-    private float chargeUpRate = 2.15f;
+    private float chargeUpRate = 0.215f;
  
     //Throwing helpvariables
     float currentAngle;
@@ -82,12 +82,10 @@ public class PlayerController : MonoBehaviour
             aimArrow.GetComponent<AimArrowController>().Enable();
     }
 
-    public void StartRound()
+    public void StartRound(int throws)
     {
-        Debug.Log(gameObject.name + "'s round!");
 
         CupRack opponentCupRack = FindObjectOfType<GameLogic>().GetOpponentCupRack(gameObject);
-
 
         //Har vi genltemans?
         if (opponentCupRack.GetCupCount() == 2)
@@ -103,8 +101,6 @@ public class PlayerController : MonoBehaviour
             islandCups = opponentCupRack.CheckForIsland();
             if (islandCups.Count > 0 && GetComponent<PlayerRoundHandler>().islands > 0)
             {
-                //Debug.Log(gameObject.name + " has island with " + islandCups.Count + " cups!");
-                //islandCups.ForEach(ic => Debug.Log(ic.name));
                 if (IsAI() && AI.DecidesIsland(islandCups))
                     islandInvoked = true;
 
@@ -115,9 +111,7 @@ public class PlayerController : MonoBehaviour
             {
                 hasStrats = true;
                 if (IsAI())
-                {
                     AI.DecideRestack();
-                }
             }
             //Om vi har noen syke strats, så viser vi knappen
             if (hasStrats && !IsAI()) 
@@ -126,7 +120,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         //Legger til baller
-        throwsRemaining = FindObjectOfType<GameRules>().NumberOfBallsPrRound;
+        throwsRemaining = throws;
         hud.UpdateColors(playerColor, throwsRemaining);
         isBallsBackRound = false;
         //Starter pilen
@@ -153,7 +147,7 @@ public class PlayerController : MonoBehaviour
                 {
                     chargeUpRateDirection = 1;
                 }
-                if (currentPower > 100 && chargeUpRateDirection == 1)
+                if (currentPower > 10 && chargeUpRateDirection == 1)
                 {
                     chargeUpRateDirection = -1;
                 }
@@ -162,7 +156,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if (currentPower < 100)
+                if (currentPower < 10)
                     currentPower += chargeUpRate;
             }
             

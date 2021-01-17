@@ -29,6 +29,9 @@ public class GameHUD : MonoBehaviour
     private bool dislayFps = false;
     float avgFrameRate;
 
+    //EyeToEye
+    public CanvasGroup EyeToEyeGroup;
+
 
     private void Start()
     {
@@ -44,6 +47,21 @@ public class GameHUD : MonoBehaviour
         FindObjectOfType<SoundManager>().PlaySound("Click");
         stratsMenu.GetComponent<StratsMenu>().Initiate();
         
+    }
+
+    private void FixedUpdate()
+    {
+        GameStage stage = FindObjectOfType<GameLogic>().gameStage;
+        if(stage == GameStage.EyeToEye && FindObjectOfType<GameLogic>().playerWithTheRound != null)
+        {
+            var val = Mathf.Abs(Mathf.Sin(Time.time*2f) *1.25f);
+            Debug.Log(val);
+            EyeToEyeGroup.alpha = val;
+        }
+        else
+        {
+            EyeToEyeGroup.alpha = 0f;
+        }
     }
 
     private void Update()

@@ -30,13 +30,30 @@ public class AICore : MonoBehaviour
     {
         ThrowData shot = new ThrowData();
         //Henter ut XZ vinkelen, som er konstant
-        shot.XZAngle = Mathf.PI - GetXZAngleBetweenHandAndCup(origin.position, target.position);
+        shot.XZAngle =  GetXZAngleBetweenHandAndCup(origin.position, target.position);
         //TODO: Setter XY angle som 45 alltid
-        shot.XYAngle = 0.78f;
+        shot.XYAngle = 0.1f;
         //TODO: Setter power random fra 60-90 (fordi hvorfor ikke)
-        shot.Power = rng.Next(75, 88);
+        //shot.Power = rng.Next(75, 88);
+        shot.Power = GetInitialVelocityXY(shot.XYAngle, origin, target);
 
         return shot;
+    }
+
+    public float GetInitialVelocityXY(float angle, Transform origin, Transform target)
+    {
+        float cupHeight = target.gameObject.GetComponent<Renderer>().bounds.size.y;
+
+        float distance = Vector3.Distance(origin.position, target.position);
+        float initialHeight = origin.position.y ;
+        float endHeight = target.position.y + cupHeight/2;
+
+
+        float teller = (0.5f * Physics.gravity.y * Mathf.Pow(distance, 2)) / Mathf.Pow(Mathf.Sin(angle), 2);
+        float nevner = endHeight - initialHeight - (Mathf.Cos(angle) / Mathf.Sin(angle)) * distance;
+
+        return Mathf.Sqrt(teller / nevner);
+
     }
     
     public bool DecidesIsland(List<GameObject> islandCups)
@@ -67,10 +84,10 @@ public class AICore : MonoBehaviour
             }
         }
         //Så om andelen av vanskligere kopper er over 30%, så restackes det
-        float restackThreshold = 0.28f;
-        bool tooManyHardCups = (hardCups / opponentCupCount) > restackThreshold;
+        float hardcupsThreshold = 0.28f;
+        bool tooManyHardCups = (hardCups / opponentCupCount) > hardcupsThreshold;
         if (DebugDecisions && tooManyHardCups)
-            Debug.Log(gameObject + " decides that there are too many hard cups [" + hardCups + "], and  " + (hardCups/opponentCupCount) + " of the cups are hard. Treshold: " + restackThreshold);
+            Debug.Log(gameObject + " decides that there are too many hard cups [" + hardCups + "], and  " + (hardCups/opponentCupCount) + " of the cups are hard. Treshold: " + hardcupsThreshold);
 
 
         //Dersom han har bommet nok ganger, så restacker han
@@ -101,6 +118,14 @@ public class AICore : MonoBehaviour
         if (opponentRack.GetCupCount() == 0)
             return null;
         //Sjekker om han har island
+        if (gameObject.GetComponent<PlayerController>().nextThrowIsIsland)
+        {
+            foreach(var cup in opponentRack.GetCupList())
+            {
+                if (cup.GetComponent<CupController>().isIslandCup)
+                    return cup;
+            }
+        }
 
         //Sjekker først om han har truffet noen baller
         if(difficulty > 0 && roundHandler.HitCups.Count > 0)
@@ -158,8 +183,8 @@ public class AICore : MonoBehaviour
 
     public float GetXZAngleBetweenHandAndCup(Vector3 origin, Vector3 cup)
     {
-        float deltaX = origin.x - cup.x;
-        float deltaZ = origin.z - cup.z;
+        float deltaX = cup.x - origin.x ;
+        float deltaZ = cup.z - origin.z;
 
         float degree = Mathf.Atan2(deltaZ, deltaX);
         return degree;

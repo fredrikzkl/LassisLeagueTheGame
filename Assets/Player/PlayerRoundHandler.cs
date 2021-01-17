@@ -15,10 +15,12 @@ public class PlayerRoundHandler : MonoBehaviour
     public int restacks { get; set; }
     public int islands { get; set; }
 
-    //PlayerStts
+    //PlayerStats
     public PlayerStats stats { set; get; }
 
-    // Start is called before the first frame update
+    //Eye To Eye - -1 betyr at spilleren ikke har truffet noe
+    public int eyeToEyeScore { get; set; }
+
     void Start()
     {
         HitCups = new List<GameObject>();
@@ -28,6 +30,7 @@ public class PlayerRoundHandler : MonoBehaviour
         islands = FindObjectOfType<GameRules>().Islands;
 
         stats = new PlayerStats();
+        ResetEyeToEye();
     }
 
 
@@ -92,8 +95,18 @@ public class PlayerRoundHandler : MonoBehaviour
                 if(bonusCups > 0)
                     opponentRack.PickRandomCups(HitCups, bonusCups).ForEach(c => HitCups.Add(c));
             }
-   
-            RemoveHitCups();
+
+            if(FindObjectOfType<GameLogic>().GetGameStage() == GameStage.EyeToEye)
+            {
+                DetermineEyeToEyeScore();
+                EndEyeToEyeRound();
+            }
+            else
+            {
+                RemoveHitCups();
+            }
+
+
             RemoveAllThrownBalls();
 
             Debug.Log(stats.ToString());
@@ -165,6 +178,34 @@ public class PlayerRoundHandler : MonoBehaviour
     {
         return Formations.GetValidFormations(cupRack.GetComponent<CupRack>().GetCupCount());
     }
+
+    public void DetermineEyeToEyeScore()
+    {
+        if (HitCups.Count >= 1)
+        {
+            var cupHit = HitCups[0];
+            int row = int.Parse(cupHit.name.Split('-')[0]);
+            if (row > eyeToEyeScore)
+                eyeToEyeScore = row;
+        }
+    }
+
+    public void ResetEyeToEye()
+    {
+        eyeToEyeScore = -1;
+    }
+
+    public void EndEyeToEyeRound()
+    {
+        foreach(var c in HitCups)
+        {
+            var cup = c.GetComponent<CupController>();
+            cup.UpdateToStandardMaterial();
+        }
+        HitCups.Clear();
+    }
+
+  
 
 
 }

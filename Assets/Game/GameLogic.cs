@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameStage
+{
+    EyeToEye, Game
+}
+
 public class GameLogic : MonoBehaviour
 {
+
+    public GameStage gameStage;
+
     public GameObject player1;
     public GameObject player2;
 
@@ -16,6 +24,7 @@ public class GameLogic : MonoBehaviour
     public GameObject playerWithTheRound { get; set; }
 
     public float startTime;
+
 
     private void Update()
     {
@@ -38,7 +47,6 @@ public class GameLogic : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("Game started!");
         startTime = Time.time;
         StartPlayerRound(player1);
     }
@@ -49,8 +57,17 @@ public class GameLogic : MonoBehaviour
     {
         //Setter runden til ingenting i starten
         playerWithTheRound = null;
-        //Sjekke wincondition for player
-        Debug.Log("Round ended!");
+
+        if(gameStage == GameStage.EyeToEye && player == player2)
+        {
+            var eyeToEyeResult = EyeToEyeResults();
+            if(eyeToEyeResult != null)
+            {
+                gameStage = GameStage.Game;
+                StartPlayerRound(eyeToEyeResult);
+                return;
+            }
+        }
 
         if (player == player1)
             StartPlayerRound(player2);
@@ -65,7 +82,31 @@ public class GameLogic : MonoBehaviour
             if(playerWithTheRound != null) playerWithTheRound.GetComponent<PlayerController>().EndRound();
             playerWithTheRound = player;
         }
-        player.GetComponent<PlayerController>().StartRound();
+        if(gameStage == GameStage.EyeToEye)
+        {
+            player.GetComponent<PlayerController>().StartRound(1);
+        }
+        else
+        {
+            player.GetComponent<PlayerController>().StartRound(FindObjectOfType<GameRules>().NumberOfBallsPrRound);
+        }
+    }
+
+    //Sjekker om eye to eye har en vinner - returnerer vinneren
+    public GameObject EyeToEyeResults()
+    {
+        int player1Score = player1.GetComponent<PlayerRoundHandler>().eyeToEyeScore;
+        int player2Score = player2.GetComponent<PlayerRoundHandler>().eyeToEyeScore;
+
+        if (player1Score > player2Score)
+            return player1;
+        if (player2Score > player1Score)
+            return player2;
+
+        player1.GetComponent<PlayerRoundHandler>().ResetEyeToEye();
+        player2.GetComponent<PlayerRoundHandler>().ResetEyeToEye();
+        //Om returnerer null, er det ingen som har vunnet
+        return null;
     }
 
     public void PlayReplay(GameObject player)
@@ -76,6 +117,8 @@ public class GameLogic : MonoBehaviour
             replays.Remove(r);
         }
     }
+
+
 
     public void AddThrowToReplay(Vector2 arc, float angle, float power, Transform originPosition)
     {
@@ -106,6 +149,11 @@ public class GameLogic : MonoBehaviour
             Debug.Log("Player " + player + " won the match!");
             InitiateWinningSequence(player);
         }
+    }
+
+    public GameStage GetGameStage()
+    {
+        return gameStage;
     }
 
     public void GameOver(GameObject winner)

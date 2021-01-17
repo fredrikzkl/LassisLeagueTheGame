@@ -133,6 +133,10 @@ public class CupController : MonoBehaviour
         }
     }
 
+    public void UpdateToStandardMaterial() {
+        SetMainMaterial(standardMaterial);
+    }
+
     public bool isSuccessfullyHitIsland()
     {
         return successfullyHitIsland;
