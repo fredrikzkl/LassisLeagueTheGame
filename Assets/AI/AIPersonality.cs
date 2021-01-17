@@ -5,23 +5,30 @@ using UnityEngine;
 public class AIPersonality
 {
     //Sjangsen for å treffe
-    float HitRate;
+    public float XZAimRate;
+    public float PreferredXYAimAngle;
+    public float XYAimRate;
+    public float PowerRate;
     //Når starter en runde, om han velger den koppen med flest naboer, eller random
-    bool PicksOptimalCup;
+    public bool PicksOptimalCup;
     //Hvor mange kopper han har bommet på før han bestemmer seg for å restacke
-    int MissThreshold;
+    public int MissThreshold;
     //Hvor stor andel av vansklige kopper som må finnes før restack
-    float HardCupsThreshold;
+    public float HardCupsThreshold;
     //Hva han definerer som en vansklig kopp. Hvor mange naboer. Feks 2, 2 eller mindre naboer er vansklig
-    int HardCupsDefintion;
+    public int HardCupsDefintion;
     //Hvis noe er ansett som den optimale løsningen, hva er sjangsen for at han vil gjøre den
-    float DoubtFactor;
+    public float DoubtFactor;
 
     public AIPersonality Easy()
     {
         return new AIPersonality
         {
-            HitRate = 0.4f,
+            XZAimRate = 0.05f,
+            PreferredXYAimAngle = 0.95f,
+            XYAimRate = 0.1f,
+            PowerRate = 0.05f,
+
             PicksOptimalCup = false,
             MissThreshold = 8,
             HardCupsThreshold = 0.4f,
@@ -34,7 +41,12 @@ public class AIPersonality
     {
         return new AIPersonality
         {
-            HitRate = 0.45f,
+            XZAimRate = 0.025f,
+            PreferredXYAimAngle = 0.78f,
+            XYAimRate = 0.1f,
+            PowerRate = 0.025f,
+
+            
             PicksOptimalCup = false,
             MissThreshold = 6,
             HardCupsThreshold = 0.3f,
@@ -47,7 +59,13 @@ public class AIPersonality
     {
         return new AIPersonality
         {
-            HitRate = 0.55f,
+            XZAimRate = 0.02f,
+
+            PreferredXYAimAngle = 0.55f,
+            XYAimRate = 0.1f,
+
+            PowerRate = 0.02f,
+
             PicksOptimalCup = true,
             MissThreshold = 4,
             HardCupsThreshold = 0.25f,

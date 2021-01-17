@@ -3635,7 +3635,7 @@ PrefabInstance:
     - target: {fileID: 2639203089868821684, guid: 6bb4241228c3ea34db423ef3a3113422,
         type: 3}
       propertyPath: playerType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2639203089868821684, guid: 6bb4241228c3ea34db423ef3a3113422,
         type: 3}
@@ -4759,7 +4759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62122d5b93c5c8c4aa80bcb6b80bf6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStage: 0
+  gameStage: 1
   player1: {fileID: 651852948}
   player2: {fileID: 1213259428}
   HUD: {fileID: 1219948738}
@@ -6062,7 +6062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c59519196dfad40b3d80b60298ffee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 2
+  difficulty: 0
   DebugDecisions: 1
 --- !u!4 &1213259434 stripped
 Transform:
@@ -10287,7 +10287,7 @@ PrefabInstance:
     - target: {fileID: 2639203089868821684, guid: 6bb4241228c3ea34db423ef3a3113422,
         type: 3}
       propertyPath: playerType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2639203089868821684, guid: 6bb4241228c3ea34db423ef3a3113422,
         type: 3}

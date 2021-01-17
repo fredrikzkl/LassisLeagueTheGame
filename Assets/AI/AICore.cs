@@ -19,25 +19,40 @@ public class AICore : MonoBehaviour
     private PlayerRoundHandler roundHandler;
     private CupRack opponentRack;
 
+    private AIPersonality personality;
+
 
     private void Start()
     {
         roundHandler = GetComponent<PlayerRoundHandler>();
         opponentRack = FindObjectOfType<GameLogic>().GetOpponentCupRack(gameObject);
+        personality = new AIPersonality().GetPersonality(difficulty);
     }
 
     public ThrowData CalculateShot(Transform origin, Transform target, int direction)
     {
         ThrowData shot = new ThrowData();
-        //Henter ut XZ vinkelen, som er konstant
-        shot.XZAngle =  GetXZAngleBetweenHandAndCup(origin.position, target.position);
-        //TODO: Setter XY angle som 45 alltid
-        shot.XYAngle = 0.1f;
-        //TODO: Setter power random fra 60-90 (fordi hvorfor ikke)
-        //shot.Power = rng.Next(75, 88);
-        shot.Power = GetInitialVelocityXY(shot.XYAngle, origin, target);
+        //Xz angle
+        var correctXZAngle = GetXZAngleBetweenHandAndCup(origin.position, target.position);
+        shot.XZAngle = (float) GaussianDistribution(correctXZAngle, correctXZAngle * personality.XZAimRate);
+        //XY
+        shot.XYAngle = (float)GaussianDistribution(personality.PreferredXYAimAngle, personality.PreferredXYAimAngle * personality.XYAimRate); ;
+        //Power
+        var optimalPower = GetInitialVelocityXY(shot.XYAngle, origin, target);
+        shot.Power = (float)GaussianDistribution(optimalPower, optimalPower * personality.PowerRate);
 
         return shot;
+    }
+
+    public double GaussianDistribution(double mean, double stddev)
+    {
+        // The method requires sampling from a uniform random of (0,1]
+        // but Random.NextDouble() returns a sample of [0,1).
+        double x1 = 1 - rng.NextDouble();
+        double x2 = 1 - rng.NextDouble();
+
+        double y1 = Math.Sqrt(-2.0 * Math.Log(x1)) * Math.Cos(2.0 * Math.PI * x2);
+        return y1 * stddev + mean;
     }
 
     public float GetInitialVelocityXY(float angle, Transform origin, Transform target)
