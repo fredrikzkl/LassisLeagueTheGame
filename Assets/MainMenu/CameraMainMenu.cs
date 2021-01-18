@@ -10,4 +10,9 @@ public class CameraMainMenu : MonoBehaviour
     {
         mainMenuCanvas.GetComponent<MainMenuCanvas>().ShowRulesCanvas();
     }
+
+    public void ShowVSMode()
+    {
+        mainMenuCanvas.GetComponent<MainMenuCanvas>().ShowVSModeCanvas();
+    }
 }

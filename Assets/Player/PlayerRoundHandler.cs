@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Formations;
@@ -60,11 +61,12 @@ public class PlayerRoundHandler : MonoBehaviour
         if (!HasBallsAlive())
         {
             bool ballsBack = false;
-            
-            if(HitCups.Count > 0)
+            CupRack opponentRack = FindObjectOfType<GameLogic>().GetOpponentCupRack(gameObject);
+
+
+            if (HitCups.Count > 0)
             {
                 int bonusCups = 0;
-                CupRack opponentRack = HitCups[0].GetComponent<CupController>().Rack.GetComponent<CupRack>();
                 GameRules rules = FindObjectOfType<GameRules>();
 
                 bool gotIsland = HitCups[0].GetComponent<CupController>().isSuccessfullyHitIsland();
@@ -94,6 +96,11 @@ public class PlayerRoundHandler : MonoBehaviour
 
                 if(bonusCups > 0)
                     opponentRack.PickRandomCups(HitCups, bonusCups).ForEach(c => HitCups.Add(c));
+            }
+            else if(opponentRack.GetCupCount() == 1)
+            {
+                //Brukt av announcer for reagere om det var nære
+                CheckIfCloseCall();
             }
 
             if(FindObjectOfType<GameLogic>().GetGameStage() == GameStage.EyeToEye)
@@ -125,6 +132,19 @@ public class PlayerRoundHandler : MonoBehaviour
             else
 
                 FindObjectOfType<GameLogic>().RoundEnded(gameObject);
+        }
+    }
+
+    private void CheckIfCloseCall()
+    {
+        foreach(var b in ThrownBalls)
+        {
+            var bc = b.GetComponent<BallController>();
+            if (bc.didHitRim)
+            {
+                FindObjectOfType<Announcer>().CloseCall();
+                break;
+            }
         }
     }
 

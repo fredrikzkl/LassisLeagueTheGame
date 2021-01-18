@@ -4,6 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum Window
+{
+    Main, Rules, VsMode
+}
+
 public class MainMenuCanvas : MonoBehaviour
 {
     public Animator cameraAnimator;
@@ -14,7 +19,9 @@ public class MainMenuCanvas : MonoBehaviour
     public GameObject rulesCanvas;
     public GameObject settingsCanvas;
 
-    string currentWindow;
+    public GameObject vsModeCanvas;
+
+    Window currentWindow;
 
     CanvasGroup mainMenuButtonsGroup;
     bool showButtons;
@@ -23,6 +30,7 @@ public class MainMenuCanvas : MonoBehaviour
     {
         mainMenuButtonsGroup = mainMenuButtons.GetComponent<CanvasGroup>();
         mainMenuButtonsGroup.alpha = 1f;
+        currentWindow = Window.Main;
     }
 
     public void StartGameOnClick()
@@ -31,15 +39,25 @@ public class MainMenuCanvas : MonoBehaviour
         SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
     }
 
-    public void ToRulesClick()
+    public void ToVsMode()
     {
         FindObjectOfType<SoundManager>().PlaySound("Click");
-        currentWindow = "rules";
-        cameraAnimator.SetBool("toRules", true);
+        currentWindow = Window.VsMode;
+        cameraAnimator.SetBool("toVSMode", true);
 
         HideMenuButtons();
         logo.SetActive(false);
 
+    }
+
+    public void ToRulesClick()
+    {
+        FindObjectOfType<SoundManager>().PlaySound("Click");
+        currentWindow = Window.Rules;
+        cameraAnimator.SetBool("toRules", true);
+
+        HideMenuButtons();
+        logo.SetActive(false);
     }
 
     public void ShowSettingsMenu() {
@@ -57,13 +75,26 @@ public class MainMenuCanvas : MonoBehaviour
         settingsCanvas.SetActive(false);
         ShowMenuButtons();
     }
+    
+    public void ShowVSModeCanvas()
+    {
+        var canvasGroup = vsModeCanvas.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 1f;
+        canvasGroup.interactable = true;
+    }
+
+    public void HideVSModeCanvas()
+    {
+        var canvasGroup = vsModeCanvas.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0f;
+        canvasGroup.interactable = false;
+    }
 
     public void ShowRulesCanvas()
     {
         rulesCanvas.SetActive(true);
         backButton.SetActive(true);
         rulesCanvas.GetComponent<RulesCanvas>().Open();
-
     }
 
     public void BackToMainScreen()
@@ -74,7 +105,7 @@ public class MainMenuCanvas : MonoBehaviour
         rulesCanvas.SetActive(false);
         logo.SetActive(true);
 
-        if(currentWindow == "rules")
+        if(currentWindow == Window.Rules)
         {
             rulesCanvas.GetComponent<RulesCanvas>().Close();
         }

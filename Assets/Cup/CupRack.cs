@@ -7,6 +7,7 @@ using static Formations;
 public class CupRack : MonoBehaviour
 {
 
+
     public GameObject cupPrefab;
     public Material standard;
     public Material hit;
@@ -53,10 +54,26 @@ public class CupRack : MonoBehaviour
 
         neighbourTable = DetermineCupNeighbors(cupList, f);
 
+        DetermineBitchCup();    
 
         currentFormation = f;
     }
 
+    private void DetermineBitchCup()
+    {
+        GameObject bitchCup = cupList[0];
+        int bitchNighbours = neighbourTable.GetNeighbourCount(bitchCup);
+        foreach(var c in cupList)
+        {
+            int tempBitchNeighbours = neighbourTable.GetNeighbourCount(c); 
+            if(tempBitchNeighbours > bitchNighbours)
+            {
+                bitchNighbours = tempBitchNeighbours;
+                bitchCup = c;
+            }
+        }
+        bitchCup.GetComponent<CupController>().SetAsBitchCup();
+    }
 
     public GameObject SpawnCup(Vector3 pos, string id)
     {

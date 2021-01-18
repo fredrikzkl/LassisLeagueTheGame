@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class CupController : MonoBehaviour
     public GameObject Rack { get; set; }
 
     bool isHit;
+    public bool isBitchCup = false;
+    
 
     //IslandCup: Settes true dersom spiller invoker island
     bool blinking;
@@ -77,6 +80,11 @@ public class CupController : MonoBehaviour
         renderer.materials = m;
     }
 
+    internal void SetAsBitchCup()
+    {
+        isBitchCup = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         //Ballen traff koppen!!
@@ -108,12 +116,29 @@ public class CupController : MonoBehaviour
                 }
             }
 
+            CheckBitchCup();
+
             FindObjectOfType<SoundManager>().PlaySound("CupHit");
 
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             other.gameObject.GetComponent<BallController>().BallOutOfBounds(1f);
             RegisterHit(other.gameObject);
             UpdateToHitMaterial();
+        }
+    }
+
+    private void CheckBitchCup()
+    {
+        //Bitchcup skjer om du treffer bitchcup som første kopp, som ikke er eye to eye
+        if (isBitchCup && FindObjectOfType<GameLogic>().gameStage == GameStage.Game)
+        {
+            var startFormation = Formations.GetStartFormation(FindObjectOfType<GameRules>().StartFormation);
+            int originalCupCount = Formations.GetCupCountFromFormation(startFormation);
+
+            if(Rack.GetComponent<CupRack>().GetCupList().Count == originalCupCount)
+            {
+                FindObjectOfType<Announcer>().BitchCup();
+            }
         }
     }
 

@@ -316,4 +316,15 @@ public class Formations
         return false;
     }
 
+    public static int GetCupCountFromFormation(string formationString)
+    {
+        int count = 0;
+        foreach(var c in formationString)
+        {
+            if (c == '1')
+                count++;
+        }
+        return count;
+    }
+
 }

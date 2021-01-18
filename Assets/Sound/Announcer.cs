@@ -52,7 +52,20 @@ public class Announcer : SoundManager
 
     public void BitchCup()
     {
+        switch(rng.Next(0, 5))
+        {
+            case 0:
+                Say("BitchCupBitchLikeYou");
+                break;
+            default:
+                Say("BitchCupNormal");
+                break;
+        }
+    }
 
+    public void CloseCall()
+    {
+        Say("Shitsnitzel");
     }
 
 

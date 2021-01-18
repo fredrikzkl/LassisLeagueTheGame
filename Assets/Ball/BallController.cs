@@ -19,6 +19,9 @@ public class BallController : MonoBehaviour
     //Blir satt true dersom denne ballen traff en kopp
     public bool didHitCup;
 
+    //Traff rimmen til en kopp
+    public bool didHitRim;
+
     //Blir satt til ja dersom denne ballen skal blir brukt til island
     public bool isIslandBall { get; set; }
 
@@ -36,6 +39,7 @@ public class BallController : MonoBehaviour
     {
         isInPlay = true;
         didHitCup = false;
+        didHitRim = false;
     }
 
     private void OnDestroy()
@@ -112,6 +116,7 @@ public class BallController : MonoBehaviour
 
             if (gameObject.transform.position.y > rimLimit)
             {
+                didHitRim = true;
                 PlayBallImpactSound("BallHitCupRim", volume);
             }
             else
