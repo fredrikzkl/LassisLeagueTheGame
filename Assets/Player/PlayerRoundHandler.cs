@@ -83,13 +83,17 @@ public class PlayerRoundHandler : MonoBehaviour
                     //Begge i samme kopp
                     if (HitCups[0] == HitCups[1])
                     {
+                        if (gotIsland)
+                            FindObjectOfType<Announcer>().PerfectRound();
+                        else
+                            FindObjectOfType<Announcer>().DoubleHit();
+                        
                         HitCups.RemoveAt(1);
                         bonusCups += rules.SameCupReward;
-                        FindObjectOfType<Announcer>().Say("DoubleHit");
                     }
                     else
                     {
-                        FindObjectOfType<Announcer>().Say("BallsBack");
+                        FindObjectOfType<Announcer>().BallsBack();
                     }
                     ballsBack = true;
                 }

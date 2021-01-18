@@ -65,7 +65,31 @@ public class Announcer : SoundManager
 
     public void CloseCall()
     {
-        Say("Shitsnitzel");
+        switch (rng.Next(0,2))
+        {
+            case 1:
+                Say("HowCloseWasThat");
+                break;
+            default:
+                Say("Shitsnitzel");
+                break;
+        }
+    }
+
+    //Island + begge i samme kopp
+    public void PerfectRound()
+    {
+        Say("RingaDingDingDong");
+    }
+
+    public void DoubleHit()
+    {
+        Say("DoubleHit");
+    }
+
+    public void BallsBack()
+    {
+        Say("BallsBack");
     }
 
 

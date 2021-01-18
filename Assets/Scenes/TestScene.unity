@@ -8337,7 +8337,7 @@ MonoBehaviour:
     group: 2
     source: {fileID: 0}
   DebugSounds: 0
-  playMusic: 1
+  playMusic: 0
   musicInfoBarDisplayTime: 4
   musicPlayingInfoBar: {fileID: 611536886}
 --- !u!1 &1779984439
@@ -8477,6 +8477,18 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Shitsnitzel
     clip: {fileID: 8300000, guid: 3ab43a7a3ec517e4f9c222f1d4514ecf, type: 3}
+    volume: 0.7
+    pitch: 1
+    group: 1
+    source: {fileID: 0}
+  - name: RingaDingDingDong
+    clip: {fileID: 8300000, guid: dd262149fdfc1de4f945d8338ab838e1, type: 3}
+    volume: 0.7
+    pitch: 1
+    group: 1
+    source: {fileID: 0}
+  - name: HowCloseWasThat
+    clip: {fileID: 8300000, guid: d6f71d39335d0d9429fdbb6a678fe802, type: 3}
     volume: 0.7
     pitch: 1
     group: 1

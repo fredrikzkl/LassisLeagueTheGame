@@ -93,18 +93,21 @@ public class Music : SoundManager
 
     private void FixedUpdate()
     {
-        float fadeRate = 0.025f;
-        if (musicBarTimeRemaining <= 0)
-            musicCanvas.alpha -= fadeRate;
-        else
-            musicCanvas.alpha += fadeRate;
-
-        musicBarTimeRemaining -= Time.deltaTime;
-
-        //Checks if song has stopped playin
-        if (!IsPlaying(currentTrack))
+        if (playMusic)
         {
-            PlayRandomTrack();
+            float fadeRate = 0.025f;
+            if (musicBarTimeRemaining <= 0)
+                musicCanvas.alpha -= fadeRate;
+            else
+                musicCanvas.alpha += fadeRate;
+
+            musicBarTimeRemaining -= Time.deltaTime;
+
+            //Checks if song has stopped playin
+            if (!IsPlaying(currentTrack))
+            {
+                PlayRandomTrack();
+            }
         }
     }
 
