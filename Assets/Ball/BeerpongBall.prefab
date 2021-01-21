@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7078299447764207425}
   - component: {fileID: -594725644734259965}
   - component: {fileID: 8856160796924680596}
-  - component: {fileID: -5764746735262544489}
   m_Layer: 0
   m_Name: BeerpongBall
   m_TagString: Ball
@@ -127,6 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeAlive: 4
   isInPlay: 0
+  didHitCup: 0
+  didHitRim: 0
   BallHitSoundFactor: 2.5
 --- !u!96 &8856160796924680596
 TrailRenderer:
@@ -147,7 +148,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 32bc42510cc083f4aa75bfee171c3fc8, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -270,20 +271,3 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 1
   m_Emitting: 1
---- !u!114 &-5764746735262544489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7503260739183765941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 947da9748669ca54ebebd4084590bbdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sendTriggerMessage: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  skinWidth: 0.1

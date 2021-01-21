@@ -13,7 +13,9 @@ public enum PlayerType
 
 public class PlayerController : MonoBehaviour
 {
+    
     public PlayerType playerType;
+
     public AICore AI { get; set; }
     public string Name {get;set;}
 
@@ -289,4 +291,6 @@ public class PlayerController : MonoBehaviour
     {
         return playerType == PlayerType.AI;
     }
+
+   
 }

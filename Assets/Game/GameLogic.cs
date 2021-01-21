@@ -12,6 +12,9 @@ public class GameLogic : MonoBehaviour
 
     public GameStage gameStage;
 
+    public bool UseVsModeSettings;
+    public VSModeSettingsData vsModeSettings;
+
     public GameObject player1;
     public GameObject player2;
 
@@ -43,6 +46,20 @@ public class GameLogic : MonoBehaviour
     private void Awake()
     {
         replays = new List<Replay>();
+        if (UseVsModeSettings)
+        {
+            vsModeSettings = SaveSystem.LoadVsModeSettings();
+            player1.GetComponent<PlayerController>().playerType = vsModeSettings.player1Type;
+            player2.GetComponent<PlayerController>().playerType = vsModeSettings.player2Type;
+            if(vsModeSettings.player1Type == PlayerType.AI)
+            {
+                player1.GetComponent<AICore>().difficulty = vsModeSettings.player1AIDifficulty;
+            }
+            if (vsModeSettings.player2Type == PlayerType.AI)
+            {
+                player2.GetComponent<AICore>().difficulty = vsModeSettings.player2AIDifficulty;
+            }
+        }
     }
 
     public void StartGame()
@@ -172,21 +189,28 @@ public class GameLogic : MonoBehaviour
         var p2Cups = GetOpponentCupRack(player1).GetCupCount();
 
         if (winner == player1)
+        {
             p2Cups = 0;
+            SessionData.Player1Wins++;
+            player1.GetComponent<ParticleSystem>().Play();
+        }
         else
+        {
             p1Cups = 0;
+            SessionData.Player2Wins++;
+            player2.GetComponent<ParticleSystem>().Play();
+        }
 
         string score = p1Cups + " - " + p2Cups; 
 
         FindObjectOfType<EndGameCanvas>().SetText(score, elapsedTime);
-
         FindObjectOfType<EndGameCanvas>().SetPlayerStats(player1, player2);
+
 
         FindObjectOfType<SoundManager>().PlaySound("PartyHorn");
         FindObjectOfType<SoundManager>().PlaySound("CrowdCheer");
 
         FindObjectOfType<Announcer>().GG(elapsedTime, p1Cups, p2Cups);
-
     }
 
     public void InitiateWinningSequence(GameObject player)

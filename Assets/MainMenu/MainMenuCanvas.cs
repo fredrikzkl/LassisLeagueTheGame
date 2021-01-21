@@ -33,11 +33,7 @@ public class MainMenuCanvas : MonoBehaviour
         currentWindow = Window.Main;
     }
 
-    public void StartGameOnClick()
-    {
-        FindObjectOfType<SoundManager>().PlaySound("Click");
-        SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
-    }
+  
 
     public void ToVsMode()
     {

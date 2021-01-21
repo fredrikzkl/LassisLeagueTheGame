@@ -9,6 +9,39 @@ public static class SaveSystem
 
     public static string RulesPath = Application.persistentDataPath + "/husregler.lasaron";
     public static string SystemSettingsPath = Application.persistentDataPath + "/systemSettings.lasaron";
+    public static string VSModeSettingsPath = Application.persistentDataPath + "/vsmode.lasaron";
+
+    public static void SaveVSModeSettings(VSModeSettingsData vsModeData)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = VSModeSettingsPath;
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, vsModeData);
+        stream.Close();
+    }
+
+    public static VSModeSettingsData LoadVsModeSettings()
+    {
+        string path = VSModeSettingsPath;
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            VSModeSettingsData data = formatter.Deserialize(stream) as VSModeSettingsData;
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            Debug.Log("VSModeSettings does not exist - loading standard rules");
+            return new VSModeSettingsData().Standard();
+        }
+    }
+
+
 
     public static void SaveRules(RulesData rulesData)
     {

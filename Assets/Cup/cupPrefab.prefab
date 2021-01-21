@@ -64,8 +64,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.019, y: 0.001, z: 0.01535619}
-  m_Center: {x: -4.656613e-10, y: -0.007, z: 0.00050029013}
+  m_Size: {x: 0.015, y: 0.001, z: 0.01535619}
+  m_Center: {x: -4.656613e-10, y: -0.009, z: 0.00050029013}
 --- !u!65 &6284825204808753230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -77,8 +77,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.019, y: 0.001, z: 0.01535619}
-  m_Center: {x: -4.656613e-10, y: 0.007, z: 0.00050029013}
+  m_Size: {x: 0.015, y: 0.001, z: 0.01535619}
+  m_Center: {x: -4.656613e-10, y: 0.009, z: 0.00050029013}
 --- !u!114 &792370046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rimMaterial: {fileID: 2100000, guid: a77fba8c8a5a52a47b1ca6816b8d7cfe, type: 2}
+  isBitchCup: 0
   isIslandCup: 0
   newPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &3673149219055500968

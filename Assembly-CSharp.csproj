@@ -71,7 +71,9 @@
     <Compile Include="Assets\Cup\NeighbourTable.cs" />
     <Compile Include="Assets\Data\RulesData.cs" />
     <Compile Include="Assets\Data\SaveSystem.cs" />
+    <Compile Include="Assets\Data\SessionData.cs" />
     <Compile Include="Assets\Data\SystemSettingsData.cs" />
+    <Compile Include="Assets\Data\VSModeSettingsData.cs" />
     <Compile Include="Assets\Game\Formations.cs" />
     <Compile Include="Assets\Game\GameLogic.cs" />
     <Compile Include="Assets\Game\GameRules.cs" />
@@ -132,6 +134,7 @@
     <Compile Include="Assets\UI\EndGameCanvas.cs" />
     <Compile Include="Assets\UI\GameHUD.cs" />
     <Compile Include="Assets\UI\StratsMenu.cs" />
+    <Compile Include="Assets\VsModeController.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

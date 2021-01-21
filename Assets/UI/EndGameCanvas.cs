@@ -28,6 +28,19 @@ public class EndGameCanvas : MonoBehaviour
         SetPlayerStats(player1stats, player1);
         //Player 2
         SetPlayerStats(player2stats, player2);
+
+        UpdateWins();
+    }
+
+    public void EnableConfettiParticleEffect(string pathToWinsObject)
+    {
+        transform.Find(pathToWinsObject).GetComponent<ParticleSystem>().Play();
+    }
+
+    public void UpdateWins()
+    {
+        player1stats.transform.Find("Wins").GetComponent<TMP_Text>().text = SessionData.Player1Wins.ToString();
+        player2stats.transform.Find("Wins").GetComponent<TMP_Text>().text = SessionData.Player2Wins.ToString();
     }
 
     public void SetPlayerStats(CanvasGroup statsGroup, GameObject player)
