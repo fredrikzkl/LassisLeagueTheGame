@@ -71,14 +71,17 @@ public class PlayerRoundHandler : MonoBehaviour
 
                 bool gotIsland = HitCups[0].GetComponent<CupController>().isSuccessfullyHitIsland();
 
+                //Check if sucidided
+                bool DidNotSuicide = this.DidNotSuicide();
+
                 //Island
-                if (gotIsland)
+                if (gotIsland && DidNotSuicide)
                 {
                     bonusCups += rules.IslandsReward;
                 }
 
                 //Balls back
-                if (HitCups.Count > 1)
+                if (HitCups.Count > 1 && DidNotSuicide)
                 {
                     //Begge i samme kopp
                     if (HitCups[0] == HitCups[1])
@@ -143,6 +146,8 @@ public class PlayerRoundHandler : MonoBehaviour
     {
         foreach(var b in ThrownBalls)
         {
+            if (b == null)
+                continue;
             var bc = b.GetComponent<BallController>();
             if (bc.didHitRim)
             {
@@ -205,13 +210,26 @@ public class PlayerRoundHandler : MonoBehaviour
 
     public void DetermineEyeToEyeScore()
     {
-        if (HitCups.Count >= 1)
+        if (HitCups.Count >= 1 && DidNotSuicide())
         {
             var cupHit = HitCups[0];
+
+
             int row = int.Parse(cupHit.name.Split('-')[0]);
             if (row > eyeToEyeScore)
                 eyeToEyeScore = row;
         }
+    }
+
+    public bool DidNotSuicide()
+    {
+        foreach(var c in HitCups)
+        {
+            if (c == null) continue;
+            if (c.GetComponent<CupController>().hittingPlayer == c.transform.root.gameObject)
+                return false;
+        }
+        return true;
     }
 
     public void ResetEyeToEye()

@@ -7,6 +7,9 @@ using TMPro;
 
 public class Music : SoundManager
 {
+    public float MuffledFrequencyValue = 400f;
+    public float ReqularFrequencyValue = 22000f;
+
     public bool playMusic = true;
     public float musicInfoBarDisplayTime = 4f;
 
@@ -38,8 +41,20 @@ public class Music : SoundManager
             artistTitle = musicPlayingInfoBar.transform.Find("PanelGroup/SongArtist").GetComponent<TMP_Text>();
         }
 
+        UnMuffleSound();
+
         if(playMusic)
             PlayRandomTrack();
+    }
+
+    public void MuffleSound()
+    {
+        audioMixer.SetFloat("MusicCutOffFreq", MuffledFrequencyValue);
+    }
+
+    public void UnMuffleSound()
+    {
+        audioMixer.SetFloat("MusicCutOffFreq", ReqularFrequencyValue);
     }
 
     public void PlayRandomTrack()

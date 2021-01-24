@@ -32,10 +32,7 @@ public class EndGameCanvas : MonoBehaviour
         UpdateWins();
     }
 
-    public void EnableConfettiParticleEffect(string pathToWinsObject)
-    {
-        transform.Find(pathToWinsObject).GetComponent<ParticleSystem>().Play();
-    }
+    
 
     public void UpdateWins()
     {

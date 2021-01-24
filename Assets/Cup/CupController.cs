@@ -14,6 +14,8 @@ public class CupController : MonoBehaviour
     public GameObject Rack { get; set; }
 
     bool isHit;
+    //Spilleren som traff koppen
+    public GameObject hittingPlayer { get; set; }
     public bool isBitchCup = false;
     
 
@@ -122,8 +124,17 @@ public class CupController : MonoBehaviour
 
             other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             other.gameObject.GetComponent<BallController>().BallOutOfBounds(1f);
-            RegisterHit(other.gameObject);
+
+            hittingPlayer = other.GetComponent<BallController>().owner;
+            
+            if (hittingPlayer == gameObject.transform.root.gameObject)
+            {
+                FindObjectOfType<SoundManager>().PlaySound("CrowdGroan");
+            }
+            
+
             UpdateToHitMaterial();
+            RegisterHit(other.gameObject);
         }
     }
 

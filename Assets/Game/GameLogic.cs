@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public class GameLogic : MonoBehaviour
     //Canvases
     public GameObject HUD;
     public GameObject EndScreen;
+    public GameObject PauseMenu;
 
     public List<Replay> replays;
 
@@ -31,6 +33,11 @@ public class GameLogic : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OpenPauseMenu();
+        }
+
         if (Input.GetKeyDown(KeyCode.N))
         {
             StartPlayerRound(player1);
@@ -41,7 +48,15 @@ public class GameLogic : MonoBehaviour
         }
     }
 
-    
+    private void OpenPauseMenu()
+    {
+        if (!GameManager.gameIsPaused)
+        {
+            PauseMenu.GetComponent<PauseMenuController>().PauseGame();
+        }
+    }
+
+
 
     private void Awake()
     {

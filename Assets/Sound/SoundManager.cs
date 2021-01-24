@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour
     }
 
 
+
     public void PlaySound(string name)
     {
         PlaySound(name, 1f);

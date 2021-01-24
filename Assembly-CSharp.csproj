@@ -69,6 +69,7 @@
     <Compile Include="Assets\Cup\CupController.cs" />
     <Compile Include="Assets\Cup\CupRack.cs" />
     <Compile Include="Assets\Cup\NeighbourTable.cs" />
+    <Compile Include="Assets\Cup\Skins\Skin.cs" />
     <Compile Include="Assets\Data\RulesData.cs" />
     <Compile Include="Assets\Data\SaveSystem.cs" />
     <Compile Include="Assets\Data\SessionData.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\MainMenu\CameraMainMenu.cs" />
     <Compile Include="Assets\MainMenu\MainMenuButtons.cs" />
     <Compile Include="Assets\MainMenu\MainMenuCanvas.cs" />
+    <Compile Include="Assets\MainMenu\VsModeController.cs" />
     <Compile Include="Assets\Player\AimArrowController.cs" />
     <Compile Include="Assets\Player\PlayerController.cs" />
     <Compile Include="Assets\Player\PlayerRoundHandler.cs" />
@@ -133,8 +135,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\UI\EndGameCanvas.cs" />
     <Compile Include="Assets\UI\GameHUD.cs" />
+    <Compile Include="Assets\UI\PauseMenuController.cs" />
     <Compile Include="Assets\UI\StratsMenu.cs" />
-    <Compile Include="Assets\VsModeController.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
