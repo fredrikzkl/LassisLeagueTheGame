@@ -49,7 +49,7 @@ public class EndGameCanvas : MonoBehaviour
         var header = statsGroup.transform.Find("Header");
         header.GetComponent<TMP_Text>().text = player.name;
 
-        var pc = playerController.playerColor;
+        var pc = playerController.GetPlayerColor();
         statsGroup.gameObject.GetComponent<Image>().color = new Color(pc.r, pc.g, pc.b, 0.5f);
 
         //Setter stats

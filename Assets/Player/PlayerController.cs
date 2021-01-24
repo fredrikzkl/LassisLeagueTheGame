@@ -29,7 +29,9 @@ public class PlayerController : MonoBehaviour
     public PlayerRoundHandler roundHandler;
 
     //Gamestuff
-    public Color playerColor;
+    public CupSkin skin;
+
+  
     public Slider powerSlider;
     public GameHUD hud;
 
@@ -129,7 +131,7 @@ public class PlayerController : MonoBehaviour
         }
         //Legger til baller
         throwsRemaining = throws;
-        hud.UpdateColors(playerColor, throwsRemaining);
+        hud.UpdateColors(GetPlayerColor(), throwsRemaining);
         isBallsBackRound = false;
         //Starter pilen
         if (!IsAI())
@@ -290,6 +292,16 @@ public class PlayerController : MonoBehaviour
     public bool IsAI()
     {
         return playerType == PlayerType.AI;
+    }
+
+    public Color GetPlayerColor()
+    {
+        return skin.playerColor;
+    }
+
+    public CupSkin GetSkin()
+    {
+        return skin;
     }
 
    

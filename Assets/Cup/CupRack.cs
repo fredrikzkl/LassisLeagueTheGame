@@ -6,11 +6,7 @@ using static Formations;
 
 public class CupRack : MonoBehaviour
 {
-
-
     public GameObject cupPrefab;
-    public Material standard;
-    public Material hit;
 
     private Transform location;
     public int direction = -1;
@@ -20,6 +16,9 @@ public class CupRack : MonoBehaviour
     NeighbourTable neighbourTable;
 
     public string currentFormation;
+
+    public GameObject owner;
+    private CupSkin skin;
 
 
     //Hjelpevariabler
@@ -38,6 +37,12 @@ public class CupRack : MonoBehaviour
 
         diameter = cupPrefab.GetComponent<Renderer>().bounds.size.x;
         CreateRack(FindObjectOfType<GameRules>().StartFormation);
+    }
+
+    private void Awake()
+    {
+        skin = owner.GetComponent<PlayerController>().GetSkin();
+
     }
 
 
@@ -78,7 +83,8 @@ public class CupRack : MonoBehaviour
     public GameObject SpawnCup(Vector3 pos, string id)
     {
         var c = Instantiate(cupPrefab, pos, cupPrefab.transform.rotation);
-        c.GetComponent<CupController>().SetMaterials(standard, hit);
+
+        c.GetComponent<CupController>().SetMaterials(skin.standardMaterial, skin.hitMaterial, skin.rimMaterial);
         c.GetComponent<CupController>().Rack = gameObject;
         cupList.Add(c);
         c.name = id;

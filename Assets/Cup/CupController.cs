@@ -66,8 +66,9 @@ public class CupController : MonoBehaviour
         }
     }
 
-    public void SetMaterials(Material standard, Material hit)
+    public void SetMaterials(Material standard, Material hit, Material rimMaterial)
     {
+        this.rimMaterial = rimMaterial;
         isHitMaterial = hit;
         standardMaterial = standard;
         SetMainMaterial(standardMaterial);

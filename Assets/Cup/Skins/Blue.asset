@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Blue
   m_EditorClassIdentifier: Assembly-CSharp::CupSkin
-  playerColor: {r: 0.20000002, g: 0.20000002, b: 0.20000002, a: 0}
+  playerColor: {r: 0.16509432, g: 0.16509432, b: 1, a: 0}
   standardMaterial: {fileID: 2100000, guid: 62929d4ef87a0e54da6899a1b2579fab, type: 2}
   hitMaterial: {fileID: 2100000, guid: 074d7cf1096ffd94bb79f39db0f37890, type: 2}
   rimMaterial: {fileID: 2100000, guid: a77fba8c8a5a52a47b1ca6816b8d7cfe, type: 2}

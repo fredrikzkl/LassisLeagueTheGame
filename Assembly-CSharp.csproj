@@ -69,7 +69,7 @@
     <Compile Include="Assets\Cup\CupController.cs" />
     <Compile Include="Assets\Cup\CupRack.cs" />
     <Compile Include="Assets\Cup\NeighbourTable.cs" />
-    <Compile Include="Assets\Cup\Skins\Skin.cs" />
+    <Compile Include="Assets\Cup\Skins\CupSkin.cs" />
     <Compile Include="Assets\Data\RulesData.cs" />
     <Compile Include="Assets\Data\SaveSystem.cs" />
     <Compile Include="Assets\Data\SessionData.cs" />

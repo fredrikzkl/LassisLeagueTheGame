@@ -60,7 +60,7 @@ public class StratsMenu : MonoBehaviour
         player = game.playerWithTheRound;
         //Setter fargene
         var playerController = player.GetComponent<PlayerController>();
-        var pc = playerController.playerColor;
+        var pc = playerController.GetPlayerColor();
         Color temp = new Color(pc.r, pc.g, pc.b, 0.1f);
         panel.color = temp;
         //Henter ut egen stats
@@ -120,7 +120,7 @@ public class StratsMenu : MonoBehaviour
             {
                 var cupImage = Instantiate(cupImagePrefab, p, Quaternion.identity);
                 cupImage.transform.SetParent(newCard.transform);
-                Color color = opppnentRoundHandler.gameObject.GetComponent<PlayerController>().playerColor;
+                Color color = opppnentRoundHandler.gameObject.GetComponent<PlayerController>().GetPlayerColor();
                 cupImage.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 0.9f);
             }
             //Setter x verdien til neste kort
@@ -183,7 +183,7 @@ public class StratsMenu : MonoBehaviour
                         }
                         else
                         {
-                            Color color = opppnentRoundHandler.gameObject.GetComponent<PlayerController>().playerColor;
+                            Color color = opppnentRoundHandler.gameObject.GetComponent<PlayerController>().GetPlayerColor();
                             cupImage.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 0.9f);
                         }
                     }                    

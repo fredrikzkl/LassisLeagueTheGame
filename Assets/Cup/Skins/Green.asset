@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Red
+  m_Name: Green
   m_EditorClassIdentifier: Assembly-CSharp::CupSkin
-  playerColor: {r: 1, g: 0, b: 0, a: 0}
-  standardMaterial: {fileID: 2100000, guid: fd0de1b3ba146834485c3f9f18e54274, type: 2}
-  hitMaterial: {fileID: 2100000, guid: d29fc3bd804224449814cb9650e91b35, type: 2}
-  rimMaterial: {fileID: 2100000, guid: a77fba8c8a5a52a47b1ca6816b8d7cfe, type: 2}
+  playerColor: {r: 0.1782732, g: 0.8773585, b: 0.120016046, a: 0}
+  standardMaterial: {fileID: 2100000, guid: 3881dc215e0067548b7a56e0a9da2cb7, type: 2}
+  hitMaterial: {fileID: 2100000, guid: 9862b02022db1ca4cb677a3a0f0abda7, type: 2}
+  rimMaterial: {fileID: 2100000, guid: 0f94297ee118c5345ada43115813a32a, type: 2}

@@ -1289,10 +1289,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cupPrefab: {fileID: 4483557802647962617, guid: 1ca6ca1b2b2460d4b86fd4971bf94a07,
     type: 3}
-  standard: {fileID: 2100000, guid: 62929d4ef87a0e54da6899a1b2579fab, type: 2}
-  hit: {fileID: 2100000, guid: 074d7cf1096ffd94bb79f39db0f37890, type: 2}
   direction: -1
   currentFormation: 
+  owner: {fileID: 651852948}
 --- !u!4 &258888226
 Transform:
   m_ObjectHideFlags: 0
@@ -7810,10 +7809,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cupPrefab: {fileID: 4483557802647962617, guid: 1ca6ca1b2b2460d4b86fd4971bf94a07,
     type: 3}
-  standard: {fileID: 2100000, guid: fd0de1b3ba146834485c3f9f18e54274, type: 2}
-  hit: {fileID: 2100000, guid: d29fc3bd804224449814cb9650e91b35, type: 2}
   direction: 1
   currentFormation: 
+  owner: {fileID: 1213259428}
 --- !u!4 &681158736
 Transform:
   m_ObjectHideFlags: 0
@@ -8598,6 +8596,12 @@ PrefabInstance:
       propertyPath: hud
       value: 
       objectReference: {fileID: 1219948743}
+    - target: {fileID: 2639203089868821684, guid: 6bb4241228c3ea34db423ef3a3113422,
+        type: 3}
+      propertyPath: skin
+      value: 
+      objectReference: {fileID: 11400000, guid: bfd4bd854adfe2e4a892e156e7557a74,
+        type: 2}
     - target: {fileID: 2639203089868821684, guid: 6bb4241228c3ea34db423ef3a3113422,
         type: 3}
       propertyPath: menuButton
@@ -25624,6 +25628,12 @@ PrefabInstance:
       propertyPath: hud
       value: 
       objectReference: {fileID: 1219948743}
+    - target: {fileID: 2639203089868821684, guid: 6bb4241228c3ea34db423ef3a3113422,
+        type: 3}
+      propertyPath: skin
+      value: 
+      objectReference: {fileID: 11400000, guid: a134e360c20b2d64f969b5b98429c37c,
+        type: 2}
     - target: {fileID: 2639203089868821684, guid: 6bb4241228c3ea34db423ef3a3113422,
         type: 3}
       propertyPath: menuButton
