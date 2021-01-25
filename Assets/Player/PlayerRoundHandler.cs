@@ -34,14 +34,21 @@ public class PlayerRoundHandler : MonoBehaviour
         ResetEyeToEye();
     }
 
+    public void InvokeRestack(string formationString)
+    {
+        FindObjectOfType<Announcer>().Say("Restack");
+        FindObjectOfType<GameLogic>().GetOpponent(gameObject).GetComponent<PlayerRoundHandler>().Restack(formationString);
+
+        restacks--;
+    }
+
 
     public void Restack(string formation)
     {
         var rack = cupRack.GetComponent<CupRack>();
         int cupsRemaining = rack.GetCupCount();
-        //TODO: Lage slik at restack tar inn en formasjon
+        
         rack.Rerack(formation);
-
     }
 
     public void InvokeIsland(GameObject cup)

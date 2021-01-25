@@ -237,10 +237,7 @@ public class StratsMenu : MonoBehaviour
         }
         ResumeGame();
 
-        GameObject opponent = game.GetOpponent(player);
-        opponent.GetComponent<PlayerRoundHandler>().Restack(formationString);
-        player.GetComponent<PlayerRoundHandler>().restacks--;
-        FindObjectOfType<Announcer>().Say("Restack");
+        player.GetComponent<PlayerRoundHandler>().InvokeRestack(formationString);
     }
 
 

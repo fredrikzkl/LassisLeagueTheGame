@@ -115,7 +115,7 @@ public class AICore : MonoBehaviour
         if (tooManyHardCups || missedToMuch)
         {
             Formation pickedFormation = PickRandomFormation(availableFormations);
-            opponentRack.Rerack(pickedFormation.FormationString);
+            roundHandler.InvokeRestack(pickedFormation.FormationString);
             return;
         }
         return;
