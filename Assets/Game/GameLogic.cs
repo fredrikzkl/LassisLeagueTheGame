@@ -64,9 +64,17 @@ public class GameLogic : MonoBehaviour
         if (UseVsModeSettings)
         {
             vsModeSettings = SaveSystem.LoadVsModeSettings();
-            player1.GetComponent<PlayerController>().playerType = vsModeSettings.player1Type;
-            player2.GetComponent<PlayerController>().playerType = vsModeSettings.player2Type;
-            if(vsModeSettings.player1Type == PlayerType.AI)
+
+            var p1Controller = player1.GetComponent<PlayerController>();
+            var p2Controller = player2.GetComponent<PlayerController>();
+
+            p1Controller.playerType = vsModeSettings.player1Type;
+            p2Controller.playerType = vsModeSettings.player2Type;
+
+            p1Controller.SetSkin(SkinHandler.GetSkin(vsModeSettings.player1Skin));
+            p2Controller.SetSkin(SkinHandler.GetSkin(vsModeSettings.player2Skin));
+
+            if (vsModeSettings.player1Type == PlayerType.AI)
             {
                 player1.GetComponent<AICore>().difficulty = vsModeSettings.player1AIDifficulty;
             }

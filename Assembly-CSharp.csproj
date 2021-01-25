@@ -69,7 +69,7 @@
     <Compile Include="Assets\Cup\CupController.cs" />
     <Compile Include="Assets\Cup\CupRack.cs" />
     <Compile Include="Assets\Cup\NeighbourTable.cs" />
-    <Compile Include="Assets\Cup\Skins\CupSkin.cs" />
+    <Compile Include="Assets\Data\PlayerProgression.cs" />
     <Compile Include="Assets\Data\RulesData.cs" />
     <Compile Include="Assets\Data\SaveSystem.cs" />
     <Compile Include="Assets\Data\SessionData.cs" />
@@ -84,15 +84,17 @@
     <Compile Include="Assets\MainMenu\CameraMainMenu.cs" />
     <Compile Include="Assets\MainMenu\MainMenuButtons.cs" />
     <Compile Include="Assets\MainMenu\MainMenuCanvas.cs" />
+    <Compile Include="Assets\MainMenu\RulesCanvas.cs" />
     <Compile Include="Assets\MainMenu\VsModeController.cs" />
     <Compile Include="Assets\Player\AimArrowController.cs" />
     <Compile Include="Assets\Player\PlayerController.cs" />
     <Compile Include="Assets\Player\PlayerRoundHandler.cs" />
     <Compile Include="Assets\Player\PlayerStats.cs" />
     <Compile Include="Assets\Player\PlayerThrowLogic.cs" />
+    <Compile Include="Assets\Player\Skins\CupSkin.cs" />
+    <Compile Include="Assets\Player\Skins\SkinHandler.cs" />
     <Compile Include="Assets\Player\ThrowData.cs" />
     <Compile Include="Assets\RemoveBallZone.cs" />
-    <Compile Include="Assets\RulesCanvas.cs" />
     <Compile Include="Assets\Sound\Announcer.cs" />
     <Compile Include="Assets\Sound\Music.cs" />
     <Compile Include="Assets\Sound\SoundFX.cs" />

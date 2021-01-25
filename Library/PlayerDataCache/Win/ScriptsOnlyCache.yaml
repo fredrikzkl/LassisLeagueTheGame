@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - CameraMainMenu
     - CupController
     - CupRack
+    - CupSkin
     - EndGameCanvas
     - GameHUD
     - GameLogic
@@ -17,6 +18,7 @@ ScriptsOnlyBuild:
     - MainMenuButtons
     - MainMenuCanvas
     - Music
+    - PauseMenuController
     - PlayerController
     - PlayerRoundHandler
     - PlayerThrowLogic
@@ -25,6 +27,7 @@ ScriptsOnlyBuild:
     - SoundManager
     - StratsMenu
     - SystemSettings
+    - VsModeController
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -127,41 +130,41 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11800}
     - Class: 114
-      Script: {instanceID: 11846}
-    - Class: 114
       Script: {instanceID: 11896}
     - Class: 114
-      Script: {instanceID: 11926}
+      Script: {instanceID: 11900}
     - Class: 114
-      Script: {instanceID: 12098}
+      Script: {instanceID: 11930}
     - Class: 114
-      Script: {instanceID: 12252}
+      Script: {instanceID: 12104}
     - Class: 114
-      Script: {instanceID: 12272}
+      Script: {instanceID: 12258}
     - Class: 114
-      Script: {instanceID: 12540}
+      Script: {instanceID: 12278}
     - Class: 114
-      Script: {instanceID: 12556}
+      Script: {instanceID: 12546}
     - Class: 114
       Script: {instanceID: 12562}
     - Class: 114
-      Script: {instanceID: 12760}
+      Script: {instanceID: 12568}
     - Class: 114
-      Script: {instanceID: 12818}
+      Script: {instanceID: 12768}
     - Class: 114
-      Script: {instanceID: 12828}
+      Script: {instanceID: 12826}
     - Class: 114
-      Script: {instanceID: 12996}
+      Script: {instanceID: 12836}
     - Class: 114
-      Script: {instanceID: 13108}
+      Script: {instanceID: 13004}
     - Class: 114
-      Script: {instanceID: 13186}
+      Script: {instanceID: 13116}
     - Class: 114
-      Script: {instanceID: 13212}
+      Script: {instanceID: 13196}
     - Class: 114
-      Script: {instanceID: 13226}
+      Script: {instanceID: 13222}
     - Class: 114
-      Script: {instanceID: 13244}
+      Script: {instanceID: 13236}
+    - Class: 114
+      Script: {instanceID: 13254}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -258,43 +261,45 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11754}
     - Class: 114
-      Script: {instanceID: 11846}
+      Script: {instanceID: 11900}
     - Class: 114
-      Script: {instanceID: 11896}
+      Script: {instanceID: 11922}
     - Class: 114
-      Script: {instanceID: 11918}
+      Script: {instanceID: 12008}
     - Class: 114
-      Script: {instanceID: 12218}
+      Script: {instanceID: 12224}
     - Class: 114
-      Script: {instanceID: 12252}
+      Script: {instanceID: 12258}
     - Class: 114
-      Script: {instanceID: 12308}
+      Script: {instanceID: 12314}
     - Class: 114
-      Script: {instanceID: 12368}
+      Script: {instanceID: 12374}
     - Class: 114
-      Script: {instanceID: 12394}
+      Script: {instanceID: 12400}
     - Class: 114
-      Script: {instanceID: 12540}
+      Script: {instanceID: 12546}
     - Class: 114
-      Script: {instanceID: 12688}
+      Script: {instanceID: 12694}
     - Class: 114
-      Script: {instanceID: 12708}
+      Script: {instanceID: 12714}
     - Class: 114
-      Script: {instanceID: 12760}
+      Script: {instanceID: 12740}
     - Class: 114
-      Script: {instanceID: 12766}
+      Script: {instanceID: 12768}
     - Class: 114
-      Script: {instanceID: 12818}
+      Script: {instanceID: 12774}
     - Class: 114
-      Script: {instanceID: 12828}
+      Script: {instanceID: 12826}
     - Class: 114
-      Script: {instanceID: 12944}
+      Script: {instanceID: 12836}
     - Class: 114
-      Script: {instanceID: 13146}
+      Script: {instanceID: 12952}
     - Class: 114
-      Script: {instanceID: 13212}
+      Script: {instanceID: 13154}
     - Class: 114
-      Script: {instanceID: 13244}
+      Script: {instanceID: 13222}
+    - Class: 114
+      Script: {instanceID: 13254}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -310,6 +315,10 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -350,7 +359,7 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
-      Hash: 67a29b0319d4131f27c6e650ed1d002b
+      Hash: 8d801c44e1bb76170b364e91377822ba
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CupRack
@@ -374,13 +383,13 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 8e39a88a6df334d786a185165d1ceaec
+      Hash: d560006f78bea2e42db44530bd151e81
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenuCanvas
   - hash:
       serializedVersion: 2
-      Hash: a21265779ce8c7720683080e5d5596cc
+      Hash: f235e8d9f74f6d56789cdd04511bd741
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BallController
@@ -452,7 +461,7 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
-      Hash: 53b02c67830d6d0e0e0f25cfdd9b48b6
+      Hash: e8fe372ab0586ce556564b115e3f04f1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Music
@@ -506,7 +515,7 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: eb3afb304ac9f27d659a337d2a0dedb5
+      Hash: bc0493236aed1547471722f77ec4cb65
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CupController
@@ -578,6 +587,12 @@ ScriptsOnlyBuild:
     className: Aim
   - hash:
       serializedVersion: 2
+      Hash: 8829d623e7ea806433e0bc2f398a2638
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: VsModeController
+  - hash:
+      serializedVersion: 2
       Hash: cc4274b586df3c02688bac01b88bd16c
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -632,6 +647,12 @@ ScriptsOnlyBuild:
     className: Benchmark01
   - hash:
       serializedVersion: 2
+      Hash: 8cec6e35c7ab88d9923a35b6138bb721
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PauseMenuController
+  - hash:
+      serializedVersion: 2
       Hash: d4020bafcd3ccbb5601a6e6c8ac78be0
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -662,7 +683,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: cbbede142bc7ab4bcdccd28adb014c8c
+      Hash: e3770d9bf5e183684b6d8ebfa19ab0e3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -836,7 +857,7 @@ ScriptsOnlyBuild:
     className: TMP_TextInfoDebugTool
   - hash:
       serializedVersion: 2
-      Hash: fd7fae3b2d0e4c09afae9ca6841fb87e
+      Hash: c0ec4211f60b49c02e20644c53397101
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameLogic
@@ -858,6 +879,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
     className: TMP_TextSelector_B
+  - hash:
+      serializedVersion: 2
+      Hash: 55356c24008085966aa85c75b5cdbb26
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CupSkin
   - hash:
       serializedVersion: 2
       Hash: 6939772cb3ce775a8e8d99f332534491

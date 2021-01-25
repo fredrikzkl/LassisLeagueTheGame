@@ -13,7 +13,8 @@ public class MainMenuCanvas : MonoBehaviour
 {
     public Animator cameraAnimator;
 
-    public GameObject logo;
+    public CanvasGroup Logo;
+
     public GameObject mainMenuButtons;
     public GameObject backButton;
     public GameObject rulesCanvas;
@@ -25,6 +26,7 @@ public class MainMenuCanvas : MonoBehaviour
 
     CanvasGroup mainMenuButtonsGroup;
     bool showButtons;
+    bool fadeInLogo = false;
 
     private void Start()
     {
@@ -42,7 +44,6 @@ public class MainMenuCanvas : MonoBehaviour
         cameraAnimator.SetBool("toVSMode", true);
 
         HideMenuButtons();
-        logo.SetActive(false);
 
     }
 
@@ -53,7 +54,6 @@ public class MainMenuCanvas : MonoBehaviour
         cameraAnimator.SetBool("toRules", true);
 
         HideMenuButtons();
-        logo.SetActive(false);
     }
 
     public void ShowSettingsMenu() {
@@ -69,7 +69,7 @@ public class MainMenuCanvas : MonoBehaviour
         FindObjectOfType<SoundManager>().PlaySound("Click");
        
         settingsCanvas.SetActive(false);
-        ShowMenuButtons();
+        ShowMenuButtons(true);
     }
     
     public void ShowVSModeCanvas()
@@ -81,9 +81,14 @@ public class MainMenuCanvas : MonoBehaviour
 
     public void HideVSModeCanvas()
     {
+        FindObjectOfType<SoundManager>().PlaySound("Click");
         var canvasGroup = vsModeCanvas.GetComponent<CanvasGroup>();
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
+        cameraAnimator.SetBool("toVSMode", false);
+        ShowMenuButtons(true);
+        vsModeCanvas.GetComponent<VsModeController>().SaveVsModeSettings();
+       
     }
 
     public void ShowRulesCanvas()
@@ -93,13 +98,18 @@ public class MainMenuCanvas : MonoBehaviour
         rulesCanvas.GetComponent<RulesCanvas>().Open();
     }
 
+    public void FadeInLogo()
+    {
+        fadeInLogo = true;
+    }
+
     public void BackToMainScreen()
     {
         FindObjectOfType<SoundManager>().PlaySound("Click");
         backButton.SetActive(false);
-        ShowMenuButtons();
+        ShowMenuButtons(true);
         rulesCanvas.SetActive(false);
-        logo.SetActive(true);
+        
 
         if(currentWindow == Window.Rules)
         {
@@ -110,11 +120,15 @@ public class MainMenuCanvas : MonoBehaviour
 
     }
 
-    void ShowMenuButtons()
+    void ShowMenuButtons(bool fadeInLogo)
     {
         CanvasGroup g = mainMenuButtons.GetComponent<CanvasGroup>();
         showButtons = true;
         g.blocksRaycasts = true; //this prevents the UI element to receive input events
+        if (fadeInLogo)
+        {
+            FadeInLogo();
+        }
     }
 
     void HideMenuButtons()
@@ -123,6 +137,9 @@ public class MainMenuCanvas : MonoBehaviour
         g.alpha = 0f; //this makes everything transparent
         g.blocksRaycasts = false; //this prevents the UI element to receive input events
         showButtons = false;
+        //Hides also logo
+        Logo.alpha = 0f;
+        fadeInLogo = false;
     }
 
     void ToggleActive(GameObject obj)
@@ -133,11 +150,17 @@ public class MainMenuCanvas : MonoBehaviour
             obj.SetActive(true);
     }
 
+
+    float fadeInFactor = 0.02f;
     private void FixedUpdate()
     {
         if (showButtons && mainMenuButtonsGroup.alpha  <= 1f)
         {
-            mainMenuButtonsGroup.alpha += 0.025f;
+            mainMenuButtonsGroup.alpha += fadeInFactor;
+        }
+        if (fadeInLogo)
+        {
+            Logo.alpha += 0.02f;
         }
     }
 

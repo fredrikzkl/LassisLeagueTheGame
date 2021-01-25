@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6106efab4622f8746ab220776d5626a7, type: 3}
+  m_Name: TrendyPink
+  m_EditorClassIdentifier: 
+  Name: Pink
+  playerColor: {r: 1, g: 0.67058825, b: 0.882353, a: 0}
+  standardMaterial: {fileID: 2100000, guid: 4871984179b6ad9469c3e4aca4446814, type: 2}
+  hitMaterial: {fileID: 2100000, guid: 3ce02bf1344cf5d43a3bd251ff84a691, type: 2}
+  rimMaterial: {fileID: 2100000, guid: 3bd6e33d6818bce41864679110430c2d, type: 2}

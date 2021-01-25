@@ -79,7 +79,11 @@ public class PlayerController : MonoBehaviour
         {
             Name = gameObject.name;
         }
-            
+    }
+
+    private void Awake()
+    {
+        
     }
 
     public void BallsBack()
@@ -302,6 +306,12 @@ public class PlayerController : MonoBehaviour
     public CupSkin GetSkin()
     {
         return skin;
+    }
+
+    public void SetSkin(CupSkin skin)
+    {
+        this.skin = skin;
+        roundHandler.cupRack.GetComponent<CupRack>().UpdateSkin();
     }
 
    

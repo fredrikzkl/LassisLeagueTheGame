@@ -41,8 +41,12 @@ public class CupRack : MonoBehaviour
 
     private void Awake()
     {
-        skin = owner.GetComponent<PlayerController>().GetSkin();
+        UpdateSkin();
+    }
 
+    public void UpdateSkin()
+    {
+        skin = owner.GetComponent<PlayerController>().GetSkin();
     }
 
 

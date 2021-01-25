@@ -74,6 +74,11 @@ public class CupController : MonoBehaviour
         SetMainMaterial(standardMaterial);
     }
 
+    public void SetMaterials(CupSkin skin)
+    {
+        SetMaterials(skin.standardMaterial, skin.hitMaterial, skin.rimMaterial);
+    }
+
     private void SetMainMaterial(Material material)
     {
         MeshRenderer renderer = GetComponent<MeshRenderer>();

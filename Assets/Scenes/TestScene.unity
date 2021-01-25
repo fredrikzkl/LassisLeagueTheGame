@@ -25632,7 +25632,7 @@ PrefabInstance:
         type: 3}
       propertyPath: skin
       value: 
-      objectReference: {fileID: 11400000, guid: bfd4bd854adfe2e4a892e156e7557a74,
+      objectReference: {fileID: 11400000, guid: a134e360c20b2d64f969b5b98429c37c,
         type: 2}
     - target: {fileID: 2639203089868821684, guid: 6bb4241228c3ea34db423ef3a3113422,
         type: 3}

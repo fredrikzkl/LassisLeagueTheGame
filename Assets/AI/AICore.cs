@@ -6,7 +6,7 @@ using static Formations;
 
 public enum DifficultyLevel
 {
-    Easy , Standard , Hard, Impossible
+    Easy , Standard , Hard, VeryHard, Impossible
 }
 
 public class AICore : MonoBehaviour

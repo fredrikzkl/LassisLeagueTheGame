@@ -15,4 +15,9 @@ public class CameraMainMenu : MonoBehaviour
     {
         mainMenuCanvas.GetComponent<MainMenuCanvas>().ShowVSModeCanvas();
     }
+
+    public void FadeInLogo()
+    {
+        mainMenuCanvas.FadeInLogo();
+    }
 }

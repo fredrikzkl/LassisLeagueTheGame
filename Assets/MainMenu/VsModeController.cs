@@ -8,22 +8,33 @@ using UnityEngine.UI;
 
 public class VsModeController : MonoBehaviour
 {
+
     public GameObject Player1Panel;
     public GameObject Player2Panel;
 
     private VSModeSettingsData settings;
 
+    public CupController player1CupDisplay;
+    public CupController player2CupDisplay;
+
     //Player1 Panel
+    private Image player1PanelImage;
     private TMP_Text player1Header;
 
     private Button player1AIButton;
     private TMP_Text player1AIButtonText;
 
+    private TMP_Text player1SkinText;
+
     //Player 2 Panel
+    private Image player2PanelImage;
     private TMP_Text player2Header;
 
     private Button player2AIButton;
     private TMP_Text player2AIButtonText;
+
+    private TMP_Text player2SkinText;
+
 
     private void Start()
     {
@@ -38,6 +49,14 @@ public class VsModeController : MonoBehaviour
         //AIButtonText
         player1AIButtonText = Player1Panel.transform.Find("AIDifficultyButton/AIDifficultyButton_Text").GetComponent<TMP_Text>();
         player2AIButtonText = Player2Panel.transform.Find("AIDifficultyButton/AIDifficultyButton_Text").GetComponent<TMP_Text>();
+
+        //PanelImage
+        player1PanelImage = Player1Panel.GetComponent<Image>();
+        player2PanelImage = Player2Panel.GetComponent<Image>();
+
+        //SkinText
+        player1SkinText = Player1Panel.transform.Find("PlayerSkinButton/PlayerSkinText").GetComponent<TMP_Text>();
+        player2SkinText = Player2Panel.transform.Find("PlayerSkinButton/PlayerSkinText").GetComponent<TMP_Text>();
 
         //Laster inn data og setter variabler
         settings = SaveSystem.LoadVsModeSettings();
@@ -54,17 +73,60 @@ public class VsModeController : MonoBehaviour
 
         player1AIButtonText.text = settings.player1AIDifficulty.ToString();
         player2AIButtonText.text = settings.player2AIDifficulty.ToString();
+
+        //Skins
+        var player1Skin = SkinHandler.GetSkin(settings.player1Skin);
+        SetPanelColor(player1PanelImage, player1Skin.playerColor);
+        player1CupDisplay.SetMaterials(player1Skin);
+        player1SkinText.text = settings.player1Skin;
+
+        var player2Skin = SkinHandler.GetSkin(settings.player2Skin);
+        SetPanelColor(player2PanelImage, player2Skin.playerColor);
+        player2CupDisplay.SetMaterials(player2Skin);
+        player2SkinText.text = settings.player2Skin;
+
+    }
+
+    private void SetPanelColor(Image panelImage, Color color)
+    {
+        panelImage.color = new Color(color.r, color.g, color.b, 0.5f);
     }
 
     public void StartGameOnClick()
     {
         FindObjectOfType<SoundManager>().PlaySound("Click");
         //Starter med å lagre settingsene
-        SaveSystem.SaveVSModeSettings(settings);
+        SaveVsModeSettings();
         //Klargjør sessionen
         SessionData.ClearSession();
         //Laster inn spillet! Lets go!
         SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
+    }
+
+    public void SkinToggleOnClick(int player)
+    {
+        switch (player)
+        {
+            case 1:
+                CupSkin newSkin1 = SkinHandler.GetNextSkin(settings.player1Skin);
+                player1SkinText.text = newSkin1.Name;
+                player1CupDisplay.SetMaterials(newSkin1);
+                SetPanelColor(player1PanelImage, newSkin1.playerColor);
+
+                settings.player1Skin = newSkin1.Name;
+                break;
+            case 2:
+                CupSkin newSkin2 = SkinHandler.GetNextSkin(settings.player2Skin);
+                player2SkinText.text = newSkin2.Name;
+                player2CupDisplay.SetMaterials(newSkin2);
+                SetPanelColor(player2PanelImage, newSkin2.playerColor);
+
+                settings.player2Skin = newSkin2.Name;
+                break;
+            default:
+                Debug.LogWarning("Player number " + player + " does not exist (Toogle Skin)");
+                break;
+        }
     }
 
     public void PlayerTypeOnClick(int player)
@@ -131,8 +193,16 @@ public class VsModeController : MonoBehaviour
         return (DifficultyLevel)newLevel;
     }
 
-    
+    public void CloseMenu()
+    {
+        gameObject.GetComponent<CanvasGroup>().alpha = 0;
 
+    }
+
+    public void SaveVsModeSettings()
+    {
+        SaveSystem.SaveVSModeSettings(settings);
+    }
     
 
 

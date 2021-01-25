@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6106efab4622f8746ab220776d5626a7, type: 3}
+  m_Name: GoldCup
+  m_EditorClassIdentifier: 
+  Name: Gold
+  playerColor: {r: 1, g: 0.84313726, b: 0.27058825, a: 0}
+  standardMaterial: {fileID: 2100000, guid: e5e9fa64bc818b849b38d519907e5f44, type: 2}
+  hitMaterial: {fileID: 2100000, guid: f6324b152c406084cb93ce17a0835023, type: 2}
+  rimMaterial: {fileID: 2100000, guid: 515cca6e6d5f320459b6115148413030, type: 2}

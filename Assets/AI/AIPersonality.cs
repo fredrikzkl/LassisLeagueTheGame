@@ -26,7 +26,7 @@ public class AIPersonality
         {
             XZAimRate = 0.05f,
             PreferredXYAimAngle = 0.95f,
-            XYAimRate = 0.1f,
+            XYAimRate = 0.3f,
             PowerRate = 0.05f,
 
             PicksOptimalCup = false,
@@ -38,6 +38,24 @@ public class AIPersonality
     }
 
     public AIPersonality Standard()
+    {
+        return new AIPersonality
+        {
+            XZAimRate = 0.031f,
+            PreferredXYAimAngle = 0.8f,
+            XYAimRate = 0.1f,
+            PowerRate = 0.031f,
+
+
+            PicksOptimalCup = false,
+            MissThreshold = 6,
+            HardCupsThreshold = 0.3f,
+            HardCupsDefintion = 2,
+            DoubtFactor = 0.28f
+        };
+    }
+
+    public AIPersonality Hard()
     {
         return new AIPersonality
         {
@@ -55,7 +73,7 @@ public class AIPersonality
         };
     }
 
-    public AIPersonality Hard()
+    public AIPersonality VeryHard()
     {
         return new AIPersonality
         {
@@ -114,6 +132,9 @@ public class AIPersonality
 
             case DifficultyLevel.Hard:
                 return Hard();
+
+            case DifficultyLevel.VeryHard:
+                return VeryHard();
 
             case DifficultyLevel.Impossible:
                 return Impossible();

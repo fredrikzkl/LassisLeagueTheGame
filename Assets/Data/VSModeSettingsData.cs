@@ -16,6 +16,9 @@ public class VSModeSettingsData
     [EnumMember(Value = "player2AIDifficulty")]
     public DifficultyLevel player2AIDifficulty;
 
+    public string player1Skin;
+    public string player2Skin;
+
     public VSModeSettingsData Standard()
     {
         return new VSModeSettingsData
@@ -24,7 +27,10 @@ public class VSModeSettingsData
             player2Type = PlayerType.Player,
 
             player1AIDifficulty = DifficultyLevel.Easy,
-            player2AIDifficulty = DifficultyLevel.Easy
+            player2AIDifficulty = DifficultyLevel.Easy,
+
+            player1Skin = "Blue",
+            player2Skin = "Red"
         };
       
     }
