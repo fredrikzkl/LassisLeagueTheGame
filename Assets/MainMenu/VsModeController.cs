@@ -13,6 +13,7 @@ public class VsModeController : MonoBehaviour
     public GameObject Player2Panel;
 
     private VSModeSettingsData settings;
+    public SkinHandler skins;
 
     public CupController player1CupDisplay;
     public CupController player2CupDisplay;
@@ -75,12 +76,12 @@ public class VsModeController : MonoBehaviour
         player2AIButtonText.text = settings.player2AIDifficulty.ToString();
 
         //Skins
-        var player1Skin = SkinHandler.GetSkin(settings.player1Skin);
+        var player1Skin = skins.GetSkin(settings.player1Skin);
         SetPanelColor(player1PanelImage, player1Skin.playerColor);
         player1CupDisplay.SetMaterials(player1Skin);
         player1SkinText.text = settings.player1Skin;
 
-        var player2Skin = SkinHandler.GetSkin(settings.player2Skin);
+        var player2Skin = skins.GetSkin(settings.player2Skin);
         SetPanelColor(player2PanelImage, player2Skin.playerColor);
         player2CupDisplay.SetMaterials(player2Skin);
         player2SkinText.text = settings.player2Skin;
@@ -100,7 +101,15 @@ public class VsModeController : MonoBehaviour
         //Klargjør sessionen
         SessionData.ClearSession();
         //Laster inn spillet! Lets go!
-        SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        //Level
+
+        
+
+        string level = "SanDiego";
+        SessionData.CurrentMap = level;
+        SceneManager.LoadScene(level, LoadSceneMode.Additive);
+
     }
 
     public void SkinToggleOnClick(int player)
@@ -108,7 +117,7 @@ public class VsModeController : MonoBehaviour
         switch (player)
         {
             case 1:
-                CupSkin newSkin1 = SkinHandler.GetNextSkin(settings.player1Skin);
+                CupSkin newSkin1 = skins.GetNextSkin(settings.player1Skin);
                 player1SkinText.text = newSkin1.Name;
                 player1CupDisplay.SetMaterials(newSkin1);
                 SetPanelColor(player1PanelImage, newSkin1.playerColor);
@@ -116,7 +125,7 @@ public class VsModeController : MonoBehaviour
                 settings.player1Skin = newSkin1.Name;
                 break;
             case 2:
-                CupSkin newSkin2 = SkinHandler.GetNextSkin(settings.player2Skin);
+                CupSkin newSkin2 = skins.GetNextSkin(settings.player2Skin);
                 player2SkinText.text = newSkin2.Name;
                 player2CupDisplay.SetMaterials(newSkin2);
                 SetPanelColor(player2PanelImage, newSkin2.playerColor);

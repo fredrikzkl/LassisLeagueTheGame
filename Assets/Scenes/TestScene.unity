@@ -9831,7 +9831,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.004142292, y: -0.9943165, z: 0.09766874, w: 0.04217054}
   m_LocalPosition: {x: -1.34, y: 2.9, z: -3.62}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000002}
   m_Children:
   - {fileID: 1418861054}
   - {fileID: 1779984440}
@@ -9877,6 +9877,8 @@ MonoBehaviour:
     player2Type: 0
     player1AIDifficulty: 0
     player2AIDifficulty: 0
+    player1Skin: 
+    player2Skin: 
   player1: {fileID: 651852948}
   player2: {fileID: 1213259428}
   HUD: {fileID: 1219948738}

@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 1c3432cde2bcbe144b75532e9a357958
+  - enabled: 1
+    path: Assets/Scenes/Kirkeveien.unity
+    guid: 5eff50dc2bafe274f8eabe489453ad27
+  - enabled: 1
+    path: Assets/Scenes/SanDiego.unity
+    guid: 848bc974c7385c94db8f52e0aedff994
   m_configObjects: {}

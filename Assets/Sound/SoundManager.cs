@@ -81,12 +81,18 @@ public class SoundManager : MonoBehaviour
         SetMasterVolume(settings.masterVolume);
         SetSFXVolume(settings.sfxVolume);
         SetAnnouncerVolume(settings.announcerVolume);
+        SetMusicVolume(settings.musicVolume);
     }
 
     public void SetMasterVolume(float volume)
     {
         audioMixer.SetFloat("MasterVolume", volume);
         
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("MusicVolume", volume);
     }
 
     public void SetSFXVolume(float volume)
@@ -100,5 +106,7 @@ public class SoundManager : MonoBehaviour
         audioMixer.SetFloat("AnnouncerVolume", volume);
         
     }
+
+
 
 }

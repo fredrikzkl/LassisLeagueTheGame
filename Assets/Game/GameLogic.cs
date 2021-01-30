@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameStage
 {
@@ -16,8 +17,11 @@ public class GameLogic : MonoBehaviour
     public bool UseVsModeSettings;
     public VSModeSettingsData vsModeSettings;
 
+    public SkinHandler skins;
+
     public GameObject player1;
     public GameObject player2;
+
 
     //Canvases
     public GameObject HUD;
@@ -71,8 +75,8 @@ public class GameLogic : MonoBehaviour
             p1Controller.playerType = vsModeSettings.player1Type;
             p2Controller.playerType = vsModeSettings.player2Type;
 
-            p1Controller.SetSkin(SkinHandler.GetSkin(vsModeSettings.player1Skin));
-            p2Controller.SetSkin(SkinHandler.GetSkin(vsModeSettings.player2Skin));
+            p1Controller.SetSkin(skins.GetSkin(vsModeSettings.player1Skin));
+            p2Controller.SetSkin(skins.GetSkin(vsModeSettings.player2Skin));
 
             if (vsModeSettings.player1Type == PlayerType.AI)
             {
@@ -252,7 +256,8 @@ public class GameLogic : MonoBehaviour
 
     public void Rematch()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SceneManager.LoadScene(SessionData.CurrentMap, LoadSceneMode.Additive);
     }
 
 

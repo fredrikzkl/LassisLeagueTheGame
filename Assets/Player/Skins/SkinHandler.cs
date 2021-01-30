@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
-using System.Linq;
 
-public static class SkinHandler 
+public class SkinHandler : MonoBehaviour
 {
-    public static CupSkin[] skins = Resources.FindObjectsOfTypeAll<CupSkin>();
+    public CupSkin[] skins;
 
-    public static CupSkin GetSkin(string name)
+    public CupSkin GetSkin(string name)
     {
         foreach(var s in skins)
         {
@@ -15,17 +12,10 @@ public static class SkinHandler
                 return s;
         }
 
-        Debug.LogWarning("Did not load skins properly, trying again");
-        skins = Resources.FindObjectsOfTypeAll<CupSkin>();
-        if (skins.Length > 1)
-            GetSkin(name);
-
-        throw new Exception("Skin [" + name + "] does not exist");
+        throw new System.Exception("Skin [" + name + "] does not exist");
     }
 
-
-
-    public static CupSkin GetNextSkin(string current)
+    public CupSkin GetNextSkin(string current)
     {
         for (int i = 0; i < skins.Length; i++)
         {
