@@ -18,6 +18,8 @@ public class VsModeController : MonoBehaviour
     public CupController player1CupDisplay;
     public CupController player2CupDisplay;
 
+    public MapController mapController;
+
     //Player1 Panel
     private Image player1PanelImage;
     private TMP_Text player1Header;
@@ -66,6 +68,10 @@ public class VsModeController : MonoBehaviour
 
     public void Init(VSModeSettingsData settings)
     {
+        //Map
+        mapController.SetMap(settings.map);
+
+        //Playerstuff
         player1Header.text = settings.player1Type.ToString();
         player2Header.text = settings.player2Type.ToString();
 
@@ -86,6 +92,7 @@ public class VsModeController : MonoBehaviour
         player2CupDisplay.SetMaterials(player2Skin);
         player2SkinText.text = settings.player2Skin;
 
+
     }
 
     private void SetPanelColor(Image panelImage, Color color)
@@ -103,12 +110,13 @@ public class VsModeController : MonoBehaviour
         //Laster inn spillet! Lets go!
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         //Level
-
-        
-
-        string level = "SanDiego";
-        SessionData.CurrentMap = level;
-        SceneManager.LoadScene(level, LoadSceneMode.Additive);
+        var map = settings.map;
+        if (map == "Random")
+        {
+            map = mapController.GetRandomMap().Name;
+        }
+        SessionData.CurrentMap = map;
+        SceneManager.LoadScene(map, LoadSceneMode.Additive);
 
     }
 
@@ -211,6 +219,11 @@ public class VsModeController : MonoBehaviour
     public void SaveVsModeSettings()
     {
         SaveSystem.SaveVSModeSettings(settings);
+    }
+
+    public void UpdateMap(string name)
+    {
+        settings.map = name;
     }
     
 

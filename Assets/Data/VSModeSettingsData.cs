@@ -19,6 +19,8 @@ public class VSModeSettingsData
     public string player1Skin;
     public string player2Skin;
 
+    public string map;
+
     public VSModeSettingsData Standard()
     {
         return new VSModeSettingsData
@@ -30,7 +32,9 @@ public class VSModeSettingsData
             player2AIDifficulty = DifficultyLevel.Easy,
 
             player1Skin = "Blue",
-            player2Skin = "Red"
+            player2Skin = "Red",
+
+            map = "Random"
         };
       
     }
