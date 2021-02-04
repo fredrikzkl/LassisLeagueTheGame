@@ -81,6 +81,7 @@
     <Compile Include="Assets\Game\Replay.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\GameSettings.cs" />
+    <Compile Include="Assets\MainMenu\BallSelector.cs" />
     <Compile Include="Assets\MainMenu\CameraMainMenu.cs" />
     <Compile Include="Assets\MainMenu\MainMenuButtons.cs" />
     <Compile Include="Assets\MainMenu\MainMenuCanvas.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Assets\UI\GameHUD.cs" />
     <Compile Include="Assets\UI\PauseMenuController.cs" />
     <Compile Include="Assets\UI\StratsMenu.cs" />
+    <Compile Include="Assets\Utils\ItemSelector.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
