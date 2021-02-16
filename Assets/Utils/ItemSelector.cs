@@ -3,17 +3,25 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 /*
+ * 
  * Brukes som en generel abstrakt klasse for å håndtere meny-valg 
+ * Item må være Serializable for å kunne enkelt legge til verdier i editoren
+ * 
  */
 
+[System.Serializable]
 public class Item
 {
     public string Name;
     public Material Material;
 }
 
+
 public class ItemSelector : MonoBehaviour
 {
+    public VsModeController vsModeSettings;
+
+    public bool DebugEvents;
     public Item[] Items;
     private Item CurrentItem;
 
@@ -25,10 +33,24 @@ public class ItemSelector : MonoBehaviour
         {
             MeshRender = gameObject.GetComponent<MeshRenderer>();
         }
+
+        if(Items.Length > 0)
+        {
+            CurrentItem = Items[0];
+        }
+        else
+        {
+            Debug.LogWarning($"{gameObject}'s itemlist is empty");
+        }
+
+
     }
 
     public Item NextItem()
     {
+        if (DebugEvents)
+            Debug.Log("Clicking 'NextItem' on " + gameObject);
+
         if(Items.Length < 1)
         {
             Debug.LogWarning($"{gameObject}'s itemlist is empty");
@@ -50,6 +72,7 @@ public class ItemSelector : MonoBehaviour
                 return nextItem;
             }
         }
+
         return null;
     }
 
@@ -69,7 +92,18 @@ public class ItemSelector : MonoBehaviour
             MeshRender.material = newCurrentItem.Material;
 
         CurrentItem = newCurrentItem;
+
+        if (DebugEvents)
+        {
+            Debug.Log("New Item for " + gameObject + " : " + newCurrentItem.Name);
+        }
+
+        RegisterNewItem(newCurrentItem);
         //vsModeSettings.UpdateMap(current.Name);
+    }
+
+    public virtual void RegisterNewItem(Item newCurrentItem) {
+        Debug.LogWarning(gameObject.name + " needs to override RegisterNewItem()");
     }
 
     public void SetItem(string name)

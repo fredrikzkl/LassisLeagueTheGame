@@ -18,7 +18,8 @@ public class VsModeController : MonoBehaviour
     public CupController player1CupDisplay;
     public CupController player2CupDisplay;
 
-    public MapController mapController;
+    public MapSelector mapController;
+    public BallSelector ballSelector;
 
     //Player1 Panel
     private Image player1PanelImage;
@@ -69,7 +70,10 @@ public class VsModeController : MonoBehaviour
     public void Init(VSModeSettingsData settings)
     {
         //Map
-        mapController.SetMap(settings.map);
+        mapController.SetItem(settings.map);
+        //Ball
+        ballSelector.SetItem(settings.ball);
+
 
         //Playerstuff
         player1Header.text = settings.player1Type.ToString();
@@ -113,7 +117,7 @@ public class VsModeController : MonoBehaviour
         var map = settings.map;
         if (map == "Random")
         {
-            map = mapController.GetRandomMap().Name;
+            map = mapController.GetRandomItem().Name;
         }
         SessionData.CurrentMap = map;
         SceneManager.LoadScene(map, LoadSceneMode.Additive);
@@ -225,6 +229,12 @@ public class VsModeController : MonoBehaviour
     {
         settings.map = name;
     }
+
+    public void UpdateBall(string name)
+    {
+        settings.ball = name;
+    }
+    
     
 
 

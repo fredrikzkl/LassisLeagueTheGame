@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7078299447764207425}
   - component: {fileID: -594725644734259965}
   - component: {fileID: 8856160796924680596}
+  - component: {fileID: 3234057146590093302}
   m_Layer: 0
   m_Name: BeerpongBall
   m_TagString: Ball
@@ -271,3 +272,21 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 1
   m_Emitting: 1
+--- !u!114 &3234057146590093302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503260739183765941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ba56b10a59bac4ebab73f86dc62cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugEvents: 0
+  Items:
+  - Name: Standard
+    Material: {fileID: 2100000, guid: 92301e5ebe1ce9c4e924e89301fa3a0d, type: 2}
+  - Name: Silver
+    Material: {fileID: 2100000, guid: 46a35abdec6830e45968df0c53ee25a0, type: 2}

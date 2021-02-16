@@ -1865,6 +1865,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ac4c48c52d83e4091bd9a3bfac1a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugEvents: 1
+  Items:
+  - Name: Standard
+    Material: {fileID: 2100000, guid: 92301e5ebe1ce9c4e924e89301fa3a0d, type: 2}
+  - Name: Silver
+    Material: {fileID: 2100000, guid: 46a35abdec6830e45968df0c53ee25a0, type: 2}
 --- !u!4 &215310151 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 79584a460a5bfdc4b80c537bdde38547,

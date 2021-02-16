@@ -2,8 +2,10 @@
 using System.Collections;
 using UnityEditor;
 
-[CustomEditor(typeof(BallSelector))]
 public class BallSelector : ItemSelector
 {
-    
+    public override void RegisterNewItem(Item newCurrentItem)
+    {
+        vsModeSettings.UpdateBall(newCurrentItem.Name);
+    }
 }

@@ -85,7 +85,7 @@
     <Compile Include="Assets\MainMenu\CameraMainMenu.cs" />
     <Compile Include="Assets\MainMenu\MainMenuButtons.cs" />
     <Compile Include="Assets\MainMenu\MainMenuCanvas.cs" />
-    <Compile Include="Assets\MainMenu\MapController.cs" />
+    <Compile Include="Assets\MainMenu\MapSelector.cs" />
     <Compile Include="Assets\MainMenu\RulesCanvas.cs" />
     <Compile Include="Assets\MainMenu\VsModeController.cs" />
     <Compile Include="Assets\Player\AimArrowController.cs" />

@@ -20,6 +20,7 @@ public class VSModeSettingsData
     public string player2Skin;
 
     public string map;
+    public string ball;
 
     public VSModeSettingsData Standard()
     {
@@ -34,7 +35,8 @@ public class VSModeSettingsData
             player1Skin = "Blue",
             player2Skin = "Red",
 
-            map = "Random"
+            map = "Random",
+            ball = "Standard"
         };
       
     }
